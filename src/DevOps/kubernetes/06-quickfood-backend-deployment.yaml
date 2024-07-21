@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quickfood-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quickfood-backend
+  template:
+    metadata:
+      labels:
+        app: quickfood-backend
+    spec:
+      containers:
+      - name: quickfood-backend
+        image: sofarc6soat/quickfood-backend:1.1
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        - name: ASPNETCORE_URLS
+          value: https://+:443;http://+80
+        - name: ASPNETCORE_HTTPS_PORTS
+          value: "443"
+        - name: ASPNETCORE_HTTP_PORTS
+          value: "80"
+        - name: ASPNETCORE_Kestrel__Certificates__Default__Password
+          value: quickfood
+        - name: ASPNETCORE_Kestrel__Certificates__Default__Path
+          value: /https/quickfood-certificate.pfx
+        - name: ConnectionStrings__DefaultConnection
+          value: Server=quickfood-sqlserver;Database=QuickFood;User Id=sa;Password=quickfood-backend#2024;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;
+        volumeMounts:
+        - name: certs
+          mountPath: /https
+          readOnly: true
+      volumes:
+      - name: certs
+        hostPath:
+          path: /path/to/certs
+          type: Directory
