@@ -1,9 +1,8 @@
 ﻿namespace Domain.ValueObjects
 {
-    public enum PagamentoStatus
+    public enum StatusPagamento
     {
         Pendente,
-        Pago,
-        Rejeitado
+        Pago
     }
 }

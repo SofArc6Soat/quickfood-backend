@@ -3,6 +3,7 @@
     public enum PedidoStatus
     {
         Rascunho,
+        PendentePagamento,
         Recebido,
         EmPreparacao,
         Pronto,

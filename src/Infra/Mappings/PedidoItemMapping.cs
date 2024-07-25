@@ -15,11 +15,6 @@ namespace Infra.Mappings
             builder.Property(c => c.ValorUnitario)
                    .HasColumnType("decimal(18,2)")
                    .HasPrecision(2);
-
-            // Relacionamentos
-
-            builder.HasOne(c => c.Pedido)
-                .WithMany(c => c.PedidoItems);
         }
     }
 }

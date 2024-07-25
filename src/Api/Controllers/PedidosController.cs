@@ -17,6 +17,14 @@ namespace Api.Controllers
             return CustomResponseGet(result);
         }
 
+        [HttpGet("ordenados")]
+        public async Task<ContentResult> ObterTodosPedidosOrdenados(CancellationToken cancellationToken)
+        {
+            var result = await pedidoUseCase.ObterTodosPedidosOrdenadosAsync(cancellationToken);
+
+            return Content(result, "application/json");
+        }
+
         [HttpPost]
         public async Task<IActionResult> CadastrarPedido(PedidoRequest request, CancellationToken cancellationToken)
         {
@@ -28,19 +36,6 @@ namespace Api.Controllers
             var result = await pedidoUseCase.CadastrarPedidoAsync(request, cancellationToken);
 
             return CustomResponsePost($"pedidos/{request.PedidoId}", request, result);
-        }
-
-        [HttpPatch("checkout/{pedidoId:guid}")]
-        public async Task<IActionResult> Checkout([FromRoute] Guid pedidoId, CancellationToken cancellationToken)
-        {
-            if (!ModelState.IsValid)
-            {
-                return ErrorBadRequestModelState(ModelState);
-            }
-
-            var result = await pedidoUseCase.EfetuarCheckoutAsync(pedidoId, cancellationToken);
-
-            return CustomResponsePutPatch(pedidoId, result);
         }
 
         [HttpPatch("status/{pedidoId:guid}")]

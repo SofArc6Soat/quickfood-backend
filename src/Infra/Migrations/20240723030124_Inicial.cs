@@ -42,7 +42,7 @@ namespace Infra.Migrations
                     ClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Status = table.Column<string>(type: "varchar(20)", nullable: false),
                     ValorTotal = table.Column<decimal>(type: "decimal(18,2)", precision: 2, nullable: false),
-                    Pagamento = table.Column<string>(type: "varchar(20)", nullable: false)
+                    DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -64,6 +64,30 @@ namespace Infra.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Produtos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pagamentos",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PedidoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Status = table.Column<string>(type: "varchar(20)", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(18,2)", precision: 2, nullable: false),
+                    QrCodePix = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pagamentos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pagamentos_Pedidos_PedidoId",
+                        column: x => x.PedidoId,
+                        principalSchema: "dbo",
+                        principalTable: "Pedidos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -136,6 +160,12 @@ namespace Infra.Migrations
                 filter: "[Email] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pagamentos_PedidoId",
+                schema: "dbo",
+                table: "Pagamentos",
+                column: "PedidoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PedidosItens_PedidoId",
                 schema: "dbo",
                 table: "PedidosItens",
@@ -147,6 +177,10 @@ namespace Infra.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Clientes",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Pagamentos",
                 schema: "dbo");
 
             migrationBuilder.DropTable(

@@ -12,6 +12,7 @@ namespace Application.DependencyInjection
             services.AddTransient<IProdutoUseCase, ProdutoUseCase>();
             services.AddTransient<IClienteUseCase, ClienteUseCase>();
             services.AddTransient<IPedidoUseCase, PedidoUseCase>();
+            services.AddTransient<IPagamentoUseCase, PagamentoUseCase>();
         }
     }
 }
