@@ -1,10 +1,10 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0.3-bookworm-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0.7-bookworm-slim AS base
 RUN mkdir -p /app && adduser --disabled-password --gecos "" userapp && chown -R userapp /app
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0.203-bookworm-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0.303-bookworm-slim AS build
 WORKDIR /src
 COPY ["./Api/Api.csproj", "Api/"]
 RUN dotnet restore "Api/Api.csproj"

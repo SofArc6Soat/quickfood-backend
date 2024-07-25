@@ -42,26 +42,13 @@ namespace Application.UseCases
                 }
             }
 
-            await pedidoRepository.InsertAsync(pedido, cancellationToken);
-
-            return await pedidoRepository.UnitOfWork.CommitAsync(cancellationToken);
-        }
-
-        public async Task<bool> EfetuarCheckoutAsync(Guid pedidoId, CancellationToken cancellationToken)
-        {
-            var pedido = await ObterPedidoAsync(pedidoId, cancellationToken);
-
-            if (pedido is null)
+            if (pedido.PedidoItems.Count == 0)
             {
+                Notificar("O pedido precisa ter pelo menos um item.");
                 return false;
             }
 
-            if (!pedido.EfetuarCheckout())
-            {
-                Notificar("Não foi possível realizar o checkout do pedido.");
-            }
-
-            await pedidoRepository.UpdateAsync(pedido, cancellationToken);
+            await pedidoRepository.InsertAsync(pedido, cancellationToken);
 
             return await pedidoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
@@ -100,5 +87,8 @@ namespace Application.UseCases
 
             return pedido;
         }
+
+        public async Task<string> ObterTodosPedidosOrdenadosAsync(CancellationToken cancellationToken) =>
+            await pedidoRepository.ObterTodosPedidosOrdenadosAsync(cancellationToken);
     }
 }

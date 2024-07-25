@@ -5,6 +5,7 @@ namespace Domain.Repositories
 {
     public interface IPedidoRepository : IRepositoryGeneric<Pedido>
     {
+        Task<string> ObterTodosPedidosOrdenadosAsync(CancellationToken cancellation);
         Task<IEnumerable<Pedido>> ObterTodosPedidosAsync();
     }
 }

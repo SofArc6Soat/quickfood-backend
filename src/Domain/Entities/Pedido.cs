@@ -10,7 +10,7 @@ namespace Domain.Entities
         public Guid? ClienteId { get; private set; }
         public PedidoStatus Status { get; private set; }
         public decimal ValorTotal { get; private set; }
-        public PagamentoStatus Pagamento { get; private set; }
+        public DateTime DataCriacao { get; private set; }
 
         private readonly List<PedidoItem> _pedidoItems;
         public IReadOnlyCollection<PedidoItem> PedidoItems => _pedidoItems;
@@ -23,8 +23,8 @@ namespace Domain.Entities
             Id = id;
             ClienteId = clienteId;
             _pedidoItems = [];
-            Pagamento = PagamentoStatus.Pendente;
             Status = PedidoStatus.Rascunho;
+            DataCriacao = DateTime.Now;
         }
 
         public void AdicionarItem(PedidoItem item)
@@ -52,8 +52,18 @@ namespace Domain.Entities
         {
             if (Status == PedidoStatus.Rascunho)
             {
+                Status = PedidoStatus.PendentePagamento;
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool AlterarStatusParaRecebibo()
+        {
+            if (Status == PedidoStatus.PendentePagamento)
+            {
                 Status = PedidoStatus.Recebido;
-                Pagamento = PagamentoStatus.Pago;
                 return true;
             }
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240528011408_Inicial")]
+    [Migration("20240723030124_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace Infra.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.5")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -75,6 +75,36 @@ namespace Infra.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Domain.Entities.Pagamento", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PedidoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("QrCodePix")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<decimal>("Valor")
+                        .HasPrecision(2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PedidoId");
+
+                    b.ToTable("Pagamentos", "dbo");
+                });
+
             modelBuilder.Entity("Domain.Entities.Pedido", b =>
                 {
                     b.Property<Guid>("Id")
@@ -84,15 +114,14 @@ namespace Infra.Migrations
                     b.Property<Guid?>("ClienteId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("NumeroPedido")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NumeroPedido"), 10L);
-
-                    b.Property<string>("Pagamento")
-                        .IsRequired()
-                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -280,6 +309,17 @@ namespace Infra.Migrations
                             Nome = "SORVETE DE CREME",
                             Preco = 12m
                         });
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pagamento", b =>
+                {
+                    b.HasOne("Domain.Entities.Pedido", "Pedido")
+                        .WithMany()
+                        .HasForeignKey("PedidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pedido");
                 });
 
             modelBuilder.Entity("Domain.Entities.PedidoItem", b =>

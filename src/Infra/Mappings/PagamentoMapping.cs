@@ -4,23 +4,21 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.Mappings
 {
-    public class PedidoMapping : IEntityTypeConfiguration<Pedido>
+    public class PagamentoMapping : IEntityTypeConfiguration<Pagamento>
     {
-        public void Configure(EntityTypeBuilder<Pedido> builder)
+        public void Configure(EntityTypeBuilder<Pagamento> builder)
         {
-            builder.ToTable("Pedidos", "dbo");
+            builder.ToTable("Pagamentos", "dbo");
 
             builder.HasKey(c => c.Id);
 
-            builder.Property(c => c.ValorTotal)
+            builder.Property(c => c.Valor)
                    .HasColumnType("decimal(18,2)")
                    .HasPrecision(2);
 
             builder.Property(c => c.Status)
                 .HasColumnType("varchar(20)")
                 .HasConversion<string>();
-
-            builder.Property(c => c.NumeroPedido).UseIdentityColumn(10, 1).ValueGeneratedOnAddOrUpdate();
         }
     }
 }
