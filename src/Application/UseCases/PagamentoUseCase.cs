@@ -3,7 +3,7 @@ using Core.Domain.Notificacoes;
 using Domain.Entities;
 using Domain.Repositories;
 
-namespace Application.UseCases
+namespace UseCases.UseCases
 {
     public class PagamentoUseCase(IPedidoRepository pedidoRepository, IPagamentoRepository pagamentoRepository, INotificador notificador) : BaseUseCase(notificador), IPagamentoUseCase
     {

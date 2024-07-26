@@ -1,4 +1,4 @@
-﻿namespace Application.UseCases
+﻿namespace UseCases.UseCases
 {
     public interface IPagamentoUseCase
     {

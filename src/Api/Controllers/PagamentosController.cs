@@ -1,7 +1,7 @@
-using Application.UseCases;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
 using Microsoft.AspNetCore.Mvc;
+using UseCases.UseCases;
 
 namespace Api.Controllers
 {

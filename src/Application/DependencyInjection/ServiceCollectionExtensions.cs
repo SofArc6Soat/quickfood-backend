@@ -1,8 +1,8 @@
-﻿using Application.UseCases;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics.CodeAnalysis;
+using UseCases.UseCases;
 
-namespace Application.DependencyInjection
+namespace UseCases.DependencyInjection
 {
     [ExcludeFromCodeCoverage]
     public static class ServiceCollectionExtensions

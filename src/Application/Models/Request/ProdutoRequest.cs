@@ -2,7 +2,7 @@
 using Domain.ValueObjects;
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.Models.Request
+namespace UseCases.Models.Request
 {
     public record ProdutoRequest
     {

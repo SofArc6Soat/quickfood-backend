@@ -1,8 +1,8 @@
-﻿using Application.Models.Request;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.ValueObjects;
+using UseCases.Models.Request;
 
-namespace Application.UseCases
+namespace UseCases.UseCases
 {
     public interface IPedidoUseCase
     {

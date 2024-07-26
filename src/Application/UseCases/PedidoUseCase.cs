@@ -1,11 +1,11 @@
-﻿using Application.Models.Request;
-using Core.Domain.Base;
+﻿using Core.Domain.Base;
 using Core.Domain.Notificacoes;
 using Domain.Entities;
 using Domain.Repositories;
 using Domain.ValueObjects;
+using UseCases.Models.Request;
 
-namespace Application.UseCases
+namespace UseCases.UseCases
 {
     public class PedidoUseCase(IPedidoRepository pedidoRepository, IProdutoRepository produtoRepository, INotificador notificador) : BaseUseCase(notificador), IPedidoUseCase
     {

@@ -1,10 +1,10 @@
-﻿using Application.Models.Request;
-using Core.Domain.Base;
+﻿using Core.Domain.Base;
 using Core.Domain.Notificacoes;
 using Domain.Entities;
 using Domain.Repositories;
+using UseCases.Models.Request;
 
-namespace Application.UseCases
+namespace UseCases.UseCases
 {
     public class ClienteUseCase(IClienteRepository clienteRepository, INotificador notificador) : BaseUseCase(notificador), IClienteUseCase
     {

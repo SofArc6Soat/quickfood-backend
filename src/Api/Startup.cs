@@ -1,8 +1,8 @@
 ﻿using Api.Configuration;
-using Application.DependencyInjection;
 using Core.WebApi.DependencyInjection;
 using Infra.Context;
 using Infra.DependencyInjection;
+using UseCases.DependencyInjection;
 
 namespace Api
 {

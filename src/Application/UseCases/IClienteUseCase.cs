@@ -1,7 +1,7 @@
-﻿using Application.Models.Request;
-using Domain.Entities;
+﻿using Domain.Entities;
+using UseCases.Models.Request;
 
-namespace Application.UseCases
+namespace UseCases.UseCases
 {
     public interface IClienteUseCase
     {

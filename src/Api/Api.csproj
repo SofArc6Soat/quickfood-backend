@@ -16,7 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BuildingBlocks\Core.WebApi\Core.WebApi.csproj" />
     <ProjectReference Include="..\Infra\Infra.csproj" />
-    <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\Application\UseCases.csproj" />
   </ItemGroup>
 
   <ItemGroup>
