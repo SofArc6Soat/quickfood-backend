@@ -1,46 +1,45 @@
-using Application.Models.Request;
-using Application.UseCases;
+using Controllers;
+using Controllers.Dtos.Request;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
-using Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
     [Route("produtos")]
-    public class ProdutosController(IProdutoUseCase produtoUseCase, INotificador notificador) : MainController(notificador)
+    public class ProdutosApiController(IProdutosController produtosController, INotificador notificador) : MainController(notificador)
     {
         [HttpGet]
         public async Task<IActionResult> ObterTodosProdutos(CancellationToken cancellationToken)
         {
-            var result = await produtoUseCase.ObterTodosProdutosAsync(cancellationToken);
+            var result = await produtosController.ObterTodosProdutosAsync(cancellationToken);
 
             return CustomResponseGet(result);
         }
 
         [HttpGet("categoria")]
-        public async Task<IActionResult> ObterProdutosCategoria(Categoria categoria, CancellationToken cancellationToken)
+        public async Task<IActionResult> ObterProdutosCategoria(string categoria, CancellationToken cancellationToken)
         {
-            var result = await produtoUseCase.ObterProdutosCategoriaAsync(categoria, cancellationToken);
+            var result = await produtosController.ObterProdutosCategoriaAsync(categoria, cancellationToken);
 
             return CustomResponseGet(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CadastrarProduto(ProdutoRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CadastrarProduto(ProdutoDto request, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 return ErrorBadRequestModelState(ModelState);
             }
 
-            var result = await produtoUseCase.CadastrarProdutoAsync(request, cancellationToken);
+            var result = await produtosController.CadastrarProdutoAsync(request, cancellationToken);
 
             return CustomResponsePost($"produtos/{request.Id}", request, result);
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> AtualizarProduto([FromRoute] Guid id, ProdutoRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> AtualizarProduto([FromRoute] Guid id, ProdutoDto request, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
@@ -52,7 +51,7 @@ namespace Api.Controllers
                 return ErrorBadRequestPutId();
             }
 
-            var result = await produtoUseCase.AtualizarProdutoAsync(request, cancellationToken);
+            var result = await produtosController.AtualizarProdutoAsync(request, cancellationToken);
 
             return CustomResponsePutPatch(request, result);
         }
@@ -60,7 +59,7 @@ namespace Api.Controllers
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeletarProduto([FromRoute] Guid id, CancellationToken cancellationToken)
         {
-            var result = await produtoUseCase.DeletarProdutoAsync(id, cancellationToken);
+            var result = await produtosController.DeletarProdutoAsync(id, cancellationToken);
 
             return CustomResponseDelete(id, result);
         }
