@@ -32,8 +32,6 @@ A arquitetura hexagonal será utilizada para garantir que a aplicação seja mod
 
 ## Como Executar o Projeto
 
-### 
-
 1. Clone este repositório:
    ```bash
    git clone https://github.com/SofArc6Soat/quickfood-backend.git
@@ -45,42 +43,38 @@ A arquitetura hexagonal será utilizada para garantir que a aplicação seja mod
 2.1.1 Navegue até o diretório do projeto:
    ```bash
    cd quickfood-backend\src\DevOps
+   ```
    
 2.1.2 Configure o ambiente Docker:
    ```bash
    docker-compose up --build
+   ```
    
 2.2 Docker (kubernetes)
 
 2.2.1 Navegue até o diretório do projeto:
    ```bash
    cd quickfood-backend\src\DevOps\kubernetes
+   ```
    
 2.2.2 Configure o ambiente Docker:
    ```bash
    kubectl apply -f 01-sql-data-pvc.yaml
-   ```bash
    kubectl apply -f 02-sql-log-pvc.yaml
-   ```bash
    kubectl apply -f 03-sql-secrets-pvc.yaml
-   ```bash
    kubectl apply -f 04-quickfood-sqlserver-deployment.yaml
-   ```bash
    kubectl apply -f 05-quickfood-sqlserver-service.yaml
-   ```bash
    kubectl apply -f 06-quickfood-backend-deployment.yaml
-   ```bash
    kubectl apply -f 06-quickfood-backend-deployment.yaml
-   ```bash
    kubectl apply -f 07-quickfood-backend-service.yaml
+   ```
    
 ou executar todos scripts de uma vez   
    ```bash
    Get-ExecutionPolicy 
-   ```bash
    Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
-   ```bash
    .\apply-k8s-resources.ps1
+   ```
 
 3. A aplicação estará disponível em http://localhost:5000 ou https://localhost:5001
 
@@ -89,7 +83,6 @@ ou executar todos scripts de uma vez
 5. URL do Healthcheck da API: http://localhost:5000/health ou https://localhost:5001/health
 
 6. Caso deseje testar via postman com dados fake importe o arquivo API QuickFood.postman_collection.json do diretorio "postman" na aplicação postman local.
-
 
 ## Autores
 
@@ -102,4 +95,3 @@ ou executar todos scripts de uma vez
 - **Github - Domain Storytelling**: [Link para o Domain Storytelling](https://github.com/SofArc6Soat/quickfood-domain-story-telling)
 - **Github - Context Map**: [Link para o Domain Storytelling](https://github.com/SofArc6Soat/quickfood-ubiquitous-language)
 - **Github - Linguagem Ubíqua**: [Link para o Domain Storytelling](https://github.com/SofArc6Soat/quickfood-ubiquitous-language)
-- **DockerHub - docker push sofarc6soat/quickfood-backend:tagname
