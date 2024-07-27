@@ -60,19 +60,37 @@ A arquitetura hexagonal será utilizada para garantir que a aplicação seja mod
 2.2.2 Configure o ambiente Docker:
    ```bash
    kubectl apply -f 01-sql-data-pvc.yaml
+   ```
+   ```bash
    kubectl apply -f 02-sql-log-pvc.yaml
+   ```
+   ```bash
    kubectl apply -f 03-sql-secrets-pvc.yaml
+   ```
+   ```bash
    kubectl apply -f 04-quickfood-sqlserver-deployment.yaml
+   ```
+   ```bash
    kubectl apply -f 05-quickfood-sqlserver-service.yaml
+   ```
+   ```bash
    kubectl apply -f 06-quickfood-backend-deployment.yaml
+   ```
+   ```bash
    kubectl apply -f 06-quickfood-backend-deployment.yaml
+   ```
+   ```bash
    kubectl apply -f 07-quickfood-backend-service.yaml
    ```
    
 ou executar todos scripts de uma vez   
    ```bash
    Get-ExecutionPolicy 
+   ```
+   ```bash
    Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+   ```
+   ```bash
    .\apply-k8s-resources.ps1
    ```
 
