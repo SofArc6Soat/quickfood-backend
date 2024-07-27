@@ -1,5 +1,5 @@
-using Application.Models.Request;
-using Application.UseCases;
+using Controllers;
+using Controllers.Dtos.Request;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
 using Microsoft.AspNetCore.Mvc;
@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers
 {
     [Route("pedidos")]
-    public class PedidosController(IPedidoUseCase pedidoUseCase, INotificador notificador) : MainController(notificador)
+    public class PedidosApiController(IPedidoController pedidoController, INotificador notificador) : MainController(notificador)
     {
         [HttpGet]
         public async Task<IActionResult> ObterTodosPedidos(CancellationToken cancellationToken)
         {
-            var result = await pedidoUseCase.ObterTodosPedidosAsync(cancellationToken);
+            var result = await pedidoController.ObterTodosPedidosAsync(cancellationToken);
 
             return CustomResponseGet(result);
         }
@@ -20,35 +20,35 @@ namespace Api.Controllers
         [HttpGet("ordenados")]
         public async Task<ContentResult> ObterTodosPedidosOrdenados(CancellationToken cancellationToken)
         {
-            var result = await pedidoUseCase.ObterTodosPedidosOrdenadosAsync(cancellationToken);
+            var result = await pedidoController.ObterTodosPedidosOrdenadosAsync(cancellationToken);
 
             return Content(result, "application/json");
         }
 
         [HttpPost]
-        public async Task<IActionResult> CadastrarPedido(PedidoRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CadastrarPedido(PedidoDto request, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 return ErrorBadRequestModelState(ModelState);
             }
 
-            var result = await pedidoUseCase.CadastrarPedidoAsync(request, cancellationToken);
+            var result = await pedidoController.CadastrarPedidoAsync(request, cancellationToken);
 
             return CustomResponsePost($"pedidos/{request.PedidoId}", request, result);
         }
 
         [HttpPatch("status/{pedidoId:guid}")]
-        public async Task<IActionResult> AlterarStatus([FromRoute] Guid pedidoId, [FromBody] PedidoStatusRequest pedidoStatus, CancellationToken cancellationToken)
+        public async Task<IActionResult> AlterarStatus([FromRoute] Guid pedidoId, [FromBody] PedidoStatusDto pedidoStatusDto, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 return ErrorBadRequestModelState(ModelState);
             }
 
-            var result = await pedidoUseCase.AlterarStatusAsync(pedidoId, pedidoStatus.Status, cancellationToken);
+            var result = await pedidoController.AlterarStatusAsync(pedidoId, pedidoStatusDto, cancellationToken);
 
-            return CustomResponsePutPatch(pedidoStatus, result);
+            return CustomResponsePutPatch(pedidoStatusDto, result);
         }
     }
 }

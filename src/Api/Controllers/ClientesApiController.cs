@@ -1,5 +1,5 @@
-using Application.Models.Request;
-using Application.UseCases;
+using Controllers;
+using Controllers.Dtos.Request;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
 using Microsoft.AspNetCore.Mvc;
@@ -7,39 +7,39 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers
 {
     [Route("clientes")]
-    public class ClientesController(IClienteUseCase clienteUseCase, INotificador notificador) : MainController(notificador)
+    public class ClientesApiController(IClientesController clientesController, INotificador notificador) : MainController(notificador)
     {
         [HttpGet]
         public async Task<IActionResult> ObterTodosClientes(CancellationToken cancellationToken)
         {
-            var result = await clienteUseCase.ObterTodosClientesAsync(cancellationToken);
+            var result = await clientesController.ObterTodosClientesAsync(cancellationToken);
 
             return CustomResponseGet(result);
         }
 
         [HttpGet("identifique-se")]
-        public async Task<IActionResult> IdentificarClienteCpf([FromQuery] IdentifiqueSeRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> IdentificarClienteCpf([FromQuery] IdentifiqueSeDto request, CancellationToken cancellationToken)
         {
-            var result = await clienteUseCase.IdentificarClienteCpfAsync(request, cancellationToken);
+            var result = await clientesController.IdentificarClienteCpfAsync(request.Cpf, cancellationToken);
 
             return CustomResponseGet(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CadastrarCliente(ClienteRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CadastrarCliente(ClienteDto request, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 return ErrorBadRequestModelState(ModelState);
             }
 
-            var result = await clienteUseCase.CadastrarClienteAsync(request, cancellationToken);
+            var result = await clientesController.CadastrarClienteAsync(request, cancellationToken);
 
             return CustomResponsePost($"clientes/{request.Id}", request, result);
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> AtualizarCliente([FromRoute] Guid id, ClienteRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> AtualizarCliente([FromRoute] Guid id, ClienteDto request, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
@@ -51,7 +51,7 @@ namespace Api.Controllers
                 return ErrorBadRequestPutId();
             }
 
-            var result = await clienteUseCase.AtualizarClienteAsync(request, cancellationToken);
+            var result = await clientesController.AtualizarClienteAsync(request, cancellationToken);
 
             return CustomResponsePutPatch(request, result);
         }
@@ -59,7 +59,7 @@ namespace Api.Controllers
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeletarCliente([FromRoute] Guid id, CancellationToken cancellationToken)
         {
-            var result = await clienteUseCase.DeletarClienteAsync(id, cancellationToken);
+            var result = await clientesController.DeletarClienteAsync(id, cancellationToken);
 
             return CustomResponseDelete(id, result);
         }

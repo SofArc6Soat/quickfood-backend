@@ -1,6 +1,6 @@
-﻿namespace Application.UseCases
+﻿namespace Controllers
 {
-    public interface IPagamentoUseCase
+    public interface IPagamentoController
     {
         Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken);
         Task<bool> EfetuarCheckoutAsync(Guid pedidoId, CancellationToken cancellationToken);

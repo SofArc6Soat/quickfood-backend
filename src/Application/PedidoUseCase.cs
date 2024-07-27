@@ -1,19 +1,18 @@
-﻿using Application.Models.Request;
-using Core.Domain.Base;
+﻿using Core.Domain.Base;
 using Core.Domain.Notificacoes;
 using Domain.Entities;
 using Domain.Repositories;
 using Domain.ValueObjects;
 
-namespace Application.UseCases
+namespace UseCases
 {
     public class PedidoUseCase(IPedidoRepository pedidoRepository, IProdutoRepository produtoRepository, INotificador notificador) : BaseUseCase(notificador), IPedidoUseCase
     {
-        public async Task<bool> CadastrarPedidoAsync(PedidoRequest request, CancellationToken cancellationToken)
+        public async Task<bool> CadastrarPedidoAsync(Pedido pedido, List<PedidoListaItens> itens, CancellationToken cancellationToken)
         {
-            ArgumentNullException.ThrowIfNull(request);
+            ArgumentNullException.ThrowIfNull(pedido);
 
-            var pedidoExistente = await pedidoRepository.FindByIdAsync(request.PedidoId, cancellationToken);
+            var pedidoExistente = await pedidoRepository.FindByIdAsync(pedido.Id, cancellationToken);
 
             if (pedidoExistente is not null)
             {
@@ -21,14 +20,12 @@ namespace Application.UseCases
                 return false;
             }
 
-            var pedido = new Pedido(request.PedidoId, request.ClienteId);
-
             if (!ExecutarValidacao(new ValidarPedido(), pedido))
             {
                 return false;
             }
 
-            foreach (var item in request.Items)
+            foreach (var item in itens)
             {
                 var produto = await produtoRepository.FindByIdAsync(item.ProdutoId, cancellationToken);
 
