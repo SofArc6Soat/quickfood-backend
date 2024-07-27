@@ -2,25 +2,22 @@
 using Core.Domain.Notificacoes;
 using Domain.Entities;
 using Domain.Repositories;
-using UseCases.Models.Request;
 
-namespace UseCases.UseCases
+namespace UseCases
 {
     public class ClienteUseCase(IClienteRepository clienteRepository, INotificador notificador) : BaseUseCase(notificador), IClienteUseCase
     {
-        public async Task<bool> CadastrarClienteAsync(ClienteRequest request, CancellationToken cancellationToken)
+        public async Task<bool> CadastrarClienteAsync(Cliente cliente, CancellationToken cancellationToken)
         {
-            ArgumentNullException.ThrowIfNull(request);
+            ArgumentNullException.ThrowIfNull(cliente);
 
-            var clienteExistente = clienteRepository.Find(e => e.Id == request.Id || e.Cpf == request.Cpf || e.Email == request.Email).FirstOrDefault(g => g.Id == request.Id);
+            var clienteExistente = clienteRepository.Find(e => e.Id == cliente.Id || e.Cpf == cliente.Cpf || e.Email == cliente.Email).FirstOrDefault(g => g.Id == cliente.Id);
 
             if (clienteExistente is not null)
             {
                 Notificar("Cliente já existente");
                 return false;
             }
-
-            var cliente = new Cliente(request.Id, request.Nome, request.Email, request.Cpf, request.Ativo);
 
             if (!ExecutarValidacao(new ValidarCliente(), cliente))
             {
@@ -32,19 +29,17 @@ namespace UseCases.UseCases
             return await clienteRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
-        public async Task<bool> AtualizarClienteAsync(ClienteRequest request, CancellationToken cancellationToken)
+        public async Task<bool> AtualizarClienteAsync(Cliente cliente, CancellationToken cancellationToken)
         {
-            ArgumentNullException.ThrowIfNull(request);
+            ArgumentNullException.ThrowIfNull(cliente);
 
-            var clienteExistente = await clienteRepository.FindByIdAsync(request.Id, cancellationToken);
+            var clienteExistente = await clienteRepository.FindByIdAsync(cliente.Id, cancellationToken);
 
             if (clienteExistente is null)
             {
                 Notificar("Cliente inexistente");
                 return false;
             }
-
-            var cliente = new Cliente(request.Id, request.Nome, request.Email, request.Cpf, request.Ativo);
 
             if (!ExecutarValidacao(new ValidarCliente(), cliente))
             {
@@ -74,13 +69,13 @@ namespace UseCases.UseCases
         public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken) =>
             await clienteRepository.ObterTodosClientesAsync();
 
-        public async Task<Cliente?> IdentificarClienteCpfAsync(IdentifiqueSeRequest request, CancellationToken cancellationToken)
+        public async Task<Cliente?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken)
         {
-            var cliente = await clienteRepository.IdentificarClienteCpfAsync(request.Cpf, cancellationToken);
+            var cliente = await clienteRepository.IdentificarClienteCpfAsync(cpf, cancellationToken);
 
             if (cliente is null)
             {
-                Notificar($"Cliente {request.Cpf} não encontrado.");
+                Notificar($"Cliente {cpf} não encontrado.");
 
                 return cliente;
             }

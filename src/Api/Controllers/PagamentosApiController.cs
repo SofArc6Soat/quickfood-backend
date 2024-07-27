@@ -1,17 +1,17 @@
+using Controllers;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
 using Microsoft.AspNetCore.Mvc;
-using UseCases.UseCases;
 
 namespace Api.Controllers
 {
     [Route("pagamentos")]
-    public class PagamentosController(IPagamentoUseCase pagamentoUseCase, INotificador notificador) : MainController(notificador)
+    public class PagamentosApiController(IPagamentoController pagamentoController, INotificador notificador) : MainController(notificador)
     {
         [HttpGet("{pedidoId:guid}")]
         public async Task<ContentResult> ObterPagamentoPorPedido([FromRoute] Guid pedidoId, CancellationToken cancellationToken)
         {
-            var result = await pagamentoUseCase.ObterPagamentoPorPedidoAsync(pedidoId, cancellationToken);
+            var result = await pagamentoController.ObterPagamentoPorPedidoAsync(pedidoId, cancellationToken);
 
             return Content(result, "application/json");
         }
@@ -24,7 +24,7 @@ namespace Api.Controllers
                 return ErrorBadRequestModelState(ModelState);
             }
 
-            var result = await pagamentoUseCase.EfetuarCheckoutAsync(pedidoId, cancellationToken);
+            var result = await pagamentoController.EfetuarCheckoutAsync(pedidoId, cancellationToken);
 
             return CustomResponsePutPatch(pedidoId, result);
         }
@@ -37,7 +37,7 @@ namespace Api.Controllers
                 return ErrorBadRequestModelState(ModelState);
             }
 
-            var result = await pagamentoUseCase.NotificarPagamentoAsync(pedidoId, cancellationToken);
+            var result = await pagamentoController.NotificarPagamentoAsync(pedidoId, cancellationToken);
 
             return CustomResponsePutPatch(pedidoId, result);
         }

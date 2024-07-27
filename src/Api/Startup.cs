@@ -1,8 +1,8 @@
 ﻿using Api.Configuration;
+using Controllers.DependencyInjection;
 using Core.WebApi.DependencyInjection;
 using Infra.Context;
 using Infra.DependencyInjection;
-using UseCases.DependencyInjection;
 
 namespace Api
 {
@@ -31,7 +31,7 @@ namespace Api
 
             services.AddHealthCheckConfig(settings.ConnectionStrings.DefaultConnection);
 
-            services.AddApplicationDependencyServices();
+            services.AddControllerDependencyServices();
 
             services.AddInfraDependencyServices(settings.ConnectionStrings.DefaultConnection);
 

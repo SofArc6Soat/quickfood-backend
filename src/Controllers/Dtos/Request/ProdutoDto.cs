@@ -1,10 +1,9 @@
 ﻿using Core.Domain.DataAnnotations;
-using Domain.ValueObjects;
 using System.ComponentModel.DataAnnotations;
 
-namespace UseCases.Models.Request
+namespace Controllers.Dtos.Request
 {
-    public record ProdutoRequest
+    public record ProdutoDto
     {
         [RequiredGuid(ErrorMessage = "O campo {0} é obrigatório.")]
         public required Guid Id { get; set; }
@@ -27,7 +26,7 @@ namespace UseCases.Models.Request
         public required bool Ativo { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-        [EnumDataType(typeof(Categoria))]
-        public required Categoria Categoria { get; set; }
+        [AllowedValues("Lanche", "Acompanhamento", "Bebida", "Sobremesa")]
+        public required string Categoria { get; set; }
     }
 }

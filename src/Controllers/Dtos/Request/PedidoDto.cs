@@ -1,9 +1,9 @@
 ﻿using Core.Domain.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 
-namespace UseCases.Models.Request
+namespace Controllers.Dtos.Request
 {
-    public record PedidoRequest
+    public record PedidoDto
     {
         [RequiredGuid(ErrorMessage = "O campo {0} é obrigatório.")]
         public required Guid PedidoId { get; set; }
@@ -11,10 +11,10 @@ namespace UseCases.Models.Request
         public Guid? ClienteId { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-        public required List<PedidoItemRequest> Items { get; set; } = [];
+        public required List<PedidoListaItensDto> Items { get; set; } = [];
     }
 
-    public record PedidoItemRequest
+    public record PedidoListaItensDto
     {
         [RequiredGuid(ErrorMessage = "O campo {0} é obrigatório.")]
         public required Guid ProdutoId { get; set; }
