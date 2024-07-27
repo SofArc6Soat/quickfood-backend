@@ -15,9 +15,6 @@ namespace Domain.Entities
         private readonly List<PedidoItem> _pedidoItems;
         public IReadOnlyCollection<PedidoItem> PedidoItems => _pedidoItems;
 
-        protected Pedido() =>
-            _pedidoItems = [];
-
         public Pedido(Guid id, Guid? clienteId)
         {
             Id = id;
@@ -25,6 +22,16 @@ namespace Domain.Entities
             _pedidoItems = [];
             Status = PedidoStatus.Rascunho;
             DataCriacao = DateTime.Now;
+        }
+
+        public Pedido(Guid id, int numeroPedido, Guid? clienteId, PedidoStatus status, decimal valorTotal, DateTime dataCricacao)
+        {
+            Id = id;
+            NumeroPedido = numeroPedido;
+            ClienteId = clienteId;
+            Status = status;
+            ValorTotal = valorTotal;
+            DataCriacao = dataCricacao;
         }
 
         public void AdicionarItem(PedidoItem item)

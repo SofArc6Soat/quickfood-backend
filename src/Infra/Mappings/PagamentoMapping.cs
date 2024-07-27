@@ -1,12 +1,12 @@
-﻿using Domain.Entities;
+﻿using Infra.Dto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.Mappings
 {
-    public class PagamentoMapping : IEntityTypeConfiguration<Pagamento>
+    public class PagamentoMapping : IEntityTypeConfiguration<PagamentoDto>
     {
-        public void Configure(EntityTypeBuilder<Pagamento> builder)
+        public void Configure(EntityTypeBuilder<PagamentoDto> builder)
         {
             builder.ToTable("Pagamentos", "dbo");
 
@@ -17,8 +17,8 @@ namespace Infra.Mappings
                    .HasPrecision(2);
 
             builder.Property(c => c.Status)
-                .HasColumnType("varchar(20)")
-                .HasConversion<string>();
+                   .IsRequired()
+                   .HasColumnType("varchar(20)");
         }
     }
 }

@@ -1,12 +1,12 @@
-﻿using Domain.Entities;
+﻿using Infra.Dto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.Mappings
 {
-    public class PedidoItemMapping : IEntityTypeConfiguration<PedidoItem>
+    public class PedidoItemMapping : IEntityTypeConfiguration<PedidoItemDto>
     {
-        public void Configure(EntityTypeBuilder<PedidoItem> builder)
+        public void Configure(EntityTypeBuilder<PedidoItemDto> builder)
         {
             builder.ToTable("PedidosItens", "dbo");
 

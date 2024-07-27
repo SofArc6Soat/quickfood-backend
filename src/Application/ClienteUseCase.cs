@@ -1,7 +1,8 @@
 ﻿using Core.Domain.Base;
 using Core.Domain.Notificacoes;
 using Domain.Entities;
-using Domain.Repositories;
+using Infra.Dto;
+using Infra.Repositories;
 
 namespace UseCases
 {
@@ -24,7 +25,9 @@ namespace UseCases
                 return false;
             }
 
-            await clienteRepository.InsertAsync(cliente, cancellationToken);
+            var dto = new ClienteDto(cliente.Id, cliente.Nome, cliente.Email, cliente.Cpf, cliente.Ativo);
+
+            await clienteRepository.InsertAsync(dto, cancellationToken);
 
             return await clienteRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
@@ -46,7 +49,9 @@ namespace UseCases
                 return false;
             }
 
-            await clienteRepository.UpdateAsync(cliente, cancellationToken);
+            var dto = new ClienteDto(cliente.Id, cliente.Nome, cliente.Email, cliente.Cpf, cliente.Ativo);
+
+            await clienteRepository.UpdateAsync(dto, cancellationToken);
 
             return await clienteRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
@@ -66,21 +71,36 @@ namespace UseCases
             return await clienteRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
-        public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken) =>
-            await clienteRepository.ObterTodosClientesAsync();
-
-        public async Task<Cliente?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken)
         {
-            var cliente = await clienteRepository.IdentificarClienteCpfAsync(cpf, cancellationToken);
+            var dto = await clienteRepository.ObterTodosClientesAsync();
 
-            if (cliente is null)
+            if (dto.Any())
             {
-                Notificar($"Cliente {cpf} não encontrado.");
+                var cliente = new List<Cliente>();
+                foreach (var item in dto)
+                {
+                    cliente.Add(new Cliente(item.Id, item.Nome, item.Email, item.Cpf, item.Ativo));
+                }
 
                 return cliente;
             }
 
-            return cliente;
+            return [];
+        }
+
+        public async Task<Cliente?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken)
+        {
+            var dto = await clienteRepository.IdentificarClienteCpfAsync(cpf, cancellationToken);
+
+            if (dto is null)
+            {
+                Notificar($"Cliente {cpf} não encontrado.");
+
+                return null;
+            }
+
+            return new Cliente(dto.Id, dto.Nome, dto.Email, dto.Cpf, dto.Ativo);
         }
     }
 }

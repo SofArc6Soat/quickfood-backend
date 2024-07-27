@@ -1,17 +1,16 @@
 ﻿using Cora.Infra.Repository;
 using Dapper;
-using Domain.Entities;
-using Domain.Repositories;
 using Infra.Context;
+using Infra.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories
 {
-    public class PedidoRepository(ApplicationDbContext context) : RepositoryGeneric<Pedido>(context), IPedidoRepository
+    public class PedidoRepository(ApplicationDbContext context) : RepositoryGeneric<PedidoDto>(context), IPedidoRepository
     {
-        private readonly DbSet<Pedido> _pedidos = context.Set<Pedido>();
+        private readonly DbSet<PedidoDto> _pedidos = context.Set<PedidoDto>();
 
-        public async Task<IEnumerable<Pedido>> ObterTodosPedidosAsync() =>
+        public async Task<IEnumerable<PedidoDto>> ObterTodosPedidosAsync() =>
             await _pedidos.AsNoTracking().AsSplitQuery().Include(p => p.PedidoItems).OrderBy(p => p.NumeroPedido).ToListAsync();
 
         public async Task<string> ObterTodosPedidosOrdenadosAsync(CancellationToken cancellationToken)

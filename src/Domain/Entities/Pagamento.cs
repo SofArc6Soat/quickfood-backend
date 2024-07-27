@@ -11,13 +11,21 @@ namespace Domain.Entities
         public string? QrCodePix { get; private set; }
         public DateTime DataCriacao { get; private set; }
 
-        public Pedido Pedido { get; set; }
-
         public Pagamento(Guid pedidoId, decimal valor)
         {
             PedidoId = pedidoId;
             Valor = valor;
             DataCriacao = DateTime.Now;
+        }
+
+        public Pagamento(Guid id, Guid pedidoId, StatusPagamento status, decimal valor, string? qrCodePix, DateTime dataCriacao)
+        {
+            Id = id;
+            PedidoId = pedidoId;
+            Status = status;
+            Valor = valor;
+            QrCodePix = qrCodePix;
+            DataCriacao = dataCriacao;
         }
 
         public void GerarQrCodePix()

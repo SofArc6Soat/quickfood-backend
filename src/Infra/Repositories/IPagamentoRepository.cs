@@ -1,9 +1,9 @@
 ﻿using Core.Domain.Data;
-using Domain.Entities;
+using Infra.Dto;
 
-namespace Domain.Repositories
+namespace Infra.Repositories
 {
-    public interface IPagamentoRepository : IRepositoryGeneric<Pagamento>
+    public interface IPagamentoRepository : IRepositoryGeneric<PagamentoDto>
     {
         Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellation);
     }

@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Infra.Dto;
 using Infra.Mappings.SeedData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -7,9 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 namespace Infra.Mappings
 {
     [ExcludeFromCodeCoverage]
-    public class ClienteMapping : IEntityTypeConfiguration<Cliente>
+    public class ClienteMapping : IEntityTypeConfiguration<ClienteDto>
     {
-        public void Configure(EntityTypeBuilder<Cliente> builder)
+        public void Configure(EntityTypeBuilder<ClienteDto> builder)
         {
             builder.ToTable("Clientes", "dbo");
 

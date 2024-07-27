@@ -1,7 +1,9 @@
 ﻿using Core.Domain.Base;
 using Core.Domain.Notificacoes;
 using Domain.Entities;
-using Domain.Repositories;
+using Domain.ValueObjects;
+using Infra.Dto;
+using Infra.Repositories;
 
 namespace UseCases
 {
@@ -9,13 +11,16 @@ namespace UseCases
     {
         public async Task<bool> EfetuarCheckoutAsync(Guid pedidoId, CancellationToken cancellationToken)
         {
-            var pedido = await pedidoRepository.FindByIdAsync(pedidoId, cancellationToken);
+            var dto = await pedidoRepository.FindByIdAsync(pedidoId, cancellationToken);
 
-            if (pedido is null)
+            if (dto is null)
             {
                 Notificar($"Pedido {pedidoId} não encontrado.");
                 return false;
             }
+
+            _ = Enum.TryParse(dto.Status, out PedidoStatus status);
+            var pedido = new Pedido(dto.Id, dto.NumeroPedido, dto.ClienteId, status, dto.ValorTotal, dto.DataCriacao);
 
             if (!pedido.EfetuarCheckout())
             {
@@ -31,41 +36,62 @@ namespace UseCases
                 return false;
             }
 
-            await pedidoRepository.UpdateAsync(pedido, cancellationToken);
+            var pedidoItensDto = new List<PedidoItemDto>();
+            foreach (var item in pedido.PedidoItems)
+            {
+                pedidoItensDto.Add(new PedidoItemDto(item.Id, pedido.Id, item.ProdutoId, item.Quantidade, item.ValorUnitario));
+            }
+
+            var peditoDto = new PedidoDto(pedido.Id, pedido.NumeroPedido, pedido.ClienteId, pedido.Status.ToString(), pedido.ValorTotal, pedido.DataCriacao, pedidoItensDto);
+            await pedidoRepository.UpdateAsync(peditoDto, cancellationToken);
 
             var pagamento = new Pagamento(pedidoId, pedido.ValorTotal);
             pagamento.GerarQrCodePix();
             pagamento.AlterarStatusPagamentoParaPendente();
 
-            await pagamentoRepository.InsertAsync(pagamento, cancellationToken);
+            var pagementoDto = new PagamentoDto(pagamento.Id, pagamento.PedidoId, pagamento.Status.ToString(), pagamento.Valor, pagamento.QrCodePix, pagamento.DataCriacao);
+            await pagamentoRepository.InsertAsync(pagementoDto, cancellationToken);
 
             return await pagamentoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
         public async Task<bool> NotificarPagamentoAsync(Guid pedidoId, CancellationToken cancellationToken)
         {
-            var pagamentoExistente = pagamentoRepository.Find(e => e.PedidoId == pedidoId).FirstOrDefault();
+            var dto = pagamentoRepository.Find(e => e.PedidoId == pedidoId).FirstOrDefault();
 
-            if (pagamentoExistente is null)
+            if (dto is null)
             {
                 Notificar($"Pagamento inexistente para o {pedidoId}, verifique se o pedido foi efetuado corretamente");
                 return false;
             }
 
-            pagamentoExistente.AlterarStatusPagamentoParaPago();
-            await pagamentoRepository.UpdateAsync(pagamentoExistente, cancellationToken);
+            _ = Enum.TryParse(dto.Status, out StatusPagamento status);
+            var pagamento = new Pagamento(dto.Id, dto.PedidoId, status, dto.Valor, dto.QrCodePix, dto.DataCriacao);
+            pagamento.AlterarStatusPagamentoParaPago();
 
-            var pedido = await pedidoRepository.FindByIdAsync(pedidoId, cancellationToken);
+            var pagementoDto = new PagamentoDto(pagamento.Id, pagamento.PedidoId, pagamento.Status.ToString(), pagamento.Valor, pagamento.QrCodePix, pagamento.DataCriacao);
+            await pagamentoRepository.UpdateAsync(pagementoDto, cancellationToken);
 
-            if (pedido is null)
+            var pedidoDto = await pedidoRepository.FindByIdAsync(pedidoId, cancellationToken);
+
+            if (pedidoDto is null)
             {
                 Notificar($"Pedido {pedidoId} não encontrado.");
                 return false;
             }
 
+            _ = Enum.TryParse(dto.Status, out PedidoStatus pedidoStatus);
+            var pedido = new Pedido(pedidoDto.Id, pedidoDto.NumeroPedido, pedidoDto.ClienteId, pedidoStatus, pedidoDto.ValorTotal, pedidoDto.DataCriacao);
             pedido.AlterarStatusParaRecebibo();
 
-            await pedidoRepository.UpdateAsync(pedido, cancellationToken);
+            var pedidoItensDto = new List<PedidoItemDto>();
+            foreach (var item in pedido.PedidoItems)
+            {
+                pedidoItensDto.Add(new PedidoItemDto(item.Id, pedido.Id, item.ProdutoId, item.Quantidade, item.ValorUnitario));
+            }
+
+            var pedidoNovoDto = new PedidoDto(pedido.Id, pedido.NumeroPedido, pedido.ClienteId, pedido.Status.ToString(), pedido.ValorTotal, pedido.DataCriacao, pedidoItensDto);
+            await pedidoRepository.UpdateAsync(pedidoNovoDto, cancellationToken);
 
             return await pagamentoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }

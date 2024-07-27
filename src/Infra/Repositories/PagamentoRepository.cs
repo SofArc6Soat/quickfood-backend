@@ -1,12 +1,11 @@
 ﻿using Cora.Infra.Repository;
 using Dapper;
-using Domain.Entities;
-using Domain.Repositories;
 using Infra.Context;
+using Infra.Dto;
 
 namespace Infra.Repositories
 {
-    public class PagamentoRepository(ApplicationDbContext context) : RepositoryGeneric<Pagamento>(context), IPagamentoRepository
+    public class PagamentoRepository(ApplicationDbContext context) : RepositoryGeneric<PagamentoDto>(context), IPagamentoRepository
     {
         public async Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken)
         {
