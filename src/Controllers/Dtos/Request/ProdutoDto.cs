@@ -26,7 +26,7 @@ namespace Controllers.Dtos.Request
         public required bool Ativo { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-        [AllowedValues("Lanche", "Acompanhamento", "Bebida", "Sobremesa")]
+        [AllowedValues("Lanche", "Acompanhamento", "Bebida", "Sobremesa", ErrorMessage = "Categoria inválida.")]
         public required string Categoria { get; set; }
     }
 }

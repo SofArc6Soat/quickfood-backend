@@ -1,8 +1,9 @@
 ﻿using Core.Domain.Base;
 using Core.Domain.Notificacoes;
 using Domain.Entities;
-using Domain.Repositories;
 using Domain.ValueObjects;
+using Infra.Dto;
+using Infra.Repositories;
 
 namespace UseCases
 {
@@ -12,9 +13,9 @@ namespace UseCases
         {
             ArgumentNullException.ThrowIfNull(pedido);
 
-            var pedidoExistente = await pedidoRepository.FindByIdAsync(pedido.Id, cancellationToken);
+            var pedidoDtoExistente = await pedidoRepository.FindByIdAsync(pedido.Id, cancellationToken);
 
-            if (pedidoExistente is not null)
+            if (pedidoDtoExistente is not null)
             {
                 Notificar("Pedido já existente");
                 return false;
@@ -27,15 +28,15 @@ namespace UseCases
 
             foreach (var item in itens)
             {
-                var produto = await produtoRepository.FindByIdAsync(item.ProdutoId, cancellationToken);
+                var produtoDto = await produtoRepository.FindByIdAsync(item.ProdutoId, cancellationToken);
 
-                if (produto is null)
+                if (produtoDto is null)
                 {
                     Notificar($"Produto {item.ProdutoId} não encontrado.");
                 }
                 else
                 {
-                    pedido.AdicionarItem(new PedidoItem(item.ProdutoId, item.Quantidade, produto.Preco));
+                    pedido.AdicionarItem(new PedidoItem(item.ProdutoId, item.Quantidade, produtoDto.Preco));
                 }
             }
 
@@ -45,7 +46,28 @@ namespace UseCases
                 return false;
             }
 
-            await pedidoRepository.InsertAsync(pedido, cancellationToken);
+            var pedidoDto = new PedidoDto
+            {
+                Id = pedido.Id,
+                NumeroPedido = pedido.NumeroPedido,
+                ClienteId = pedido.ClienteId,
+                Status = pedido.Status.ToString(),
+                ValorTotal = pedido.ValorTotal,
+                DataPedido = pedido.DataPedido
+            };
+
+            foreach (var item in pedido.PedidoItems)
+            {
+                pedidoDto.Itens.Add(new PedidoItemDto
+                {
+                    PedidoId = pedidoDto.Id,
+                    ProdutoId = item.ProdutoId,
+                    Quantidade = item.Quantidade,
+                    ValorUnitario = item.ValorUnitario
+                });
+            }
+
+            await pedidoRepository.InsertAsync(pedidoDto, cancellationToken);
 
             return await pedidoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
@@ -65,22 +87,36 @@ namespace UseCases
                 return false;
             }
 
-            await pedidoRepository.UpdateAsync(pedido, cancellationToken);
+            var pedidoDto = new PedidoDto
+            {
+                Id = pedido.Id,
+                NumeroPedido = pedido.NumeroPedido,
+                ClienteId = pedido.ClienteId,
+                Status = pedido.Status.ToString(),
+                ValorTotal = pedido.ValorTotal,
+                DataPedido = pedido.DataPedido
+            };
+
+            await pedidoRepository.UpdateAsync(pedidoDto, cancellationToken);
 
             return await pedidoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
-        public Task<IEnumerable<Pedido>> ObterTodosPedidosAsync(CancellationToken cancellationToken) =>
-            pedidoRepository.ObterTodosPedidosAsync();
+        public async Task<string> ObterTodosPedidosAsync(CancellationToken cancellationToken) =>
+            await pedidoRepository.ObterTodosPedidosAsync(cancellationToken);
 
         private async Task<Pedido?> ObterPedidoAsync(Guid pedidoId, CancellationToken cancellationToken)
         {
-            var pedido = await pedidoRepository.FindByIdAsync(pedidoId, cancellationToken);
+            var dto = await pedidoRepository.FindByIdAsync(pedidoId, cancellationToken);
 
-            if (pedido is null)
+            if (dto is null)
             {
                 Notificar($"Pedido {pedidoId} não encontrado.");
+                return null;
             }
+
+            _ = Enum.TryParse(dto.Status, out PedidoStatus status);
+            var pedido = new Pedido(dto.Id, dto.NumeroPedido, dto.ClienteId, status, dto.ValorTotal, dto.DataPedido);
 
             return pedido;
         }

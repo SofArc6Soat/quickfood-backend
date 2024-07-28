@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Infra.Dto;
 using Infra.Mappings.SeedData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -7,9 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 namespace Infra.Mappings
 {
     [ExcludeFromCodeCoverage]
-    public class ClienteMapping : IEntityTypeConfiguration<Cliente>
+    public class ClienteMapping : IEntityTypeConfiguration<ClienteDto>
     {
-        public void Configure(EntityTypeBuilder<Cliente> builder)
+        public void Configure(EntityTypeBuilder<ClienteDto> builder)
         {
             builder.ToTable("Clientes", "dbo");
 
@@ -25,14 +25,18 @@ namespace Infra.Mappings
             builder.Property(c => c.Cpf)
                    .HasColumnType("varchar(11)");
 
-            // Data
-            builder.HasData(ClienteSeedData.GetSeedData());
-
+            // UK
             builder.HasIndex(u => u.Email)
                    .IsUnique();
 
             builder.HasIndex(u => u.Cpf)
                    .IsUnique();
+
+            builder.HasIndex(u => new { u.Email, u.Cpf })
+                  .IsUnique();
+
+            // Data
+            builder.HasData(ClienteSeedData.GetSeedData());
         }
     }
 }

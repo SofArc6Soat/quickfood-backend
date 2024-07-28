@@ -1,8 +1,9 @@
 ﻿using Core.Domain.Base;
 using Core.Domain.Notificacoes;
 using Domain.Entities;
-using Domain.Repositories;
 using Domain.ValueObjects;
+using Infra.Dto;
+using Infra.Repositories;
 
 namespace UseCases
 {
@@ -12,9 +13,9 @@ namespace UseCases
         {
             ArgumentNullException.ThrowIfNull(produto);
 
-            var produtoExistente = produtoRepository.Find(e => e.Id == produto.Id || e.Nome == produto.Nome || e.Descricao == produto.Descricao).FirstOrDefault(g => g.Id == produto.Id);
+            var produtoDtoExistente = produtoRepository.Find(e => e.Id == produto.Id || e.Nome == produto.Nome || e.Descricao == produto.Descricao).FirstOrDefault(g => g.Id == produto.Id);
 
-            if (produtoExistente is not null)
+            if (produtoDtoExistente is not null)
             {
                 Notificar("Produto já existente");
                 return false;
@@ -25,7 +26,17 @@ namespace UseCases
                 return false;
             }
 
-            await produtoRepository.InsertAsync(produto, cancellationToken);
+            var produtoDto = new ProdutoDto
+            {
+                Id = produto.Id,
+                Nome = produto.Nome,
+                Descricao = produto.Descricao,
+                Preco = produto.Preco,
+                Categoria = produto.Categoria.ToString(),
+                Ativo = produto.Ativo
+            };
+
+            await produtoRepository.InsertAsync(produtoDto, cancellationToken);
 
             return await produtoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
@@ -34,9 +45,9 @@ namespace UseCases
         {
             ArgumentNullException.ThrowIfNull(produto);
 
-            var produtoExistente = await produtoRepository.FindByIdAsync(produto.Id, cancellationToken);
+            var produtoDtoExistente = await produtoRepository.FindByIdAsync(produto.Id, cancellationToken);
 
-            if (produtoExistente is null)
+            if (produtoDtoExistente is null)
             {
                 Notificar("Produto inexistente");
                 return false;
@@ -47,16 +58,26 @@ namespace UseCases
                 return false;
             }
 
-            await produtoRepository.UpdateAsync(produto, cancellationToken);
+            var produtoDto = new ProdutoDto
+            {
+                Id = produto.Id,
+                Nome = produto.Nome,
+                Descricao = produto.Descricao,
+                Preco = produto.Preco,
+                Categoria = produto.Categoria.ToString(),
+                Ativo = produto.Ativo
+            };
+
+            await produtoRepository.UpdateAsync(produtoDto, cancellationToken);
 
             return await produtoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
         public async Task<bool> DeletarProdutoAsync(Guid id, CancellationToken cancellationToken)
         {
-            var produtoExistente = await produtoRepository.FindByIdAsync(id, cancellationToken);
+            var produtoDtoExistente = await produtoRepository.FindByIdAsync(id, cancellationToken);
 
-            if (produtoExistente is null)
+            if (produtoDtoExistente is null)
             {
                 Notificar("Produto inexistente");
                 return false;
@@ -67,10 +88,44 @@ namespace UseCases
             return await produtoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
-        public async Task<IEnumerable<Produto>> ObterTodosProdutosAsync(CancellationToken cancellationToken) =>
-            await produtoRepository.ObterTodosProdutosAsync();
+        public async Task<IEnumerable<Produto>> ObterTodosProdutosAsync(CancellationToken cancellationToken)
+        {
+            var produtoDto = await produtoRepository.ObterTodosProdutosAsync(cancellationToken);
 
-        public async Task<IEnumerable<Produto>> ObterProdutosCategoriaAsync(Categoria categoria, CancellationToken cancellationToken) =>
-            await produtoRepository.ObterProdutosCategoriaAsync(categoria);
+            if (produtoDto.Any())
+            {
+                var produto = new List<Produto>();
+                foreach (var item in produtoDto)
+                {
+                    _ = Enum.TryParse(item.Categoria, out Categoria produtoCategoria);
+
+                    produto.Add(new Produto(item.Id, item.Nome, item.Descricao, item.Preco, produtoCategoria, item.Ativo));
+                }
+
+                return produto;
+            }
+
+            return [];
+        }
+
+        public async Task<IEnumerable<Produto>> ObterProdutosCategoriaAsync(Categoria categoria, CancellationToken cancellationToken)
+        {
+            var produtoDto = await produtoRepository.ObterProdutosCategoriaAsync(categoria.ToString(), cancellationToken);
+
+            if (produtoDto.Any())
+            {
+                var produto = new List<Produto>();
+                foreach (var item in produtoDto)
+                {
+                    _ = Enum.TryParse(item.Categoria, out Categoria produtoCategoria);
+
+                    produto.Add(new Produto(item.Id, item.Nome, item.Descricao, item.Preco, produtoCategoria, item.Ativo));
+                }
+
+                return produto;
+            }
+
+            return [];
+        }
     }
 }

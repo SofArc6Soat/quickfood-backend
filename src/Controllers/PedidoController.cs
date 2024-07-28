@@ -28,7 +28,7 @@ namespace Controllers
             return await pedidoUseCase.CadastrarPedidoAsync(pedido, pedidoListaItens, cancellationToken);
         }
 
-        public async Task<IEnumerable<Pedido>> ObterTodosPedidosAsync(CancellationToken cancellationToken) =>
+        public async Task<string> ObterTodosPedidosAsync(CancellationToken cancellationToken) =>
             await pedidoUseCase.ObterTodosPedidosAsync(cancellationToken);
 
         public async Task<string> ObterTodosPedidosOrdenadosAsync(CancellationToken cancellationToken) =>

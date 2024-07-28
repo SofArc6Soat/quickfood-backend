@@ -18,11 +18,11 @@ namespace Api.Controllers
         }
 
         [HttpGet("ordenados")]
-        public async Task<ContentResult> ObterTodosPedidosOrdenados(CancellationToken cancellationToken)
+        public async Task<IActionResult> ObterTodosPedidosOrdenados(CancellationToken cancellationToken)
         {
             var result = await pedidoController.ObterTodosPedidosOrdenadosAsync(cancellationToken);
 
-            return Content(result, "application/json");
+            return CustomResponseGet(result);
         }
 
         [HttpPost]

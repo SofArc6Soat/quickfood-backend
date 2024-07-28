@@ -1,19 +1,18 @@
 ﻿using Cora.Infra.Repository;
-using Domain.Entities;
-using Domain.Repositories;
 using Infra.Context;
+using Infra.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories
 {
-    public class ClienteRepository(ApplicationDbContext context) : RepositoryGeneric<Cliente>(context), IClienteRepository
+    public class ClienteRepository(ApplicationDbContext context) : RepositoryGeneric<ClienteDto>(context), IClienteRepository
     {
-        private readonly DbSet<Cliente> _clientes = context.Set<Cliente>();
+        private readonly DbSet<ClienteDto> _clientes = context.Set<ClienteDto>();
 
-        public async Task<Cliente?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken) =>
+        public async Task<ClienteDto?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken) =>
             await _clientes.AsNoTracking().Where(p => p.Cpf == cpf).FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync() =>
-            await _clientes.AsNoTracking().Where(p => p.Ativo).ToListAsync();
+        public async Task<IEnumerable<ClienteDto>> ObterTodosClientesAsync(CancellationToken cancellationToken) =>
+            await _clientes.AsNoTracking().Where(p => p.Ativo).ToListAsync(cancellationToken);
     }
 }
