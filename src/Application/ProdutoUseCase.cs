@@ -13,7 +13,7 @@ namespace UseCases
         {
             ArgumentNullException.ThrowIfNull(produto);
 
-            var produtoDtoExistente = produtoRepository.Find(e => e.Id == produto.Id || e.Nome == produto.Nome || e.Descricao == produto.Descricao).FirstOrDefault(g => g.Id == produto.Id);
+            var produtoDtoExistente = produtoRepository.Find(e => e.Id == produto.Id || e.Nome == produto.Nome || e.Descricao == produto.Descricao, cancellationToken).FirstOrDefault(g => g.Id == produto.Id);
 
             if (produtoDtoExistente is not null)
             {

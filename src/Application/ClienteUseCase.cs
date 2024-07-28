@@ -12,7 +12,7 @@ namespace UseCases
         {
             ArgumentNullException.ThrowIfNull(cliente);
 
-            var clienteDtoExistente = clienteRepository.Find(e => e.Id == cliente.Id || e.Cpf == cliente.Cpf || e.Email == cliente.Email).FirstOrDefault(g => g.Id == cliente.Id);
+            var clienteDtoExistente = clienteRepository.Find(e => e.Id == cliente.Id || e.Cpf == cliente.Cpf || e.Email == cliente.Email, cancellationToken).FirstOrDefault(g => g.Id == cliente.Id);
 
             if (clienteDtoExistente is not null)
             {

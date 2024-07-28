@@ -28,7 +28,7 @@ namespace UseCases
                 return false;
             }
 
-            var pagamentoDtoExistente = pagamentoRepository.Find(e => e.PedidoId == pedido.Id).Any();
+            var pagamentoDtoExistente = pagamentoRepository.Find(e => e.PedidoId == pedido.Id, cancellationToken).Any();
 
             if (pagamentoDtoExistente)
             {
@@ -69,7 +69,7 @@ namespace UseCases
 
         public async Task<bool> NotificarPagamentoAsync(Guid pedidoId, CancellationToken cancellationToken)
         {
-            var pagamentoExistenteDto = pagamentoRepository.Find(e => e.PedidoId == pedidoId).FirstOrDefault();
+            var pagamentoExistenteDto = pagamentoRepository.Find(e => e.PedidoId == pedidoId, cancellationToken).FirstOrDefault();
 
             if (pagamentoExistenteDto is null)
             {
