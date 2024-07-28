@@ -36,22 +36,71 @@ A arquitetura hexagonal será utilizada para garantir que a aplicação seja mod
    ```bash
    git clone https://github.com/SofArc6Soat/quickfood-backend.git
 
-2. Navegue até o diretório do projeto:
-   ```bash
-   cd quickfood-backend
+2. Executar docker-compose ou kubernetes    
 
-3. Configure o ambiente Docker:
+2.1 Docker (docker-compose)
+
+2.1.1 Navegue até o diretório do projeto:
    ```bash
-   cd docker-compose
+   cd quickfood-backend\src\DevOps
+   ```
+   
+2.1.2 Configure o ambiente Docker:
+   ```bash
    docker-compose up --build
+   ```
+   
+2.2 Docker (kubernetes)
 
-4. A aplicação estará disponível em http://localhost:5000 ou https://localhost:5001
+2.2.1 Navegue até o diretório do projeto:
+   ```bash
+   cd quickfood-backend\src\DevOps\kubernetes
+   ```
+   
+2.2.2 Configure o ambiente Docker:
+   ```bash
+   kubectl apply -f 01-sql-data-pvc.yaml
+   ```
+   ```bash
+   kubectl apply -f 02-sql-log-pvc.yaml
+   ```
+   ```bash
+   kubectl apply -f 03-sql-secrets-pvc.yaml
+   ```
+   ```bash
+   kubectl apply -f 04-quickfood-sqlserver-deployment.yaml
+   ```
+   ```bash
+   kubectl apply -f 05-quickfood-sqlserver-service.yaml
+   ```
+   ```bash
+   kubectl apply -f 06-quickfood-backend-deployment.yaml
+   ```
+   ```bash
+   kubectl apply -f 06-quickfood-backend-deployment.yaml
+   ```
+   ```bash
+   kubectl apply -f 07-quickfood-backend-service.yaml
+   ```
+   
+ou executar todos scripts de uma vez   
+   ```bash
+   Get-ExecutionPolicy 
+   ```
+   ```bash
+   Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+   ```
+   ```bash
+   .\apply-k8s-resources.ps1
+   ```
 
-5. URL do Swagger: http://localhost:5000/swagger ou https://localhost:5001/swagger
+3. A aplicação estará disponível em http://localhost:5000 ou https://localhost:5001
 
-6. URL do Healthcheck da API: http://localhost:5000/health ou https://localhost:5001/health
+4. URL do Swagger: http://localhost:5000/swagger ou https://localhost:5001/swagger
 
-7. Caso deseje testar via postman com dados fake importe o arquivo API QuickFood.postman_collection.json do diretorio "postman" na aplicação postman local.
+5. URL do Healthcheck da API: http://localhost:5000/health ou https://localhost:5001/health
+
+6. Caso deseje testar via postman com dados fake importe o arquivo API QuickFood.postman_collection.json do diretorio "postman" na aplicação postman local.
 
 ## Autores
 
@@ -64,4 +113,3 @@ A arquitetura hexagonal será utilizada para garantir que a aplicação seja mod
 - **Github - Domain Storytelling**: [Link para o Domain Storytelling](https://github.com/SofArc6Soat/quickfood-domain-story-telling)
 - **Github - Context Map**: [Link para o Domain Storytelling](https://github.com/SofArc6Soat/quickfood-ubiquitous-language)
 - **Github - Linguagem Ubíqua**: [Link para o Domain Storytelling](https://github.com/SofArc6Soat/quickfood-ubiquitous-language)
-- **DockerHub - docker push sofarc6soat/quickfood-backend:tagname
