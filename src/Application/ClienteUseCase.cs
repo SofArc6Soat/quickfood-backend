@@ -12,9 +12,9 @@ namespace UseCases
         {
             ArgumentNullException.ThrowIfNull(cliente);
 
-            var clienteExistente = clienteRepository.Find(e => e.Id == cliente.Id || e.Cpf == cliente.Cpf || e.Email == cliente.Email).FirstOrDefault(g => g.Id == cliente.Id);
+            var clienteDtoExistente = clienteRepository.Find(e => e.Id == cliente.Id || e.Cpf == cliente.Cpf || e.Email == cliente.Email).FirstOrDefault(g => g.Id == cliente.Id);
 
-            if (clienteExistente is not null)
+            if (clienteDtoExistente is not null)
             {
                 Notificar("Cliente já existente");
                 return false;
@@ -25,9 +25,16 @@ namespace UseCases
                 return false;
             }
 
-            var dto = new ClienteDto(cliente.Id, cliente.Nome, cliente.Email, cliente.Cpf, cliente.Ativo);
+            var clienteDto = new ClienteDto
+            {
+                Id = cliente.Id,
+                Nome = cliente.Nome,
+                Email = cliente.Email,
+                Cpf = cliente.Cpf,
+                Ativo = cliente.Ativo
+            };
 
-            await clienteRepository.InsertAsync(dto, cancellationToken);
+            await clienteRepository.InsertAsync(clienteDto, cancellationToken);
 
             return await clienteRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
@@ -36,9 +43,9 @@ namespace UseCases
         {
             ArgumentNullException.ThrowIfNull(cliente);
 
-            var clienteExistente = await clienteRepository.FindByIdAsync(cliente.Id, cancellationToken);
+            var clienteDtoExistente = await clienteRepository.FindByIdAsync(cliente.Id, cancellationToken);
 
-            if (clienteExistente is null)
+            if (clienteDtoExistente is null)
             {
                 Notificar("Cliente inexistente");
                 return false;
@@ -49,18 +56,25 @@ namespace UseCases
                 return false;
             }
 
-            var dto = new ClienteDto(cliente.Id, cliente.Nome, cliente.Email, cliente.Cpf, cliente.Ativo);
+            var clienteDto = new ClienteDto
+            {
+                Id = cliente.Id,
+                Nome = cliente.Nome,
+                Email = cliente.Email,
+                Cpf = cliente.Cpf,
+                Ativo = cliente.Ativo
+            };
 
-            await clienteRepository.UpdateAsync(dto, cancellationToken);
+            await clienteRepository.UpdateAsync(clienteDto, cancellationToken);
 
             return await clienteRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
         public async Task<bool> DeletarClienteAsync(Guid id, CancellationToken cancellationToken)
         {
-            var clienteExistente = await clienteRepository.FindByIdAsync(id, cancellationToken);
+            var clienteDtoExistente = await clienteRepository.FindByIdAsync(id, cancellationToken);
 
-            if (clienteExistente is null)
+            if (clienteDtoExistente is null)
             {
                 Notificar("Cliente inexistente");
                 return false;
@@ -73,12 +87,12 @@ namespace UseCases
 
         public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken)
         {
-            var dto = await clienteRepository.ObterTodosClientesAsync();
+            var clienteDto = await clienteRepository.ObterTodosClientesAsync(cancellationToken);
 
-            if (dto.Any())
+            if (clienteDto.Any())
             {
                 var cliente = new List<Cliente>();
-                foreach (var item in dto)
+                foreach (var item in clienteDto)
                 {
                     cliente.Add(new Cliente(item.Id, item.Nome, item.Email, item.Cpf, item.Ativo));
                 }
@@ -91,16 +105,16 @@ namespace UseCases
 
         public async Task<Cliente?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken)
         {
-            var dto = await clienteRepository.IdentificarClienteCpfAsync(cpf, cancellationToken);
+            var clienteDto = await clienteRepository.IdentificarClienteCpfAsync(cpf, cancellationToken);
 
-            if (dto is null)
+            if (clienteDto is null)
             {
                 Notificar($"Cliente {cpf} não encontrado.");
 
                 return null;
             }
 
-            return new Cliente(dto.Id, dto.Nome, dto.Email, dto.Cpf, dto.Ativo);
+            return new Cliente(clienteDto.Id, clienteDto.Nome, clienteDto.Email, clienteDto.Cpf, clienteDto.Ativo);
         }
     }
 }

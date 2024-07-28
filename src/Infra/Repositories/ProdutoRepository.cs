@@ -9,10 +9,10 @@ namespace Infra.Repositories
     {
         private readonly DbSet<ProdutoDto> _produtos = context.Set<ProdutoDto>();
 
-        public async Task<IEnumerable<ProdutoDto>> ObterTodosProdutosAsync() =>
-            await _produtos.AsNoTracking().Where(p => p.Ativo).ToListAsync();
+        public async Task<IEnumerable<ProdutoDto>> ObterTodosProdutosAsync(CancellationToken cancellationToken) =>
+            await _produtos.AsNoTracking().Where(p => p.Ativo).ToListAsync(cancellationToken);
 
-        public async Task<IEnumerable<ProdutoDto>> ObterProdutosCategoriaAsync(string categoria) =>
-            await _produtos.AsNoTracking().Where(p => p.Ativo && p.Categoria == categoria).ToListAsync();
+        public async Task<IEnumerable<ProdutoDto>> ObterProdutosCategoriaAsync(string categoria, CancellationToken cancellationToken) =>
+            await _produtos.AsNoTracking().Where(p => p.Ativo && p.Categoria == categoria).ToListAsync(cancellationToken);
     }
 }

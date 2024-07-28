@@ -8,8 +8,20 @@ namespace Infra.Mappings.SeedData
     {
         public static List<ClienteDto> GetSeedData() =>
         [
-            new ClienteDto(Guid.Parse("efee2d79-ce89-479a-9667-04f57f9e2e5e"), "João", "joao@gmail.com", "08062759016", true),
-            new ClienteDto(Guid.Parse("fdff63d2-127f-49c5-854a-e47cae8cedb9"), "Maria", "maria@gmail.com", "05827307084", true)
+            new ClienteDto {
+                Id = Guid.Parse("efee2d79-ce89-479a-9667-04f57f9e2e5e"),
+                Nome = "João",
+                Email = "joao@gmail.com",
+                Cpf = "08062759016",
+                Ativo = true
+            },
+            new ClienteDto {
+                Id = Guid.Parse("fdff63d2-127f-49c5-854a-e47cae8cedb9"),
+                Nome = "Maria",
+                Email = "maria@gmail.com",
+                Cpf = "05827307084",
+                Ativo = true
+            }
         ];
     }
 }

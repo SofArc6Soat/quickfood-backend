@@ -42,7 +42,7 @@ namespace Infra.Migrations
                     ClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Status = table.Column<string>(type: "varchar(20)", nullable: false),
                     ValorTotal = table.Column<decimal>(type: "decimal(18,2)", precision: 2, nullable: false),
-                    DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DataPedido = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,7 +58,7 @@ namespace Infra.Migrations
                     Nome = table.Column<string>(type: "varchar(40)", nullable: false),
                     Descricao = table.Column<string>(type: "varchar(200)", nullable: false),
                     Preco = table.Column<decimal>(type: "decimal(18,2)", precision: 2, nullable: false),
-                    Categoria = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Categoria = table.Column<string>(type: "varchar(20)", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -75,8 +75,8 @@ namespace Infra.Migrations
                     PedidoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Status = table.Column<string>(type: "varchar(20)", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", precision: 2, nullable: false),
-                    QrCodePix = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    QrCodePix = table.Column<string>(type: "varchar(100)", nullable: false),
+                    DataPagamento = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,7 +116,7 @@ namespace Infra.Migrations
             migrationBuilder.InsertData(
                 schema: "dbo",
                 table: "Clientes",
-                columns: ["Id", "Ativo", "Cpf", "Email", "Nome"],
+                columns: new[] { "Id", "Ativo", "Cpf", "Email", "Nome" },
                 values: new object[,]
                 {
                     { new Guid("efee2d79-ce89-479a-9667-04f57f9e2e5e"), true, "08062759016", "joao@gmail.com", "João" },
@@ -126,7 +126,7 @@ namespace Infra.Migrations
             migrationBuilder.InsertData(
                 schema: "dbo",
                 table: "Produtos",
-                columns: ["Id", "Ativo", "Categoria", "Descricao", "Nome", "Preco"],
+                columns: new[] { "Id", "Ativo", "Categoria", "Descricao", "Nome", "Preco" },
                 values: new object[,]
                 {
                     { new Guid("111cb598-2df6-41bf-b51b-d4e0f292bda3"), true, "Bebida", "350ml", "PEPSI LATA", 7m },
@@ -156,6 +156,14 @@ namespace Infra.Migrations
                 schema: "dbo",
                 table: "Clientes",
                 column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clientes_Email_Cpf",
+                schema: "dbo",
+                table: "Clientes",
+                columns: new[] { "Email", "Cpf" },
                 unique: true,
                 filter: "[Email] IS NOT NULL");
 

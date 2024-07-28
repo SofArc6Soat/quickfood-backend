@@ -5,7 +5,7 @@ namespace Infra.Repositories
 {
     public interface IPedidoRepository : IRepositoryGeneric<PedidoDto>
     {
-        Task<string> ObterTodosPedidosOrdenadosAsync(CancellationToken cancellation);
-        Task<IEnumerable<PedidoDto>> ObterTodosPedidosAsync();
+        Task<string> ObterTodosPedidosOrdenadosAsync(CancellationToken cancellationToken);
+        Task<string> ObterTodosPedidosAsync(CancellationToken cancellationToken);
     }
 }

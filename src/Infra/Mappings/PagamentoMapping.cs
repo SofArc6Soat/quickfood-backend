@@ -19,6 +19,10 @@ namespace Infra.Mappings
             builder.Property(c => c.Status)
                    .IsRequired()
                    .HasColumnType("varchar(20)");
+
+            builder.Property(c => c.QrCodePix)
+                   .IsRequired()
+                   .HasColumnType("varchar(100)");
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Infra.Repositories
         public async Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken)
         {
             var query = @"
-                SELECT pedidoId, status, valor, dataCriacao AS dataPagamento
+                SELECT pedidoId, status, valor, dataPagamento
                 FROM Pagamentos
                 WHERE PedidoId = @vPedidoId
                 FOR JSON PATH";

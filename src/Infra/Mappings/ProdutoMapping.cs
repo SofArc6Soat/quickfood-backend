@@ -23,12 +23,13 @@ namespace Infra.Mappings
                    .IsRequired()
                    .HasColumnType("varchar(200)");
 
+            builder.Property(c => c.Categoria)
+                   .IsRequired()
+                   .HasColumnType("varchar(20)");
+
             builder.Property(c => c.Preco)
                    .HasColumnType("decimal(18,2)")
                    .HasPrecision(2);
-
-            builder.Property(u => u.Categoria)
-                   .IsRequired();
 
             // Data
             builder.HasData(ProdutoSeedData.GetSeedData());

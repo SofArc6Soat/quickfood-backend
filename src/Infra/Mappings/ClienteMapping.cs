@@ -25,14 +25,18 @@ namespace Infra.Mappings
             builder.Property(c => c.Cpf)
                    .HasColumnType("varchar(11)");
 
-            // Data
-            builder.HasData(ClienteSeedData.GetSeedData());
-
+            // UK
             builder.HasIndex(u => u.Email)
                    .IsUnique();
 
             builder.HasIndex(u => u.Cpf)
                    .IsUnique();
+
+            builder.HasIndex(u => new { u.Email, u.Cpf })
+                  .IsUnique();
+
+            // Data
+            builder.HasData(ClienteSeedData.GetSeedData());
         }
     }
 }

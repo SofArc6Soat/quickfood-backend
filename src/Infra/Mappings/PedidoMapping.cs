@@ -20,7 +20,13 @@ namespace Infra.Mappings
                    .IsRequired()
                    .HasColumnType("varchar(20)");
 
+            // Identity
             builder.Property(c => c.NumeroPedido).UseIdentityColumn(10, 1).ValueGeneratedOnAddOrUpdate();
+
+            // EF Rel.
+            builder.HasMany(e => e.Itens)
+                .WithOne(e => e.Pedido)
+                .HasForeignKey(e => e.PedidoId);
         }
     }
 }

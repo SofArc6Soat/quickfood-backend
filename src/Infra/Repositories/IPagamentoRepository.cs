@@ -5,6 +5,6 @@ namespace Infra.Repositories
 {
     public interface IPagamentoRepository : IRepositoryGeneric<PagamentoDto>
     {
-        Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellation);
+        Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken);
     }
 }

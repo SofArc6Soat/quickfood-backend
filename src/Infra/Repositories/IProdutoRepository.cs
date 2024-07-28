@@ -5,7 +5,7 @@ namespace Infra.Repositories
 {
     public interface IProdutoRepository : IRepositoryGeneric<ProdutoDto>
     {
-        Task<IEnumerable<ProdutoDto>> ObterTodosProdutosAsync();
-        Task<IEnumerable<ProdutoDto>> ObterProdutosCategoriaAsync(string categoria);
+        Task<IEnumerable<ProdutoDto>> ObterTodosProdutosAsync(CancellationToken cancellationToken);
+        Task<IEnumerable<ProdutoDto>> ObterProdutosCategoriaAsync(string categoria, CancellationToken cancellationToken);
     }
 }

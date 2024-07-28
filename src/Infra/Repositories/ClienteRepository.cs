@@ -12,7 +12,7 @@ namespace Infra.Repositories
         public async Task<ClienteDto?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken) =>
             await _clientes.AsNoTracking().Where(p => p.Cpf == cpf).FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<IEnumerable<ClienteDto>> ObterTodosClientesAsync() =>
-            await _clientes.AsNoTracking().Where(p => p.Ativo).ToListAsync();
+        public async Task<IEnumerable<ClienteDto>> ObterTodosClientesAsync(CancellationToken cancellationToken) =>
+            await _clientes.AsNoTracking().Where(p => p.Ativo).ToListAsync(cancellationToken);
     }
 }

@@ -28,15 +28,15 @@ namespace UseCases
 
             foreach (var item in itens)
             {
-                var produto = await produtoRepository.FindByIdAsync(item.ProdutoId, cancellationToken);
+                var produtoDto = await produtoRepository.FindByIdAsync(item.ProdutoId, cancellationToken);
 
-                if (produto is null)
+                if (produtoDto is null)
                 {
                     Notificar($"Produto {item.ProdutoId} não encontrado.");
                 }
                 else
                 {
-                    pedido.AdicionarItem(new PedidoItem(item.ProdutoId, item.Quantidade, produto.Preco));
+                    pedido.AdicionarItem(new PedidoItem(item.ProdutoId, item.Quantidade, produtoDto.Preco));
                 }
             }
 
@@ -46,13 +46,26 @@ namespace UseCases
                 return false;
             }
 
-            var pedidoItensDto = new List<PedidoItemDto>();
+            var pedidoDto = new PedidoDto
+            {
+                Id = pedido.Id,
+                NumeroPedido = pedido.NumeroPedido,
+                ClienteId = pedido.ClienteId,
+                Status = pedido.Status.ToString(),
+                ValorTotal = pedido.ValorTotal,
+                DataPedido = pedido.DataPedido
+            };
+
             foreach (var item in pedido.PedidoItems)
             {
-                pedidoItensDto.Add(new PedidoItemDto(item.Id, pedido.Id, item.ProdutoId, item.Quantidade, item.ValorUnitario));
+                pedidoDto.Itens.Add(new PedidoItemDto
+                {
+                    PedidoId = pedidoDto.Id,
+                    ProdutoId = item.ProdutoId,
+                    Quantidade = item.Quantidade,
+                    ValorUnitario = item.ValorUnitario
+                });
             }
-
-            var pedidoDto = new PedidoDto(pedido.Id, pedido.NumeroPedido, pedido.ClienteId, pedido.Status.ToString(), pedido.ValorTotal, pedido.DataCriacao, pedidoItensDto);
 
             await pedidoRepository.InsertAsync(pedidoDto, cancellationToken);
 
@@ -74,36 +87,23 @@ namespace UseCases
                 return false;
             }
 
-            var pedidoItensDto = new List<PedidoItemDto>();
-            foreach (var item in pedido.PedidoItems)
+            var pedidoDto = new PedidoDto
             {
-                pedidoItensDto.Add(new PedidoItemDto(item.Id, pedido.Id, item.ProdutoId, item.Quantidade, item.ValorUnitario));
-            }
+                Id = pedido.Id,
+                NumeroPedido = pedido.NumeroPedido,
+                ClienteId = pedido.ClienteId,
+                Status = pedido.Status.ToString(),
+                ValorTotal = pedido.ValorTotal,
+                DataPedido = pedido.DataPedido
+            };
 
-            var pedidoDto = new PedidoDto(pedido.Id, pedido.NumeroPedido, pedido.ClienteId, pedido.Status.ToString(), pedido.ValorTotal, pedido.DataCriacao, pedidoItensDto);
             await pedidoRepository.UpdateAsync(pedidoDto, cancellationToken);
 
             return await pedidoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
-        public async Task<IEnumerable<Pedido>> ObterTodosPedidosAsync(CancellationToken cancellationToken)
-        {
-            var dto = await pedidoRepository.ObterTodosPedidosAsync();
-
-            if (dto.Any())
-            {
-                var pedido = new List<Pedido>();
-                foreach (var item in dto)
-                {
-                    _ = Enum.TryParse(item.Status, out PedidoStatus status);
-                    pedido.Add(new Pedido(item.Id, item.NumeroPedido, item.ClienteId, status, item.ValorTotal, item.DataCriacao));
-                }
-
-                return pedido;
-            }
-
-            return [];
-        }
+        public async Task<string> ObterTodosPedidosAsync(CancellationToken cancellationToken) =>
+            await pedidoRepository.ObterTodosPedidosAsync(cancellationToken);
 
         private async Task<Pedido?> ObterPedidoAsync(Guid pedidoId, CancellationToken cancellationToken)
         {
@@ -116,7 +116,7 @@ namespace UseCases
             }
 
             _ = Enum.TryParse(dto.Status, out PedidoStatus status);
-            var pedido = new Pedido(dto.Id, dto.NumeroPedido, dto.ClienteId, status, dto.ValorTotal, dto.DataCriacao);
+            var pedido = new Pedido(dto.Id, dto.NumeroPedido, dto.ClienteId, status, dto.ValorTotal, dto.DataPedido);
 
             return pedido;
         }

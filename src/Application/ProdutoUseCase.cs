@@ -13,9 +13,9 @@ namespace UseCases
         {
             ArgumentNullException.ThrowIfNull(produto);
 
-            var produtoExistente = produtoRepository.Find(e => e.Id == produto.Id || e.Nome == produto.Nome || e.Descricao == produto.Descricao).FirstOrDefault(g => g.Id == produto.Id);
+            var produtoDtoExistente = produtoRepository.Find(e => e.Id == produto.Id || e.Nome == produto.Nome || e.Descricao == produto.Descricao).FirstOrDefault(g => g.Id == produto.Id);
 
-            if (produtoExistente is not null)
+            if (produtoDtoExistente is not null)
             {
                 Notificar("Produto já existente");
                 return false;
@@ -26,9 +26,17 @@ namespace UseCases
                 return false;
             }
 
-            var dto = new ProdutoDto(produto.Id, produto.Nome, produto.Descricao, produto.Preco, produto.Categoria.ToString(), produto.Ativo);
+            var produtoDto = new ProdutoDto
+            {
+                Id = produto.Id,
+                Nome = produto.Nome,
+                Descricao = produto.Descricao,
+                Preco = produto.Preco,
+                Categoria = produto.Categoria.ToString(),
+                Ativo = produto.Ativo
+            };
 
-            await produtoRepository.InsertAsync(dto, cancellationToken);
+            await produtoRepository.InsertAsync(produtoDto, cancellationToken);
 
             return await produtoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
@@ -37,9 +45,9 @@ namespace UseCases
         {
             ArgumentNullException.ThrowIfNull(produto);
 
-            var produtoExistente = await produtoRepository.FindByIdAsync(produto.Id, cancellationToken);
+            var produtoDtoExistente = await produtoRepository.FindByIdAsync(produto.Id, cancellationToken);
 
-            if (produtoExistente is null)
+            if (produtoDtoExistente is null)
             {
                 Notificar("Produto inexistente");
                 return false;
@@ -50,18 +58,26 @@ namespace UseCases
                 return false;
             }
 
-            var dto = new ProdutoDto(produto.Id, produto.Nome, produto.Descricao, produto.Preco, produto.Categoria.ToString(), produto.Ativo);
+            var produtoDto = new ProdutoDto
+            {
+                Id = produto.Id,
+                Nome = produto.Nome,
+                Descricao = produto.Descricao,
+                Preco = produto.Preco,
+                Categoria = produto.Categoria.ToString(),
+                Ativo = produto.Ativo
+            };
 
-            await produtoRepository.UpdateAsync(dto, cancellationToken);
+            await produtoRepository.UpdateAsync(produtoDto, cancellationToken);
 
             return await produtoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
         public async Task<bool> DeletarProdutoAsync(Guid id, CancellationToken cancellationToken)
         {
-            var produtoExistente = await produtoRepository.FindByIdAsync(id, cancellationToken);
+            var produtoDtoExistente = await produtoRepository.FindByIdAsync(id, cancellationToken);
 
-            if (produtoExistente is null)
+            if (produtoDtoExistente is null)
             {
                 Notificar("Produto inexistente");
                 return false;
@@ -74,12 +90,12 @@ namespace UseCases
 
         public async Task<IEnumerable<Produto>> ObterTodosProdutosAsync(CancellationToken cancellationToken)
         {
-            var dto = await produtoRepository.ObterTodosProdutosAsync();
+            var produtoDto = await produtoRepository.ObterTodosProdutosAsync(cancellationToken);
 
-            if (dto.Any())
+            if (produtoDto.Any())
             {
                 var produto = new List<Produto>();
-                foreach (var item in dto)
+                foreach (var item in produtoDto)
                 {
                     _ = Enum.TryParse(item.Categoria, out Categoria produtoCategoria);
 
@@ -94,12 +110,12 @@ namespace UseCases
 
         public async Task<IEnumerable<Produto>> ObterProdutosCategoriaAsync(Categoria categoria, CancellationToken cancellationToken)
         {
-            var dto = await produtoRepository.ObterProdutosCategoriaAsync(categoria.ToString());
+            var produtoDto = await produtoRepository.ObterProdutosCategoriaAsync(categoria.ToString(), cancellationToken);
 
-            if (dto.Any())
+            if (produtoDto.Any())
             {
                 var produto = new List<Produto>();
-                foreach (var item in dto)
+                foreach (var item in produtoDto)
                 {
                     _ = Enum.TryParse(item.Categoria, out Categoria produtoCategoria);
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
+using System.Text.Json;
 
 namespace Core.WebApi.Controller
 {
@@ -25,6 +26,9 @@ namespace Core.WebApi.Controller
             data is not null
                 ? Ok(SuccessResponse(data))
                 : NotFound(NoSuccessResponse(data));
+
+        protected IActionResult CustomResponseGet(string result) =>
+            result.Equals("[]") ? NotFound(NoSuccessResponse()) : Ok(SuccessResponse(result));
 
         protected IActionResult CustomResponsePost(string url, object data, bool result) =>
             OperacaoValida() || result
@@ -66,6 +70,13 @@ namespace Core.WebApi.Controller
         private static BaseApiResponse SuccessResponse(object data) =>
             new() { Success = true, Data = data };
 
+        private static BaseApiResponse SuccessResponse(string data) =>
+            new()
+            {
+                Success = true,
+                Data = JsonDocument.Parse(data).RootElement
+            };
+
         private static BaseApiResponse SuccessResponse(Guid id) =>
             new() { Success = true, Data = id };
 
@@ -85,5 +96,11 @@ namespace Core.WebApi.Controller
                 Errors = notificador.ObterNotificacoes().Select(n => n.Mensagem).ToList()
             };
 
+        private static BaseApiResponse NoSuccessResponse() =>
+            new()
+            {
+                Success = true,
+                Data = "[]"
+            };
     }
 }

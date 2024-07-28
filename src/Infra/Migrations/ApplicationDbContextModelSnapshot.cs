@@ -22,7 +22,7 @@ namespace Infra.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.Cliente", b =>
+            modelBuilder.Entity("Infra.Dto.ClienteDto", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,6 +51,10 @@ namespace Infra.Migrations
                         .IsUnique()
                         .HasFilter("[Email] IS NOT NULL");
 
+                    b.HasIndex("Email", "Cpf")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
                     b.ToTable("Clientes", "dbo");
 
                     b.HasData(
@@ -72,20 +76,21 @@ namespace Infra.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.Pagamento", b =>
+            modelBuilder.Entity("Infra.Dto.PagamentoDto", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DataCriacao")
+                    b.Property<DateTime>("DataPagamento")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("PedidoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("QrCodePix")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -102,7 +107,7 @@ namespace Infra.Migrations
                     b.ToTable("Pagamentos", "dbo");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Pedido", b =>
+            modelBuilder.Entity("Infra.Dto.PedidoDto", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,7 +116,7 @@ namespace Infra.Migrations
                     b.Property<Guid?>("ClienteId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DataCriacao")
+                    b.Property<DateTime>("DataPedido")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("NumeroPedido")
@@ -133,7 +138,7 @@ namespace Infra.Migrations
                     b.ToTable("Pedidos", "dbo");
                 });
 
-            modelBuilder.Entity("Domain.Entities.PedidoItem", b =>
+            modelBuilder.Entity("Infra.Dto.PedidoItemDto", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -159,7 +164,7 @@ namespace Infra.Migrations
                     b.ToTable("PedidosItens", "dbo");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Produto", b =>
+            modelBuilder.Entity("Infra.Dto.ProdutoDto", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -170,7 +175,7 @@ namespace Infra.Migrations
 
                     b.Property<string>("Categoria")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -308,9 +313,9 @@ namespace Infra.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.Pagamento", b =>
+            modelBuilder.Entity("Infra.Dto.PagamentoDto", b =>
                 {
-                    b.HasOne("Domain.Entities.Pedido", "Pedido")
+                    b.HasOne("Infra.Dto.PedidoDto", "Pedido")
                         .WithMany()
                         .HasForeignKey("PedidoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -319,10 +324,10 @@ namespace Infra.Migrations
                     b.Navigation("Pedido");
                 });
 
-            modelBuilder.Entity("Domain.Entities.PedidoItem", b =>
+            modelBuilder.Entity("Infra.Dto.PedidoItemDto", b =>
                 {
-                    b.HasOne("Domain.Entities.Pedido", "Pedido")
-                        .WithMany("PedidoItems")
+                    b.HasOne("Infra.Dto.PedidoDto", "Pedido")
+                        .WithMany("Itens")
                         .HasForeignKey("PedidoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -330,9 +335,9 @@ namespace Infra.Migrations
                     b.Navigation("Pedido");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Pedido", b =>
+            modelBuilder.Entity("Infra.Dto.PedidoDto", b =>
                 {
-                    b.Navigation("PedidoItems");
+                    b.Navigation("Itens");
                 });
 #pragma warning restore 612, 618
         }
