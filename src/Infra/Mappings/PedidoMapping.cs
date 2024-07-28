@@ -1,12 +1,12 @@
-﻿using Domain.Entities;
+﻿using Infra.Dto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.Mappings
 {
-    public class PedidoMapping : IEntityTypeConfiguration<Pedido>
+    public class PedidoMapping : IEntityTypeConfiguration<PedidoDto>
     {
-        public void Configure(EntityTypeBuilder<Pedido> builder)
+        public void Configure(EntityTypeBuilder<PedidoDto> builder)
         {
             builder.ToTable("Pedidos", "dbo");
 
@@ -17,10 +17,16 @@ namespace Infra.Mappings
                    .HasPrecision(2);
 
             builder.Property(c => c.Status)
-                .HasColumnType("varchar(20)")
-                .HasConversion<string>();
+                   .IsRequired()
+                   .HasColumnType("varchar(20)");
 
+            // Identity
             builder.Property(c => c.NumeroPedido).UseIdentityColumn(10, 1).ValueGeneratedOnAddOrUpdate();
+
+            // EF Rel.
+            builder.HasMany(e => e.Itens)
+                .WithOne(e => e.Pedido)
+                .HasForeignKey(e => e.PedidoId);
         }
     }
 }

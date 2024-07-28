@@ -9,11 +9,11 @@ namespace Api.Controllers
     public class PagamentosApiController(IPagamentoController pagamentoController, INotificador notificador) : MainController(notificador)
     {
         [HttpGet("{pedidoId:guid}")]
-        public async Task<ContentResult> ObterPagamentoPorPedido([FromRoute] Guid pedidoId, CancellationToken cancellationToken)
+        public async Task<IActionResult> ObterPagamentoPorPedido([FromRoute] Guid pedidoId, CancellationToken cancellationToken)
         {
             var result = await pagamentoController.ObterPagamentoPorPedidoAsync(pedidoId, cancellationToken);
 
-            return Content(result, "application/json");
+            return CustomResponseGet(result);
         }
 
         [HttpPost("checkout/{pedidoId:guid}")]

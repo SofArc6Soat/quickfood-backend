@@ -1,24 +1,35 @@
 ﻿using Cora.Infra.Repository;
 using Dapper;
-using Domain.Entities;
-using Domain.Repositories;
 using Infra.Context;
-using Microsoft.EntityFrameworkCore;
+using Infra.Dto;
 
 namespace Infra.Repositories
 {
-    public class PedidoRepository(ApplicationDbContext context) : RepositoryGeneric<Pedido>(context), IPedidoRepository
+    public class PedidoRepository(ApplicationDbContext context) : RepositoryGeneric<PedidoDto>(context), IPedidoRepository
     {
-        private readonly DbSet<Pedido> _pedidos = context.Set<Pedido>();
+        public async Task<string> ObterTodosPedidosAsync(CancellationToken cancellationToken)
+        {
+            var query = @"
+                SELECT CONVERT(VARCHAR(MAX),(
+                    (SELECT p.Id, p.NumeroPedido, p.ClienteId, p.Status, p.ValorTotal, p.DataPedido, Itens.Nome, Detalhes.Quantidade, Detalhes.ValorUnitario
+                    FROM Pedidos p
+	                    INNER JOIN PedidosItens Detalhes
+		                    ON p.Id = detalhes.PedidoId
+	                    INNER JOIN Produtos Itens
+		                    ON detalhes.ProdutoId = Itens.Id
+                    FOR JSON AUTO)
+                ));";
 
-        public async Task<IEnumerable<Pedido>> ObterTodosPedidosAsync() =>
-            await _pedidos.AsNoTracking().AsSplitQuery().Include(p => p.PedidoItems).OrderBy(p => p.NumeroPedido).ToListAsync();
+            var result = await GetDbConnection().QueryFirstOrDefaultAsync<string>(query, cancellationToken);
+
+            return !string.IsNullOrEmpty(result) ? result : "[]";
+        }
 
         public async Task<string> ObterTodosPedidosOrdenadosAsync(CancellationToken cancellationToken)
         {
             var query = @"
                 SELECT CONVERT(VARCHAR(MAX),(
-                    (SELECT p.Id, p.NumeroPedido, p.Status, p.ValorTotal, p.DataCriacao
+                    (SELECT p.Id, p.NumeroPedido, p.Status, p.ValorTotal, p.DataPedido
                     FROM Pedidos p
                     WHERE Status IN ('Pronto', 'EmPreparacao', 'Recebido')
                     ORDER BY 
@@ -27,11 +38,11 @@ namespace Infra.Repositories
                             WHEN 'EmPreparacao' THEN 2
                             WHEN 'Recebido' THEN 3
                         END,
-                        DataCriacao ASC
+                        DataPedido ASC
                     FOR JSON PATH)
                 ));";
 
-            var result = await GetDbConnection().QueryFirstOrDefaultAsync<string>(query);
+            var result = await GetDbConnection().QueryFirstOrDefaultAsync<string>(query, cancellationToken);
 
             return !string.IsNullOrEmpty(result) ? result : "[]";
         }

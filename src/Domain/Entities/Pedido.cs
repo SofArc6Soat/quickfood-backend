@@ -10,13 +10,10 @@ namespace Domain.Entities
         public Guid? ClienteId { get; private set; }
         public PedidoStatus Status { get; private set; }
         public decimal ValorTotal { get; private set; }
-        public DateTime DataCriacao { get; private set; }
+        public DateTime DataPedido { get; private set; }
 
         private readonly List<PedidoItem> _pedidoItems;
         public IReadOnlyCollection<PedidoItem> PedidoItems => _pedidoItems;
-
-        protected Pedido() =>
-            _pedidoItems = [];
 
         public Pedido(Guid id, Guid? clienteId)
         {
@@ -24,7 +21,19 @@ namespace Domain.Entities
             ClienteId = clienteId;
             _pedidoItems = [];
             Status = PedidoStatus.Rascunho;
-            DataCriacao = DateTime.Now;
+            DataPedido = DateTime.Now;
+        }
+
+#pragma warning disable CS8618
+        public Pedido(Guid id, int numeroPedido, Guid? clienteId, PedidoStatus status, decimal valorTotal, DateTime dataCricacao)
+#pragma warning restore CS8618
+        {
+            Id = id;
+            NumeroPedido = numeroPedido;
+            ClienteId = clienteId;
+            Status = status;
+            ValorTotal = valorTotal;
+            DataPedido = dataCricacao;
         }
 
         public void AdicionarItem(PedidoItem item)
