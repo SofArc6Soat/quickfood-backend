@@ -71,7 +71,7 @@ namespace Cora.Infra.Repository
 
         public virtual IQueryable<TEntity> Query() => Context.GetDbSet<TEntity>().AsQueryable();
 
-        public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate) =>
+        public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken) =>
             Context.GetDbSet<TEntity>().AsNoTracking().Where(predicate);
     }
 }
