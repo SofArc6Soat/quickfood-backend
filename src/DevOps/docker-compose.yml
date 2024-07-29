@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   quickfood-sqlserver:
     container_name: quickfood-sqlserver
@@ -14,10 +16,10 @@ services:
       test:
         [
           "CMD-SHELL",
-          "/opt/mssql-tools/bin/sqlcmd -U sa -P 'quickfood-backend#2024' -Q 'SELECT 1' || exit 1"
+          "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'quickfood-backend#2024' -C -Q 'SELECT 1' || exit 1"
         ]
-      interval: 10s
-      timeout: 5s
+      interval: 60s
+      timeout: 10s
       retries: 3
     networks:
       - quickfood_network
@@ -25,8 +27,8 @@ services:
       - "1455:1433"
     volumes:
       - sql_data:/var/opt/mssql/data
-      - sql_data:/var/opt/mssql/log
-      - sql_data:/var/opt/mssql/secrets
+      - sql_logs:/var/opt/mssql/log
+      - sql_secrets:/var/opt/mssql/secrets
     restart: always
 
   quickfood-backend:
@@ -44,12 +46,12 @@ services:
       - 5001:443
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=https://+:443;http://+80
+      - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_HTTPS_PORTS=443
       - ASPNETCORE_HTTP_PORTS=80
       - ASPNETCORE_Kestrel__Certificates__Default__Password=quickfood
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/quickfood-certificate.pfx
-      - ConnectionStrings__DefaultConnection=Server=SqlServerDb;Database=QuickFood;User Id=sa;Password=quickfood-backend#2024;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;
+      - ConnectionStrings__DefaultConnection=Server=quickfood-sqlserver;Database=QuickFood;User Id=sa;Password=quickfood-backend#2024;Encrypt=False;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False;
     volumes:
       - ./certs:/https:ro
     networks:
@@ -66,3 +68,5 @@ networks:
 
 volumes:
   sql_data: {}
+  sql_logs: {}
+  sql_secrets: {}
