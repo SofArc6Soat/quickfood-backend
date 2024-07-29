@@ -33,7 +33,7 @@ A arquitetura hexagonal será utilizada para garantir que a aplicação seja mod
 ## Como Executar o Projeto
 
 1. Clone este repositório:
-```bash
+```
 git clone https://github.com/SofArc6Soat/quickfood-backend.git
 ```
 
@@ -42,12 +42,12 @@ git clone https://github.com/SofArc6Soat/quickfood-backend.git
    2.1. Docker (docker-compose)
 
       2.1.1. Navegue até o diretório do projeto:
-```bash
+```
 cd quickfood-backend\src\DevOps
 ```
    
       2.1.2. Configure o ambiente Docker:
-```bash
+```
 docker-compose up --build
 ```
    
@@ -60,12 +60,12 @@ docker-compose up --build
    2.2 Docker (kubernetes)
 
       2.2.1 Navegue até o diretório do projeto:
-```bash
+```
 cd quickfood-backend\src\DevOps\kubernetes
 ```
          
       2.2.2 Configure o ambiente Docker:
-```bash
+```
 kubectl apply -f 01-sql-data-pvc.yaml
 kubectl apply -f 02-sql-log-pvc.yaml
 kubectl apply -f 03-sql-secrets-pvc.yaml
@@ -80,7 +80,7 @@ kubectl port-forward svc/quickfood-backend 8080:80
          
     ou executar todos scripts via PowerShell 
 
-```bash
+```
 Get-ExecutionPolicy 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 .\delete-k8s-resources.ps1
