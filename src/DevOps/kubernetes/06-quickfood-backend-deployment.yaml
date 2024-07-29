@@ -14,31 +14,33 @@ spec:
     spec:
       containers:
       - name: quickfood-backend
-        image: sofarc6soat/quickfood-backend:1.1
+        image: sofarc6soat/quickfood-backend:1.2
         ports:
         - containerPort: 80
-        - containerPort: 443
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Production
         - name: ASPNETCORE_URLS
-          value: https://+:443;http://+80
-        - name: ASPNETCORE_HTTPS_PORTS
-          value: "443"
-        - name: ASPNETCORE_HTTP_PORTS
-          value: "80"
-        - name: ASPNETCORE_Kestrel__Certificates__Default__Password
-          value: quickfood
-        - name: ASPNETCORE_Kestrel__Certificates__Default__Path
-          value: /https/quickfood-certificate.pfx
+          value: http://+:80
+        # Removendo variáveis relacionadas ao HTTPS
+        # - name: ASPNETCORE_HTTPS_PORTS
+        #   value: "443"
+        # - name: ASPNETCORE_HTTP_PORTS
+        #   value: "80"
+        # - name: ASPNETCORE_Kestrel__Certificates__Default__Password
+        #   value: quickfood
+        # - name: ASPNETCORE_Kestrel__Certificates__Default__Path
+        #   value: /https/quickfood-certificate.pfx
         - name: ConnectionStrings__DefaultConnection
-          value: Server=quickfood-sqlserver;Database=QuickFood;User Id=sa;Password=quickfood-backend#2024;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;
-        volumeMounts:
-        - name: certs
-          mountPath: /https
-          readOnly: true
-      volumes:
-      - name: certs
-        hostPath:
-          path: /path/to/certs
-          type: Directory
+          value: Server=quickfood-sqlserver;Database=QuickFood;User Id=sa;Password=quickfood-backend#2024;Encrypt=False;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False;
+        # Removendo volumeMounts relacionados ao certificado
+        # volumeMounts:
+        # - name: certs
+        #   mountPath: /https
+        #   readOnly: true
+      # Removendo volumes relacionados ao certificado
+      # volumes:
+      # - name: certs
+      #   hostPath:
+      #     path: /usr/share/certs
+      #     type: Directory
