@@ -5,7 +5,7 @@ using Infra.Dto;
 
 namespace Infra.Repositories
 {
-    public class PagamentoRepository(ApplicationDbContext context) : RepositoryGeneric<PagamentoDto>(context), IPagamentoRepository
+    public class PagamentoRepository(ApplicationDbContext context) : RepositoryGeneric<PagamentoDb>(context), IPagamentoRepository
     {
         public async Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken)
         {

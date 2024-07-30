@@ -9,7 +9,7 @@ namespace Gateways
     {
         public async Task<bool> CadastrarPedidoAsync(Pedido pedido, CancellationToken cancellationToken)
         {
-            var pedidoDto = new PedidoDto
+            var pedidoDto = new PedidoDb
             {
                 Id = pedido.Id,
                 NumeroPedido = pedido.NumeroPedido,
@@ -21,7 +21,7 @@ namespace Gateways
 
             foreach (var item in pedido.PedidoItems)
             {
-                pedidoDto.Itens.Add(new PedidoItemDto
+                pedidoDto.Itens.Add(new PedidoItemDb
                 {
                     PedidoId = pedidoDto.Id,
                     ProdutoId = item.ProdutoId,
@@ -57,7 +57,7 @@ namespace Gateways
 
         public async Task<bool> AtualizarPedidoAsync(Pedido pedido, CancellationToken cancellationToken)
         {
-            var pedidoDto = new PedidoDto
+            var pedidoDto = new PedidoDb
             {
                 Id = pedido.Id,
                 NumeroPedido = pedido.NumeroPedido,
@@ -71,5 +71,11 @@ namespace Gateways
 
             return await pedidoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
+
+        public async Task<string> ObterTodosPedidosOrdenadosAsync(CancellationToken cancellationToken) =>
+            await pedidoRepository.ObterTodosPedidosOrdenadosAsync(cancellationToken);
+
+        public async Task<string> ObterTodosPedidosAsync(CancellationToken cancellationToken) =>
+            await pedidoRepository.ObterTodosPedidosAsync(cancellationToken);
     }
 }

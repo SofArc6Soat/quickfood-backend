@@ -2,7 +2,7 @@
 
 namespace Infra.Dto
 {
-    public class ProdutoDto : Entity
+    public class ProdutoDb : Entity
     {
         public string Nome { get; set; } = string.Empty;
         public string Descricao { get; set; } = string.Empty;

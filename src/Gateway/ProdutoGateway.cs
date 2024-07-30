@@ -9,7 +9,7 @@ namespace Gateways
     {
         public async Task<bool> CadastrarProdutoAsync(Produto produto, CancellationToken cancellationToken)
         {
-            var produtoDto = new ProdutoDto
+            var produtoDto = new ProdutoDb
             {
                 Id = produto.Id,
                 Nome = produto.Nome,
@@ -26,7 +26,7 @@ namespace Gateways
 
         public async Task<bool> AtualizarProdutoAsync(Produto produto, CancellationToken cancellationToken)
         {
-            var produtoDto = new ProdutoDto
+            var produtoDto = new ProdutoDb
             {
                 Id = produto.Id,
                 Nome = produto.Nome,
@@ -74,6 +74,46 @@ namespace Gateways
 
             _ = Enum.TryParse(produtoDto.Categoria, out Categoria categoria);
             return new Produto(produtoDto.Id, produtoDto.Nome, produtoDto.Descricao, produtoDto.Preco, categoria, produtoDto.Ativo);
+        }
+
+        public async Task<IEnumerable<Produto>> ObterTodosProdutosAsync(CancellationToken cancellationToken)
+        {
+            var produtoDto = await produtoRepository.ObterTodosProdutosAsync(cancellationToken);
+
+            if (produtoDto.Any())
+            {
+                var produto = new List<Produto>();
+                foreach (var item in produtoDto)
+                {
+                    _ = Enum.TryParse(item.Categoria, out Categoria produtoCategoria);
+
+                    produto.Add(new Produto(item.Id, item.Nome, item.Descricao, item.Preco, produtoCategoria, item.Ativo));
+                }
+
+                return produto;
+            }
+
+            return [];
+        }
+
+        public async Task<IEnumerable<Produto>> ObterProdutosCategoriaAsync(Categoria categoria, CancellationToken cancellationToken)
+        {
+            var produtoDto = await produtoRepository.ObterProdutosCategoriaAsync(categoria.ToString(), cancellationToken);
+
+            if (produtoDto.Any())
+            {
+                var produto = new List<Produto>();
+                foreach (var item in produtoDto)
+                {
+                    _ = Enum.TryParse(item.Categoria, out Categoria produtoCategoria);
+
+                    produto.Add(new Produto(item.Id, item.Nome, item.Descricao, item.Preco, produtoCategoria, item.Ativo));
+                }
+
+                return produto;
+            }
+
+            return [];
         }
     }
 }
