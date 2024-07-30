@@ -7,7 +7,7 @@ namespace Controllers
 {
     public class ProdutosController(IProdutoUseCase produtoUseCase) : IProdutosController
     {
-        public async Task<bool> CadastrarProdutoAsync(ProdutoDto produtoDto, CancellationToken cancellationToken)
+        public async Task<bool> CadastrarProdutoAsync(ProdutoRequestDto produtoDto, CancellationToken cancellationToken)
         {
             var categoriaValida = Enum.TryParse<Categoria>(produtoDto.Categoria, out var categoria);
 
@@ -21,7 +21,7 @@ namespace Controllers
             return false;
         }
 
-        public async Task<bool> AtualizarProdutoAsync(ProdutoDto produtoDto, CancellationToken cancellationToken)
+        public async Task<bool> AtualizarProdutoAsync(ProdutoRequestDto produtoDto, CancellationToken cancellationToken)
         {
             var categoriaValida = Enum.TryParse<Categoria>(produtoDto.Categoria, out var categoria);
 
