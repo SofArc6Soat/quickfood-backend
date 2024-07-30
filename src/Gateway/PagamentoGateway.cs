@@ -55,6 +55,18 @@ namespace Gateways
             return new Pagamento(pagamentoDto.Id, pagamentoDto.PedidoId, statusPagamento, pagamentoDto.Valor, pagamentoDto.QrCodePix, pagamentoDto.DataPagamento);
         }
 
+        public string GerarQrCodePixGatewayPagamento(Pagamento pagamento)
+        {
+            // Integração com gateway de pagamento e geração QR Code do PIX
+
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            return new string(
+                Enumerable.Repeat(chars, 100)
+                          .Select(s => s[random.Next(s.Length)])
+                          .ToArray());
+        }
+
         public async Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken) =>
             await pagamentoRepository.ObterPagamentoPorPedidoAsync(pedidoId, cancellationToken);
     }

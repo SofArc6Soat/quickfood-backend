@@ -34,7 +34,10 @@ namespace UseCases
             if (await pedidoGateway.AtualizarPedidoAsync(pedido, cancellationToken))
             {
                 var pagamento = new Pagamento(pedidoId, pedido.ValorTotal);
-                pagamento.GerarQrCodePix();
+
+                var qrCodePix = pagamentoGateway.GerarQrCodePixGatewayPagamento(pagamento);
+
+                pagamento.AtribuirQrCodePix(qrCodePix);
                 pagamento.AlterarStatusPagamentoParaPendente();
 
                 return await pagamentoGateway.CadastrarPagamentoAsync(pagamento, cancellationToken);
