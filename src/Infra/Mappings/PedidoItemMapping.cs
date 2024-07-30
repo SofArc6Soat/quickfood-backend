@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.Mappings
 {
-    public class PedidoItemMapping : IEntityTypeConfiguration<PedidoItemDto>
+    public class PedidoItemMapping : IEntityTypeConfiguration<PedidoItemDb>
     {
-        public void Configure(EntityTypeBuilder<PedidoItemDto> builder)
+        public void Configure(EntityTypeBuilder<PedidoItemDb> builder)
         {
             builder.ToTable("PedidosItens", "dbo");
 

@@ -2,11 +2,10 @@
 using Core.Domain.Notificacoes;
 using Domain.Entities;
 using Gateways;
-using Infra.Repositories;
 
 namespace UseCases
 {
-    public class ClienteUseCase(IClienteGateway clientesGateway, IClienteRepository clienteRepository, INotificador notificador) : BaseUseCase(notificador), IClienteUseCase
+    public class ClienteUseCase(IClienteGateway clientesGateway, INotificador notificador) : BaseUseCase(notificador), IClienteUseCase
     {
         public async Task<bool> CadastrarClienteAsync(Cliente cliente, CancellationToken cancellationToken)
         {
@@ -47,36 +46,21 @@ namespace UseCases
             return await clientesGateway.DeletarClienteAsync(id, cancellationToken);
         }
 
-        public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken)
-        {
-            var clienteDto = await clienteRepository.ObterTodosClientesAsync(cancellationToken);
-
-            if (clienteDto.Any())
-            {
-                var cliente = new List<Cliente>();
-                foreach (var item in clienteDto)
-                {
-                    cliente.Add(new Cliente(item.Id, item.Nome, item.Email, item.Cpf, item.Ativo));
-                }
-
-                return cliente;
-            }
-
-            return [];
-        }
+        public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken) =>
+            await clientesGateway.ObterTodosClientesAsync(cancellationToken);
 
         public async Task<Cliente?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken)
         {
-            var clienteDto = await clienteRepository.IdentificarClienteCpfAsync(cpf, cancellationToken);
+            var cliente = await clientesGateway.IdentificarClienteCpfAsync(cpf, cancellationToken);
 
-            if (clienteDto is null)
+            if (cliente is null)
             {
                 Notificar($"Cliente {cpf} não encontrado.");
 
                 return null;
             }
 
-            return new Cliente(clienteDto.Id, clienteDto.Nome, clienteDto.Email, clienteDto.Cpf, clienteDto.Ativo);
+            return cliente;
         }
     }
 }

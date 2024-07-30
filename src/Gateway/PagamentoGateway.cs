@@ -9,7 +9,7 @@ namespace Gateways
     {
         public async Task<bool> CadastrarPagamentoAsync(Pagamento pagamento, CancellationToken cancellationToken)
         {
-            var pagementoDto = new PagamentoDto
+            var pagementoDto = new PagamentoDb
             {
                 Id = pagamento.Id,
                 PedidoId = pagamento.PedidoId,
@@ -37,5 +37,8 @@ namespace Gateways
 
             return new Pagamento(pagamentoDto.Id, pagamentoDto.PedidoId, statusPagamento, pagamentoDto.Valor, pagamentoDto.QrCodePix, pagamentoDto.DataPagamento);
         }
+
+        public async Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken) =>
+            await pagamentoRepository.ObterPagamentoPorPedidoAsync(pedidoId, cancellationToken);
     }
 }

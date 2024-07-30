@@ -3,7 +3,7 @@ using Infra.Dto;
 
 namespace Infra.Repositories
 {
-    public interface IPagamentoRepository : IRepositoryGeneric<PagamentoDto>
+    public interface IPagamentoRepository : IRepositoryGeneric<PagamentoDb>
     {
         Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken);
     }

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.Mappings
 {
-    public class PagamentoMapping : IEntityTypeConfiguration<PagamentoDto>
+    public class PagamentoMapping : IEntityTypeConfiguration<PagamentoDb>
     {
-        public void Configure(EntityTypeBuilder<PagamentoDto> builder)
+        public void Configure(EntityTypeBuilder<PagamentoDb> builder)
         {
             builder.ToTable("Pagamentos", "dbo");
 

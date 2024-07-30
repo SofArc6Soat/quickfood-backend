@@ -2,11 +2,10 @@
 using Core.Domain.Notificacoes;
 using Domain.Entities;
 using Gateways;
-using Infra.Repositories;
 
 namespace UseCases
 {
-    public class PagamentoUseCase(IPedidoGateway pedidoGateway, IPagamentoGateway pagamentoGateway, IPagamentoRepository pagamentoRepository, INotificador notificador) : BaseUseCase(notificador), IPagamentoUseCase
+    public class PagamentoUseCase(IPedidoGateway pedidoGateway, IPagamentoGateway pagamentoGateway, INotificador notificador) : BaseUseCase(notificador), IPagamentoUseCase
     {
         public async Task<bool> EfetuarCheckoutAsync(Guid pedidoId, CancellationToken cancellationToken)
         {
@@ -66,16 +65,11 @@ namespace UseCases
 
             pedido.AlterarStatusParaRecebibo();
 
-            if (await pedidoGateway.AtualizarPedidoAsync(pedido, cancellationToken))
-            {
-                await pagamentoGateway.CadastrarPagamentoAsync(pagamento, cancellationToken);
-                return await pagamentoRepository.UnitOfWork.CommitAsync(cancellationToken);
-            }
-
-            return false;
+            return await pedidoGateway.AtualizarPedidoAsync(pedido, cancellationToken)
+&& await pagamentoGateway.CadastrarPagamentoAsync(pagamento, cancellationToken);
         }
 
         public async Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken) =>
-            await pagamentoRepository.ObterPagamentoPorPedidoAsync(pedidoId, cancellationToken);
+            await pagamentoGateway.ObterPagamentoPorPedidoAsync(pedidoId, cancellationToken);
     }
 }

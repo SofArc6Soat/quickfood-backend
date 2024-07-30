@@ -3,11 +3,10 @@ using Core.Domain.Notificacoes;
 using Domain.Entities;
 using Domain.ValueObjects;
 using Gateways;
-using Infra.Repositories;
 
 namespace UseCases
 {
-    public class PedidoUseCase(IPedidoGateway pedidoGateway, IProdutoGateway produtoGateway, IPedidoRepository pedidoRepository, INotificador notificador) : BaseUseCase(notificador), IPedidoUseCase
+    public class PedidoUseCase(IPedidoGateway pedidoGateway, IProdutoGateway produtoGateway, INotificador notificador) : BaseUseCase(notificador), IPedidoUseCase
     {
         public async Task<bool> CadastrarPedidoAsync(Pedido pedido, List<PedidoListaItens> itens, CancellationToken cancellationToken)
         {
@@ -67,9 +66,9 @@ namespace UseCases
         }
 
         public async Task<string> ObterTodosPedidosAsync(CancellationToken cancellationToken) =>
-            await pedidoRepository.ObterTodosPedidosAsync(cancellationToken);
+            await pedidoGateway.ObterTodosPedidosAsync(cancellationToken);
 
         public async Task<string> ObterTodosPedidosOrdenadosAsync(CancellationToken cancellationToken) =>
-            await pedidoRepository.ObterTodosPedidosOrdenadosAsync(cancellationToken);
+            await pedidoGateway.ObterTodosPedidosOrdenadosAsync(cancellationToken);
     }
 }
