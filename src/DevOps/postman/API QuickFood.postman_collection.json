@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "dfe12d76-39fa-4c9d-b70a-63a614a280c3",
+		"_postman_id": "d6992d1a-1bec-41e1-b83f-d4e7d941716c",
 		"name": "API QuickFood",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15227487"
+		"_exporter_id": "28727875"
 	},
 	"item": [
 		{
@@ -18,7 +18,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/clientes/identifique-se?Cpf=08062759016",
+									"raw": "{{baseUrl}}/clientes/identifique-se?Cpf=27406935323",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -29,7 +29,7 @@
 									"query": [
 										{
 											"key": "Cpf",
-											"value": "08062759016",
+											"value": "27406935323",
 											"description": "(Required) "
 										}
 									]
@@ -325,7 +325,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": true,\n  \"cpf\": \"08062759016\",\n  \"id\": \"efee2d79-ce89-479a-9667-04f57f9e2e5e\",\n  \"nome\": \"Joao A\",\n  \"email\": \"joao@gmail.com\"\n}",
+									"raw": "{\n  \"ativo\": true,\n  \"cpf\": \"27406935323\",\n  \"id\": \"988ed58d-ce28-4c14-bf61-6a719fb50b96\",\n  \"nome\": \"Ana Beatriz\",\n  \"email\": \"ana.b@gmail.com\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -345,7 +345,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "efee2d79-ce89-479a-9667-04f57f9e2e5e",
+											"value": "988ed58d-ce28-4c14-bf61-6a719fb50b96",
 											"description": "(Required) "
 										}
 									]
@@ -758,7 +758,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "efee2d79-ce89-479a-9667-04f57f9e2e5e",
+											"value": "988ed58d-ce28-4c14-bf61-6a719fb50b96",
 											"description": "(Required) "
 										}
 									]
@@ -1606,8 +1606,291 @@
 			]
 		},
 		{
-			"name": "pedidos",
+			"name": "pagamentos",
 			"item": [
+				{
+					"name": "{pedidoId}",
+					"item": [
+						{
+							"name": "/pagamentos/:pedidoId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/pagamentos/:pedidoId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pagamentos",
+										":pedidoId"
+									],
+									"variable": [
+										{
+											"key": "pedidoId",
+											"value": "be5f2ed1-40dc-4fa0-8ee1-5bb0bf15e966",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pagamentos",
+												":pedidoId"
+											],
+											"variable": [
+												{
+													"key": "pedidoId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pagamentos",
+												":pedidoId"
+											],
+											"variable": [
+												{
+													"key": "pedidoId"
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "No Content",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pagamentos",
+												":pedidoId"
+											],
+											"variable": [
+												{
+													"key": "pedidoId"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pagamentos",
+												":pedidoId"
+											],
+											"variable": [
+												{
+													"key": "pedidoId"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pagamentos",
+												":pedidoId"
+											],
+											"variable": [
+												{
+													"key": "pedidoId"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pagamentos",
+												":pedidoId"
+											],
+											"variable": [
+												{
+													"key": "pedidoId"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pagamentos",
+												":pedidoId"
+											],
+											"variable": [
+												{
+													"key": "pedidoId"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pagamentos",
+												":pedidoId"
+											],
+											"variable": [
+												{
+													"key": "pedidoId"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Service Unavailable",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pagamentos",
+												":pedidoId"
+											],
+											"variable": [
+												{
+													"key": "pedidoId"
+												}
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
 				{
 					"name": "checkout",
 					"item": [
@@ -1615,17 +1898,17 @@
 							"name": "{pedidoId}",
 							"item": [
 								{
-									"name": "/pedidos/checkout/:pedidoId",
+									"name": "/pagamentos/checkout/:pedidoId",
 									"request": {
-										"method": "PATCH",
+										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/pedidos/checkout/:pedidoId",
+											"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
-												"pedidos",
+												"pagamentos",
 												"checkout",
 												":pedidoId"
 											],
@@ -1642,15 +1925,15 @@
 										{
 											"name": "OK",
 											"originalRequest": {
-												"method": "PATCH",
+												"method": "POST",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/pedidos/checkout/:pedidoId",
+													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
 														"{{baseUrl}}"
 													],
 													"path": [
-														"pedidos",
+														"pagamentos",
 														"checkout",
 														":pedidoId"
 													],
@@ -1671,15 +1954,15 @@
 										{
 											"name": "Created",
 											"originalRequest": {
-												"method": "PATCH",
+												"method": "POST",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/pedidos/checkout/:pedidoId",
+													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
 														"{{baseUrl}}"
 													],
 													"path": [
-														"pedidos",
+														"pagamentos",
 														"checkout",
 														":pedidoId"
 													],
@@ -1700,15 +1983,15 @@
 										{
 											"name": "No Content",
 											"originalRequest": {
-												"method": "PATCH",
+												"method": "POST",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/pedidos/checkout/:pedidoId",
+													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
 														"{{baseUrl}}"
 													],
 													"path": [
-														"pedidos",
+														"pagamentos",
 														"checkout",
 														":pedidoId"
 													],
@@ -1729,15 +2012,15 @@
 										{
 											"name": "Bad Request",
 											"originalRequest": {
-												"method": "PATCH",
+												"method": "POST",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/pedidos/checkout/:pedidoId",
+													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
 														"{{baseUrl}}"
 													],
 													"path": [
-														"pedidos",
+														"pagamentos",
 														"checkout",
 														":pedidoId"
 													],
@@ -1758,15 +2041,15 @@
 										{
 											"name": "Unauthorized",
 											"originalRequest": {
-												"method": "PATCH",
+												"method": "POST",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/pedidos/checkout/:pedidoId",
+													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
 														"{{baseUrl}}"
 													],
 													"path": [
-														"pedidos",
+														"pagamentos",
 														"checkout",
 														":pedidoId"
 													],
@@ -1787,15 +2070,15 @@
 										{
 											"name": "Forbidden",
 											"originalRequest": {
-												"method": "PATCH",
+												"method": "POST",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/pedidos/checkout/:pedidoId",
+													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
 														"{{baseUrl}}"
 													],
 													"path": [
-														"pedidos",
+														"pagamentos",
 														"checkout",
 														":pedidoId"
 													],
@@ -1816,15 +2099,15 @@
 										{
 											"name": "Not Found",
 											"originalRequest": {
-												"method": "PATCH",
+												"method": "POST",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/pedidos/checkout/:pedidoId",
+													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
 														"{{baseUrl}}"
 													],
 													"path": [
-														"pedidos",
+														"pagamentos",
 														"checkout",
 														":pedidoId"
 													],
@@ -1845,15 +2128,15 @@
 										{
 											"name": "Internal Server Error",
 											"originalRequest": {
-												"method": "PATCH",
+												"method": "POST",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/pedidos/checkout/:pedidoId",
+													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
 														"{{baseUrl}}"
 													],
 													"path": [
-														"pedidos",
+														"pagamentos",
 														"checkout",
 														":pedidoId"
 													],
@@ -1874,15 +2157,15 @@
 										{
 											"name": "Service Unavailable",
 											"originalRequest": {
-												"method": "PATCH",
+												"method": "POST",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/pedidos/checkout/:pedidoId",
+													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
 														"{{baseUrl}}"
 													],
 													"path": [
-														"pedidos",
+														"pagamentos",
 														"checkout",
 														":pedidoId"
 													],
@@ -1907,6 +2190,540 @@
 					]
 				},
 				{
+					"name": "notificacoes",
+					"item": [
+						{
+							"name": "{pedidoId}",
+							"item": [
+								{
+									"name": "/pagamentos/notificacoes/:pedidoId",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pagamentos",
+												"notificacoes",
+												":pedidoId"
+											],
+											"variable": [
+												{
+													"key": "pedidoId",
+													"value": "be5f2ed1-40dc-4fa0-8ee1-5bb0bf15e966",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"pagamentos",
+														"notificacoes",
+														":pedidoId"
+													],
+													"variable": [
+														{
+															"key": "pedidoId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Created",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"pagamentos",
+														"notificacoes",
+														":pedidoId"
+													],
+													"variable": [
+														{
+															"key": "pedidoId"
+														}
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"pagamentos",
+														"notificacoes",
+														":pedidoId"
+													],
+													"variable": [
+														{
+															"key": "pedidoId"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"pagamentos",
+														"notificacoes",
+														":pedidoId"
+													],
+													"variable": [
+														{
+															"key": "pedidoId"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"pagamentos",
+														"notificacoes",
+														":pedidoId"
+													],
+													"variable": [
+														{
+															"key": "pedidoId"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Forbidden",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"pagamentos",
+														"notificacoes",
+														":pedidoId"
+													],
+													"variable": [
+														{
+															"key": "pedidoId"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"pagamentos",
+														"notificacoes",
+														":pedidoId"
+													],
+													"variable": [
+														{
+															"key": "pedidoId"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"pagamentos",
+														"notificacoes",
+														":pedidoId"
+													],
+													"variable": [
+														{
+															"key": "pedidoId"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Service Unavailable",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"pagamentos",
+														"notificacoes",
+														":pedidoId"
+													],
+													"variable": [
+														{
+															"key": "pedidoId"
+														}
+													]
+												}
+											},
+											"status": "Service Unavailable",
+											"code": 503,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "pedidos",
+			"item": [
+				{
+					"name": "ordenados",
+					"item": [
+						{
+							"name": "/pedidos/ordenados",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/ordenados",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										"ordenados"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pedidos/ordenados",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pedidos",
+												"ordenados"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pedidos/ordenados",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pedidos",
+												"ordenados"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "No Content",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pedidos/ordenados",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pedidos",
+												"ordenados"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pedidos/ordenados",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pedidos",
+												"ordenados"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pedidos/ordenados",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pedidos",
+												"ordenados"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pedidos/ordenados",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pedidos",
+												"ordenados"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pedidos/ordenados",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pedidos",
+												"ordenados"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pedidos/ordenados",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pedidos",
+												"ordenados"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Service Unavailable",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pedidos/ordenados",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pedidos",
+												"ordenados"
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "status",
 					"item": [
 						{
@@ -1924,7 +2741,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"status\": 2\n}",
+											"raw": "{\n  \"status\": \"EmPreparacao\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -1964,7 +2781,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"status\": 3\n}",
+													"raw": "{\n  \"status\": \"<string>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -2008,7 +2825,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"status\": 3\n}",
+													"raw": "{\n  \"status\": \"<string>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -2052,7 +2869,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"status\": 3\n}",
+													"raw": "{\n  \"status\": \"<string>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -2096,7 +2913,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"status\": 3\n}",
+													"raw": "{\n  \"status\": \"<string>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -2140,7 +2957,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"status\": 3\n}",
+													"raw": "{\n  \"status\": \"<string>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -2184,7 +3001,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"status\": 3\n}",
+													"raw": "{\n  \"status\": \"<string>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -2228,7 +3045,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"status\": 3\n}",
+													"raw": "{\n  \"status\": \"<string>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -2272,7 +3089,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"status\": 3\n}",
+													"raw": "{\n  \"status\": \"<string>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -2316,7 +3133,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n  \"status\": 3\n}",
+													"raw": "{\n  \"status\": \"<string>\"\n}",
 													"options": {
 														"raw": {
 															"headerFamily": "json",
@@ -2950,7 +3767,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/produtos/categoria?categoria=2",
+									"raw": "{{baseUrl}}/produtos/categoria?categoria=Sobremesa",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -2961,7 +3778,7 @@
 									"query": [
 										{
 											"key": "categoria",
-											"value": "2"
+											"value": "Sobremesa"
 										}
 									]
 								}
@@ -2973,7 +3790,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/produtos/categoria?categoria=2",
+											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -2984,7 +3801,7 @@
 											"query": [
 												{
 													"key": "categoria",
-													"value": "2"
+													"value": "<string>"
 												}
 											]
 										}
@@ -3002,7 +3819,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/produtos/categoria?categoria=2",
+											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -3013,7 +3830,7 @@
 											"query": [
 												{
 													"key": "categoria",
-													"value": "2"
+													"value": "<string>"
 												}
 											]
 										}
@@ -3031,7 +3848,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/produtos/categoria?categoria=2",
+											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -3042,7 +3859,7 @@
 											"query": [
 												{
 													"key": "categoria",
-													"value": "2"
+													"value": "<string>"
 												}
 											]
 										}
@@ -3060,7 +3877,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/produtos/categoria?categoria=2",
+											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -3071,7 +3888,7 @@
 											"query": [
 												{
 													"key": "categoria",
-													"value": "2"
+													"value": "<string>"
 												}
 											]
 										}
@@ -3089,7 +3906,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/produtos/categoria?categoria=2",
+											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -3100,7 +3917,7 @@
 											"query": [
 												{
 													"key": "categoria",
-													"value": "2"
+													"value": "<string>"
 												}
 											]
 										}
@@ -3118,7 +3935,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/produtos/categoria?categoria=2",
+											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -3129,7 +3946,7 @@
 											"query": [
 												{
 													"key": "categoria",
-													"value": "2"
+													"value": "<string>"
 												}
 											]
 										}
@@ -3147,7 +3964,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/produtos/categoria?categoria=2",
+											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -3158,7 +3975,7 @@
 											"query": [
 												{
 													"key": "categoria",
-													"value": "2"
+													"value": "<string>"
 												}
 											]
 										}
@@ -3176,7 +3993,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/produtos/categoria?categoria=2",
+											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -3187,7 +4004,7 @@
 											"query": [
 												{
 													"key": "categoria",
-													"value": "2"
+													"value": "<string>"
 												}
 											]
 										}
@@ -3205,7 +4022,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/produtos/categoria?categoria=2",
+											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -3216,7 +4033,7 @@
 											"query": [
 												{
 													"key": "categoria",
-													"value": "2"
+													"value": "<string>"
 												}
 											]
 										}
@@ -3247,7 +4064,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": true,\n  \"categoria\": 1,\n  \"descricao\": \"Chocolate - M&M\",\n  \"id\": \"bec19be4-43ca-4d9c-8d4e-4dac18066a02\",\n  \"nome\": \"M&M\",\n  \"preco\": \"3.00\"\n}",
+									"raw": "{\n  \"ativo\": true,\n  \"categoria\": \"Sobremesa\",\n  \"descricao\": \"Chocolate - M&M\",\n  \"id\": \"bec19be4-43ca-4d9c-8d4e-4dac18066a02\",\n  \"nome\": \"M&M\",\n  \"preco\": \"4.00\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -3286,7 +4103,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -3329,7 +4146,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -3372,7 +4189,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -3415,7 +4232,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -3458,7 +4275,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -3501,7 +4318,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -3544,7 +4361,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -3587,7 +4404,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -3630,7 +4447,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -4171,7 +4988,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"ativo\": true,\n  \"categoria\": 1,\n  \"descricao\": \"Chocolate - M&M\",\n  \"id\": \"bec19be4-43ca-4d9c-8d4e-4dac18066a02\",\n  \"nome\": \"M&M\",\n  \"preco\": \"2.00\"\n}",
+							"raw": "{\n  \"ativo\": true,\n  \"categoria\": \"Sobremesa\",\n  \"descricao\": \"Chocolate - M&M\",\n  \"id\": \"bec19be4-43ca-4d9c-8d4e-4dac18066a02\",\n  \"nome\": \"M&M\",\n  \"preco\": \"2.00\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -4202,7 +5019,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -4239,7 +5056,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -4276,7 +5093,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -4313,7 +5130,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -4350,7 +5167,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -4387,7 +5204,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -4424,7 +5241,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -4461,7 +5278,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -4498,7 +5315,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": 0,\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"categoria\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"preco\": \"<double>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -4553,7 +5370,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "https://localhost:5001"
+			"value": "http://localhost:5000"
 		}
 	]
 }

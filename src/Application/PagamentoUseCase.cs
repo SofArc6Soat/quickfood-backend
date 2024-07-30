@@ -65,8 +65,7 @@ namespace UseCases
 
             pedido.AlterarStatusParaRecebibo();
 
-            return await pedidoGateway.AtualizarPedidoAsync(pedido, cancellationToken)
-&& await pagamentoGateway.CadastrarPagamentoAsync(pagamento, cancellationToken);
+            return await pedidoGateway.AtualizarPedidoAsync(pedido, cancellationToken) && await pagamentoGateway.NotificarPagamentoAsync(pagamento, cancellationToken);
         }
 
         public async Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken) =>
