@@ -1,7 +1,7 @@
 using Controllers;
-using Controllers.Dtos.Request;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
+using Gateways.Dtos.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers

@@ -1,5 +1,5 @@
-﻿using Controllers.Dtos.Request;
-using Domain.Entities;
+﻿using Domain.Entities;
+using Gateways.Dtos.Request;
 
 namespace Controllers
 {
