@@ -6,6 +6,7 @@ namespace Gateways
     {
         Pagamento? ObterPagamentoPorPedido(Guid pedidoId, CancellationToken cancellationToken);
         Task<bool> CadastrarPagamentoAsync(Pagamento pagamento, CancellationToken cancellationToken);
+        Task<bool> NotificarPagamentoAsync(Pagamento pagamento, CancellationToken cancellationToken);
 
         Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken);
     }

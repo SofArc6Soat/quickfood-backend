@@ -24,6 +24,23 @@ namespace Gateways
             return await pagamentoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
+        public async Task<bool> NotificarPagamentoAsync(Pagamento pagamento, CancellationToken cancellationToken)
+        {
+            var pagementoDto = new PagamentoDb
+            {
+                Id = pagamento.Id,
+                PedidoId = pagamento.PedidoId,
+                Status = pagamento.Status.ToString(),
+                QrCodePix = pagamento.QrCodePix,
+                Valor = pagamento.Valor,
+                DataPagamento = pagamento.DataPagamento
+            };
+
+            await pagamentoRepository.UpdateAsync(pagementoDto, cancellationToken);
+
+            return await pagamentoRepository.UnitOfWork.CommitAsync(cancellationToken);
+        }
+
         public Pagamento? ObterPagamentoPorPedido(Guid pedidoId, CancellationToken cancellationToken)
         {
             var pagamentoDto = pagamentoRepository.Find(e => e.PedidoId == pedidoId, cancellationToken).FirstOrDefault();
