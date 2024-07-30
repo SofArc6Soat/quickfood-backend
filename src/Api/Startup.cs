@@ -1,6 +1,7 @@
 ﻿using Api.Configuration;
 using Controllers.DependencyInjection;
 using Core.WebApi.DependencyInjection;
+using Gateways.DependencyInjection;
 using Infra.Context;
 
 namespace Api
@@ -30,7 +31,8 @@ namespace Api
 
             services.AddHealthCheckConfig(settings.ConnectionStrings.DefaultConnection);
 
-            services.AddControllerDependencyServices(settings.ConnectionStrings.DefaultConnection);
+            services.AddControllerDependencyServices();
+            services.AddGatewayDependencyServices(settings.ConnectionStrings.DefaultConnection);
         }
 
         public void Configure(IApplicationBuilder app, ApplicationDbContext context)

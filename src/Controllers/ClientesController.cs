@@ -1,5 +1,5 @@
-﻿using Controllers.Dtos.Request;
-using Domain.Entities;
+﻿using Domain.Entities;
+using Gateways.Dtos.Request;
 using UseCases;
 
 namespace Controllers
@@ -20,13 +20,13 @@ namespace Controllers
             return await clienteUseCase.AtualizarClienteAsync(cliente, cancellationToken);
         }
 
+        public async Task<bool> DeletarClienteAsync(Guid id, CancellationToken cancellationToken) =>
+            await clienteUseCase.DeletarClienteAsync(id, cancellationToken);
+
         public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken) =>
             await clienteUseCase.ObterTodosClientesAsync(cancellationToken);
 
         public async Task<Cliente?> IdentificarClienteCpfAsync(string cfp, CancellationToken cancellationToken) =>
             await clienteUseCase.IdentificarClienteCpfAsync(cfp, cancellationToken);
-
-        public async Task<bool> DeletarClienteAsync(Guid id, CancellationToken cancellationToken) =>
-            await clienteUseCase.DeletarClienteAsync(id, cancellationToken);
     }
 }
