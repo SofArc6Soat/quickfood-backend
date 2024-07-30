@@ -1,6 +1,6 @@
-﻿using Controllers.Dtos.Request;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.ValueObjects;
+using Gateways.Dtos.Request;
 using UseCases;
 
 namespace Controllers

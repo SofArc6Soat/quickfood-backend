@@ -1,4 +1,4 @@
-﻿using Controllers.Dtos.Request;
+﻿using Gateways.Dtos.Request;
 
 namespace Controllers
 {

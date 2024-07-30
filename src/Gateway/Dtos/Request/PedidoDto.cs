@@ -1,7 +1,7 @@
 ﻿using Core.Domain.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 
-namespace Controllers.Dtos.Request
+namespace Gateways.Dtos.Request
 {
     public record PedidoDto
     {
