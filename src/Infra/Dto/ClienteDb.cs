@@ -2,7 +2,7 @@
 
 namespace Infra.Dto
 {
-    public class ClienteDto : Entity
+    public class ClienteDb : Entity
     {
         public string Nome { get; set; } = string.Empty;
         public string? Email { get; set; }

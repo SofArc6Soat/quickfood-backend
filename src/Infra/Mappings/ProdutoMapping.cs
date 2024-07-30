@@ -7,9 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 namespace Infra.Mappings
 {
     [ExcludeFromCodeCoverage]
-    public class ProdutoMapping : IEntityTypeConfiguration<ProdutoDto>
+    public class ProdutoMapping : IEntityTypeConfiguration<ProdutoDb>
     {
-        public void Configure(EntityTypeBuilder<ProdutoDto> builder)
+        public void Configure(EntityTypeBuilder<ProdutoDb> builder)
         {
             builder.ToTable("Produtos", "dbo");
 

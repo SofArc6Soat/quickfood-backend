@@ -1,5 +1,5 @@
-﻿using Controllers.Dtos.Request;
-using Domain.Entities;
+﻿using Domain.Entities;
+using Gateways.Dtos.Request;
 
 namespace Controllers
 {
@@ -7,8 +7,8 @@ namespace Controllers
     {
         Task<IEnumerable<Produto>> ObterTodosProdutosAsync(CancellationToken cancellationToken);
         Task<IEnumerable<Produto>> ObterProdutosCategoriaAsync(string categoria, CancellationToken cancellationToken);
-        Task<bool> CadastrarProdutoAsync(ProdutoDto produtoDto, CancellationToken cancellationToken);
-        Task<bool> AtualizarProdutoAsync(ProdutoDto produtoDto, CancellationToken cancellationToken);
+        Task<bool> CadastrarProdutoAsync(ProdutoRequestDto produtoDto, CancellationToken cancellationToken);
+        Task<bool> AtualizarProdutoAsync(ProdutoRequestDto produtoDto, CancellationToken cancellationToken);
         Task<bool> DeletarProdutoAsync(Guid id, CancellationToken cancellationToken);
     }
 }

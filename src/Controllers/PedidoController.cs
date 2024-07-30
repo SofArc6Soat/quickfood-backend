@@ -1,20 +1,20 @@
-﻿using Controllers.Dtos.Request;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.ValueObjects;
+using Gateways.Dtos.Request;
 using UseCases;
 
 namespace Controllers
 {
     public class PedidoController(IPedidoUseCase pedidoUseCase) : IPedidoController
     {
-        public async Task<bool> AlterarStatusAsync(Guid pedidoId, PedidoStatusDto pedidoStatusDto, CancellationToken cancellationToken)
+        public async Task<bool> AlterarStatusAsync(Guid pedidoId, PedidoStatusRequestDto pedidoStatusDto, CancellationToken cancellationToken)
         {
             var pedidoStatusValido = Enum.TryParse<PedidoStatus>(pedidoStatusDto.Status, out var status);
 
             return pedidoStatusValido && await pedidoUseCase.AlterarStatusAsync(pedidoId, status, cancellationToken);
         }
 
-        public async Task<bool> CadastrarPedidoAsync(PedidoDto pedidoDto, CancellationToken cancellationToken)
+        public async Task<bool> CadastrarPedidoAsync(PedidoRequestDto pedidoDto, CancellationToken cancellationToken)
         {
             var pedido = new Pedido(pedidoDto.PedidoId, pedidoDto.ClienteId);
 

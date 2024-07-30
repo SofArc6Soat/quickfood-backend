@@ -1,9 +1,9 @@
 ﻿using Core.Domain.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 
-namespace Controllers.Dtos.Request
+namespace Gateways.Dtos.Request
 {
-    public record PedidoDto
+    public record PedidoRequestDto
     {
         [RequiredGuid(ErrorMessage = "O campo {0} é obrigatório.")]
         public required Guid PedidoId { get; set; }

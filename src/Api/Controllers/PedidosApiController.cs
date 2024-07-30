@@ -1,7 +1,7 @@
 using Controllers;
-using Controllers.Dtos.Request;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
+using Gateways.Dtos.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -26,7 +26,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CadastrarPedido(PedidoDto request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CadastrarPedido(PedidoRequestDto request, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
@@ -39,7 +39,7 @@ namespace Api.Controllers
         }
 
         [HttpPatch("status/{pedidoId:guid}")]
-        public async Task<IActionResult> AlterarStatus([FromRoute] Guid pedidoId, [FromBody] PedidoStatusDto pedidoStatusDto, CancellationToken cancellationToken)
+        public async Task<IActionResult> AlterarStatus([FromRoute] Guid pedidoId, [FromBody] PedidoStatusRequestDto pedidoStatusDto, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {

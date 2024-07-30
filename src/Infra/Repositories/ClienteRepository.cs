@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories
 {
-    public class ClienteRepository(ApplicationDbContext context) : RepositoryGeneric<ClienteDto>(context), IClienteRepository
+    public class ClienteRepository(ApplicationDbContext context) : RepositoryGeneric<ClienteDb>(context), IClienteRepository
     {
-        private readonly DbSet<ClienteDto> _clientes = context.Set<ClienteDto>();
+        private readonly DbSet<ClienteDb> _clientes = context.Set<ClienteDb>();
 
-        public async Task<ClienteDto?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken) =>
+        public async Task<ClienteDb?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken) =>
             await _clientes.AsNoTracking().Where(p => p.Cpf == cpf).FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<IEnumerable<ClienteDto>> ObterTodosClientesAsync(CancellationToken cancellationToken) =>
+        public async Task<IEnumerable<ClienteDb>> ObterTodosClientesAsync(CancellationToken cancellationToken) =>
             await _clientes.AsNoTracking().Where(p => p.Ativo).ToListAsync(cancellationToken);
     }
 }

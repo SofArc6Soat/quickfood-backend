@@ -5,7 +5,7 @@ using Infra.Dto;
 
 namespace Infra.Repositories
 {
-    public class PedidoRepository(ApplicationDbContext context) : RepositoryGeneric<PedidoDto>(context), IPedidoRepository
+    public class PedidoRepository(ApplicationDbContext context) : RepositoryGeneric<PedidoDb>(context), IPedidoRepository
     {
         public async Task<string> ObterTodosPedidosAsync(CancellationToken cancellationToken)
         {

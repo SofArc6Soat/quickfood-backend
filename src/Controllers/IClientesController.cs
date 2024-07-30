@@ -1,5 +1,5 @@
-﻿using Controllers.Dtos.Request;
-using Domain.Entities;
+﻿using Domain.Entities;
+using Gateways.Dtos.Request;
 
 namespace Controllers
 {
@@ -7,8 +7,8 @@ namespace Controllers
     {
         Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken);
         Task<Cliente?> IdentificarClienteCpfAsync(string cfp, CancellationToken cancellationToken);
-        Task<bool> CadastrarClienteAsync(ClienteDto clienteDto, CancellationToken cancellationToken);
-        Task<bool> AtualizarClienteAsync(ClienteDto clienteDto, CancellationToken cancellationToken);
+        Task<bool> CadastrarClienteAsync(ClienteRequestDto clienteRequestDto, CancellationToken cancellationToken);
+        Task<bool> AtualizarClienteAsync(ClienteRequestDto clienteRequestDto, CancellationToken cancellationToken);
         Task<bool> DeletarClienteAsync(Guid id, CancellationToken cancellationToken);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Controllers.Dtos.Request;
+﻿using Gateways.Dtos.Request;
 
 namespace Controllers
 {
@@ -6,7 +6,7 @@ namespace Controllers
     {
         Task<string> ObterTodosPedidosAsync(CancellationToken cancellationToken);
         Task<string> ObterTodosPedidosOrdenadosAsync(CancellationToken cancellationToken);
-        Task<bool> CadastrarPedidoAsync(PedidoDto pedidoDto, CancellationToken cancellationToken);
-        Task<bool> AlterarStatusAsync(Guid pedidoId, PedidoStatusDto pedidoStatusDto, CancellationToken cancellationToken);
+        Task<bool> CadastrarPedidoAsync(PedidoRequestDto pedidoDto, CancellationToken cancellationToken);
+        Task<bool> AlterarStatusAsync(Guid pedidoId, PedidoStatusRequestDto pedidoStatusDto, CancellationToken cancellationToken);
     }
 }

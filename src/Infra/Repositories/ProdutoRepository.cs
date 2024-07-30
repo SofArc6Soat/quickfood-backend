@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories
 {
-    public class ProdutoRepository(ApplicationDbContext context) : RepositoryGeneric<ProdutoDto>(context), IProdutoRepository
+    public class ProdutoRepository(ApplicationDbContext context) : RepositoryGeneric<ProdutoDb>(context), IProdutoRepository
     {
-        private readonly DbSet<ProdutoDto> _produtos = context.Set<ProdutoDto>();
+        private readonly DbSet<ProdutoDb> _produtos = context.Set<ProdutoDb>();
 
-        public async Task<IEnumerable<ProdutoDto>> ObterTodosProdutosAsync(CancellationToken cancellationToken) =>
+        public async Task<IEnumerable<ProdutoDb>> ObterTodosProdutosAsync(CancellationToken cancellationToken) =>
             await _produtos.AsNoTracking().Where(p => p.Ativo).ToListAsync(cancellationToken);
 
-        public async Task<IEnumerable<ProdutoDto>> ObterProdutosCategoriaAsync(string categoria, CancellationToken cancellationToken) =>
+        public async Task<IEnumerable<ProdutoDb>> ObterProdutosCategoriaAsync(string categoria, CancellationToken cancellationToken) =>
             await _produtos.AsNoTracking().Where(p => p.Ativo && p.Categoria == categoria).ToListAsync(cancellationToken);
     }
 }
