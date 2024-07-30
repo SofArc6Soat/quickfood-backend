@@ -26,7 +26,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CadastrarProduto(ProdutoDto request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CadastrarProduto(ProdutoRequestDto request, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
@@ -39,7 +39,7 @@ namespace Api.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> AtualizarProduto([FromRoute] Guid id, ProdutoDto request, CancellationToken cancellationToken)
+        public async Task<IActionResult> AtualizarProduto([FromRoute] Guid id, ProdutoRequestDto request, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {

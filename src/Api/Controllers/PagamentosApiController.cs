@@ -29,6 +29,8 @@ namespace Api.Controllers
             return CustomResponsePutPatch(pedidoId, result);
         }
 
+        // WebHook
+
         [HttpPost("notificacoes/{pedidoId:guid}")]
         public async Task<IActionResult> Notificacoes([FromRoute] Guid pedidoId, CancellationToken cancellationToken)
         {

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Gateways.Dtos.Request
 {
-    public record ClienteDto
+    public record ClienteRequestDto
     {
         [RequiredGuid(ErrorMessage = "O campo {0} é obrigatório.")]
         public required Guid Id { get; set; }

@@ -18,7 +18,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("identifique-se")]
-        public async Task<IActionResult> IdentificarClienteCpf([FromQuery] IdentifiqueSeDto request, CancellationToken cancellationToken)
+        public async Task<IActionResult> IdentificarClienteCpf([FromQuery] IdentifiqueSeRequestDto request, CancellationToken cancellationToken)
         {
             var result = await clientesController.IdentificarClienteCpfAsync(request.Cpf, cancellationToken);
 
@@ -26,34 +26,34 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CadastrarCliente(ClienteDto request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CadastrarCliente(ClienteRequestDto clienteRequestDto, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 return ErrorBadRequestModelState(ModelState);
             }
 
-            var result = await clientesController.CadastrarClienteAsync(request, cancellationToken);
+            var result = await clientesController.CadastrarClienteAsync(clienteRequestDto, cancellationToken);
 
-            return CustomResponsePost($"clientes/{request.Id}", request, result);
+            return CustomResponsePost($"clientes/{clienteRequestDto.Id}", clienteRequestDto, result);
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> AtualizarCliente([FromRoute] Guid id, ClienteDto request, CancellationToken cancellationToken)
+        public async Task<IActionResult> AtualizarCliente([FromRoute] Guid id, ClienteRequestDto clienteRequestDto, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 return ErrorBadRequestModelState(ModelState);
             }
 
-            if (id != request.Id)
+            if (id != clienteRequestDto.Id)
             {
                 return ErrorBadRequestPutId();
             }
 
-            var result = await clientesController.AtualizarClienteAsync(request, cancellationToken);
+            var result = await clientesController.AtualizarClienteAsync(clienteRequestDto, cancellationToken);
 
-            return CustomResponsePutPatch(request, result);
+            return CustomResponsePutPatch(clienteRequestDto, result);
         }
 
         [HttpDelete("{id:guid}")]

@@ -6,16 +6,16 @@ namespace Controllers
 {
     public class ClientesController(IClienteUseCase clienteUseCase) : IClientesController
     {
-        public async Task<bool> CadastrarClienteAsync(ClienteDto clienteDto, CancellationToken cancellationToken)
+        public async Task<bool> CadastrarClienteAsync(ClienteRequestDto clienteRequestDto, CancellationToken cancellationToken)
         {
-            var cliente = new Cliente(clienteDto.Id, clienteDto.Nome, clienteDto.Email, clienteDto.Cpf, clienteDto.Ativo);
+            var cliente = new Cliente(clienteRequestDto.Id, clienteRequestDto.Nome, clienteRequestDto.Email, clienteRequestDto.Cpf, clienteRequestDto.Ativo);
 
             return await clienteUseCase.CadastrarClienteAsync(cliente, cancellationToken);
         }
 
-        public async Task<bool> AtualizarClienteAsync(ClienteDto clienteDto, CancellationToken cancellationToken)
+        public async Task<bool> AtualizarClienteAsync(ClienteRequestDto clienteRequestDto, CancellationToken cancellationToken)
         {
-            var cliente = new Cliente(clienteDto.Id, clienteDto.Nome, clienteDto.Email, clienteDto.Cpf, clienteDto.Ativo);
+            var cliente = new Cliente(clienteRequestDto.Id, clienteRequestDto.Nome, clienteRequestDto.Email, clienteRequestDto.Cpf, clienteRequestDto.Ativo);
 
             return await clienteUseCase.AtualizarClienteAsync(cliente, cancellationToken);
         }

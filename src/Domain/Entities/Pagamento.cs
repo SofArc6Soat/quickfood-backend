@@ -28,15 +28,8 @@ namespace Domain.Entities
             DataPagamento = dataCriacao;
         }
 
-        public void GerarQrCodePix()
-        {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var random = new Random();
-            QrCodePix = new string(
-                Enumerable.Repeat(chars, 100)
-                          .Select(s => s[random.Next(s.Length)])
-                          .ToArray());
-        }
+        public void AtribuirQrCodePix(string qrCodePix) => 
+            QrCodePix = qrCodePix;
 
         public void AlterarStatusPagamentoParaPendente() =>
             Status = StatusPagamento.Pendente;
