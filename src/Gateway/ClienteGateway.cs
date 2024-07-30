@@ -8,7 +8,7 @@ namespace Gateways
     {
         public async Task<bool> CadastrarClienteAsync(Cliente cliente, CancellationToken cancellationToken)
         {
-            var clienteDto = new ClienteDto
+            var clienteDto = new ClienteDb
             {
                 Id = cliente.Id,
                 Nome = cliente.Nome,
@@ -24,7 +24,7 @@ namespace Gateways
 
         public async Task<bool> AtualizarClienteAsync(Cliente cliente, CancellationToken cancellationToken)
         {
-            var clienteDto = new ClienteDto
+            var clienteDto = new ClienteDb
             {
                 Id = cliente.Id,
                 Nome = cliente.Nome,
@@ -58,6 +58,31 @@ namespace Gateways
             var clienteExistente = await clienteRepository.FindByIdAsync(id, cancellationToken);
 
             return clienteExistente is not null;
+        }
+
+        public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken)
+        {
+            var clienteDto = await clienteRepository.ObterTodosClientesAsync(cancellationToken);
+
+            if (clienteDto.Any())
+            {
+                var cliente = new List<Cliente>();
+                foreach (var item in clienteDto)
+                {
+                    cliente.Add(new Cliente(item.Id, item.Nome, item.Email, item.Cpf, item.Ativo));
+                }
+
+                return cliente;
+            }
+
+            return [];
+        }
+
+        public async Task<Cliente?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken)
+        {
+            var clienteDto = await clienteRepository.IdentificarClienteCpfAsync(cpf, cancellationToken);
+
+            return clienteDto is null ? null : new Cliente(clienteDto.Id, clienteDto.Nome, clienteDto.Email, clienteDto.Cpf, clienteDto.Ativo);
         }
     }
 }

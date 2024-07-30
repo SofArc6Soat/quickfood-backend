@@ -3,9 +3,9 @@ using Infra.Dto;
 
 namespace Infra.Repositories
 {
-    public interface IProdutoRepository : IRepositoryGeneric<ProdutoDto>
+    public interface IProdutoRepository : IRepositoryGeneric<ProdutoDb>
     {
-        Task<IEnumerable<ProdutoDto>> ObterTodosProdutosAsync(CancellationToken cancellationToken);
-        Task<IEnumerable<ProdutoDto>> ObterProdutosCategoriaAsync(string categoria, CancellationToken cancellationToken);
+        Task<IEnumerable<ProdutoDb>> ObterTodosProdutosAsync(CancellationToken cancellationToken);
+        Task<IEnumerable<ProdutoDb>> ObterProdutosCategoriaAsync(string categoria, CancellationToken cancellationToken);
     }
 }

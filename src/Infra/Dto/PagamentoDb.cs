@@ -2,7 +2,7 @@
 
 namespace Infra.Dto
 {
-    public class PagamentoDto : Entity
+    public class PagamentoDb : Entity
     {
         public Guid PedidoId { get; set; }
         public string Status { get; set; } = string.Empty;
@@ -11,7 +11,7 @@ namespace Infra.Dto
         public DateTime DataPagamento { get; set; }
 
 #pragma warning disable CS8618
-        public PedidoDto Pedido { get; set; }
+        public PedidoDb Pedido { get; set; }
 #pragma warning restore CS8618
     }
 }

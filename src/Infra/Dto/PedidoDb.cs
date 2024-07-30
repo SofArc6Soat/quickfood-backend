@@ -2,7 +2,7 @@
 
 namespace Infra.Dto
 {
-    public class PedidoDto : Entity
+    public class PedidoDb : Entity
     {
         public int NumeroPedido { get; set; }
         public Guid? ClienteId { get; set; }
@@ -10,8 +10,8 @@ namespace Infra.Dto
         public decimal ValorTotal { get; set; }
         public DateTime DataPedido { get; set; }
 
-        public List<PedidoItemDto> Itens { get; set; }
+        public List<PedidoItemDb> Itens { get; set; }
 
-        public PedidoDto() => Itens = [];
+        public PedidoDb() => Itens = [];
     }
 }

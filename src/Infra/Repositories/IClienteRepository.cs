@@ -3,10 +3,10 @@ using Infra.Dto;
 
 namespace Infra.Repositories
 {
-    public interface IClienteRepository : IRepositoryGeneric<ClienteDto>
+    public interface IClienteRepository : IRepositoryGeneric<ClienteDb>
     {
-        Task<IEnumerable<ClienteDto>> ObterTodosClientesAsync(CancellationToken cancellationToken);
+        Task<IEnumerable<ClienteDb>> ObterTodosClientesAsync(CancellationToken cancellationToken);
 
-        Task<ClienteDto?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken);
+        Task<ClienteDb?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken);
     }
 }
