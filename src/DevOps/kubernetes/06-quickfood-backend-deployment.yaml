@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: quickfood-backend
-        image: sofarc6soat/quickfood-backend:1.2
+        image: sofarc6soat/quickfood-backend:1.3
         ports:
         - containerPort: 80
         env:
