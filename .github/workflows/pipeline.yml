@@ -28,4 +28,4 @@ jobs:
 
       # Run unit tests
       - name: Run tests
-        run: dotnet test src/Tests/Domain.Tests.csproj 
+        run: dotnet test tests/Domain.Tests/Domain.Tests.csproj
