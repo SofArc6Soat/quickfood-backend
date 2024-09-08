@@ -45,10 +45,10 @@ namespace Gateways
             return await clienteRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
-
         public bool VerificarClienteExistente(Guid id, string? cpf, string? email, CancellationToken cancellationToken)
         {
-            var clienteExistente = clienteRepository.Find(e => e.Id == id || e.Cpf == cpf || e.Email == email, cancellationToken).FirstOrDefault(g => g.Id == id);
+            var clienteExistente = clienteRepository.Find(e => e.Id == id || e.Cpf == cpf || e.Email == email, cancellationToken)
+                                                     .FirstOrDefault(g => g.Id == id);
 
             return clienteExistente is not null;
         }
