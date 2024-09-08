@@ -1,4 +1,4 @@
-name: .NET Core Tests
+name: .NET Core Tests and Smoke Tests
 
 on:
   push:
@@ -20,12 +20,42 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x' 
+          dotnet-version: '8.0.x'
 
       # Restore dependencies
       - name: Restore dependencies
         run: dotnet restore src/Api/Api.csproj
 
       # Run unit tests
-      - name: Run tests
+      - name: Run unit tests
         run: dotnet test tests/Domain.Tests/Domain.Tests.csproj
+
+  deploy_and_smoke_test:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      # Setup .NET Core SDK
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      # Deploy application to staging environment
+      - name: Deploy to staging
+        run: |
+          # Assuming you have a script to deploy the application
+          ./deploy-to-staging.sh
+
+      # Run smoke tests
+      - name: Run smoke tests
+        run: |
+          # Install necessary tools for smoke testing
+          sudo apt-get update
+          sudo apt-get install -y curl
+
+          # Assuming smoke tests are in the tests/SmokeTests project
+          # Here we use a .NET Core application to run smoke tests
+          dotnet test tests/SmokeTests/SmokeTests.csproj
