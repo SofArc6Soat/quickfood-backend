@@ -1,0 +1,31 @@
+name: .NET Core Tests
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      # Setup .NET Core SDK
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x' 
+
+      # Restore dependencies
+      - name: Restore dependencies
+        run: dotnet restore src/Api/Api.csproj
+
+      # Run unit tests
+      - name: Run tests
+        run: dotnet test src/Tests/Domain.Tests.csproj 
