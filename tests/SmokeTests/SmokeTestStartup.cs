@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Domain.Tests;
+namespace SmokeTests;
 
-public class TestStartup : WebApplicationFactory<Startup>
+public class SmokeTestStartup : WebApplicationFactory<Startup>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {

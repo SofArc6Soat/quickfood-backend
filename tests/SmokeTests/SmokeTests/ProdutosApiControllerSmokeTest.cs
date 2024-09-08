@@ -2,9 +2,9 @@
 using Newtonsoft.Json;
 using System.Text;
 
-namespace Domain.Tests.SmokeTests;
+namespace SmokeTests.SmokeTests;
 
-public class ProdutosApiControllerSmokeTest(TestStartup factory) : IClassFixture<TestStartup>
+public class ProdutosApiControllerSmokeTest(SmokeTestStartup factory) : IClassFixture<SmokeTestStartup>
 {
     private readonly HttpClient _client = factory.CreateClient();
 
