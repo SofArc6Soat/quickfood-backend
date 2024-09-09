@@ -43,11 +43,9 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      # Deploy application to staging environment
-      - name: Deploy to staging
-        run: |
-          # Assuming you have a script to deploy the application
-          ./deploy-to-staging.sh
+      # Build application
+      - name: Build application
+        run: dotnet build src/Api/Api.csproj --configuration Release
 
       # Run smoke tests
       - name: Run smoke tests
@@ -56,6 +54,5 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y curl
 
-          # Assuming smoke tests are in the tests/SmokeTests project
-          # Here we use a .NET Core application to run smoke tests
+          # Run smoke tests
           dotnet test tests/SmokeTests/SmokeTests.csproj
