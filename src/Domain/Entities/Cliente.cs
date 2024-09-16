@@ -37,10 +37,11 @@ namespace Domain.Entities
                 .EmailAddress().WithMessage("O {PropertyName} está em um formato inválido.")
                 .Length(2, 100).WithMessage("O {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres e foi informado {PropertyValue}.");
 
-            RuleFor(f => f.Cpf.Length)
-                .Equal(ValidadorCpf.TamanhoCpf).WithMessage("O {PropertyName} precisa ter {ComparisonValue} caracteres e foi fornecido {PropertyValue}.");
-            RuleFor(f => ValidadorCpf.Validar(f.Cpf))
-                .Equal(true).WithMessage("O {PropertyName} fornecido é inválido.");
+            RuleFor(c => c.Cpf)
+                .NotEmpty().WithMessage("O {PropertyName} não pode ser vazio.")
+                .Length(11).WithMessage("O {PropertyName} precisa ter {ComparisonValue} caracteres e foi fornecido {PropertyValue}.")
+                .Must(cpf => ValidadorCpf.Validar(cpf)).WithMessage("O {PropertyName} fornecido é inválido.");
+
 
             RuleFor(c => c.Ativo)
                 .NotNull().WithMessage("O status não pode ser nulo.");

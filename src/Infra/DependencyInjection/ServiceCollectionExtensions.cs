@@ -9,13 +9,19 @@ namespace Infra.DependencyInjection
     [ExcludeFromCodeCoverage]
     public static class ServiceCollectionExtensions
     {
-        public static void AddInfraDependencyServices(this IServiceCollection services, string connectionString)
+        public static void AddInfraDependencyServices(this IServiceCollection services, string connectionString, bool useInMemoryDatabase = false)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            if (useInMemoryDatabase)
             {
-                options.UseSqlServer(connectionString,
-                                     o => { o.EnableRetryOnFailure(3, TimeSpan.FromSeconds(5), null); });
-            });
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseInMemoryDatabase("TestDb"));
+            }
+            else
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(connectionString,
+                                         o => { o.EnableRetryOnFailure(3, TimeSpan.FromSeconds(5), null); }));
+            }
 
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();

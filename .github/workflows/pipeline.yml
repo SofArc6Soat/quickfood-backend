@@ -1,0 +1,103 @@
+name: .NET Core CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - release/*
+      - bugfix/*
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      # Setup .NET Core SDK
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      # Restore dependencies
+      - name: Restore dependencies
+        run: dotnet restore src/Api/Api.csproj
+
+      # Run unit tests
+      - name: Run unit tests
+        run: dotnet test tests/Domain.Tests/Domain.Tests.csproj
+
+  deploy_to_develop:
+    if: github.ref == 'refs/heads/develop'
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      # Setup .NET Core SDK
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      # Build application
+      - name: Build application
+        run: dotnet build src/Api/Api.csproj --configuration Release
+
+      # Run smoke tests
+      - name: Run smoke tests
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl
+          dotnet test tests/SmokeTests/SmokeTests.csproj
+
+      # Create a pull request to merge into main after successful smoke test
+      - name: Create Pull Request to Main
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: develop
+          title: 'Merge Develop to Main'
+          body: 'Smoke tests passed successfully. Ready to merge into main.'
+
+  merge_to_main:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    needs: deploy_to_develop
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      # Setup .NET Core SDK
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      # Restore dependencies
+      - name: Restore dependencies
+        run: dotnet restore src/Api/Api.csproj
+
+      # Run unit tests
+      - name: Run unit tests
+        run: dotnet test tests/Domain.Tests/Domain.Tests.csproj
+
+      # Build application
+      - name: Build application
+        run: dotnet build src/Api/Api.csproj --configuration Release
+
+      # Run smoke tests on main
+      - name: Run smoke tests
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl
+          dotnet test tests/SmokeTests/SmokeTests.csproj
