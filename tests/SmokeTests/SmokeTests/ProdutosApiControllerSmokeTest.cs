@@ -37,7 +37,7 @@ public class ProdutosApiControllerSmokeTest(SmokeTestStartup factory) : IClassFi
         var produto = new ProdutoRequestDto
         {
             Id = Guid.NewGuid(),
-            Nome = "Novo Produto",
+            Nome = "Produto teste",
             Descricao = "Um produto novo",
             Preco = 10,
             Categoria = "Lanche",
