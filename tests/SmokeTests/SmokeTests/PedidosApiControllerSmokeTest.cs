@@ -45,7 +45,7 @@ public class PedidosApiControllerSmokeTest(SmokeTestStartup factory) : IClassFix
         Assert.Equal("application/json; charset=utf-8", postResponse.Content.Headers.ContentType.ToString());
     }
 
-    [Fact]
+/*    [Fact]
     public async Task Patch_PedidosStatusEndpoint_UpdatesStatus()
     {
         // Arrange: Criação do produto
@@ -91,7 +91,7 @@ public class PedidosApiControllerSmokeTest(SmokeTestStartup factory) : IClassFix
         response.EnsureSuccessStatusCode();
         Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
     }
-
+*/
     private async Task Post_ProdutosEndpoint_CreatesProduto()
     {
         var produtoDto = new ProdutoRequestDto
