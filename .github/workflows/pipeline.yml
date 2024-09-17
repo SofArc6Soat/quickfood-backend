@@ -178,8 +178,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker Image
-        run: docker build -t sofarc6soat/quickfood-backend:latest -f ./src/Api/Dockerfile .
-          docker push sofarc6soat/quickfood-backend:latest
-
+        run: docker build -t sofarc6soat/quickfood-backend:latest -f ../src/Api/Dockerfile .
+       
       - name: Push Docker Image
         run: docker push sofarc6soat/quickfood-backend:latest
