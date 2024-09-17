@@ -182,3 +182,28 @@ jobs:
        
       - name: Push Docker Image
         run: docker push sofarc6soat/quickfood-backend:latest
+
+  code_analysis:
+    runs-on: ubuntu-latest
+    needs: [unit_test_develop, unit_test_main]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore src/Api/Api.csproj
+
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN_GIT }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: dotnet sonarscanner begin /k:sofarc6soat /d:sonar.login=${{ secrets.SONAR_TOKEN }} && \
+            dotnet build src/Api/Api.csproj --configuration Release && \
+            dotnet sonarscanner end
