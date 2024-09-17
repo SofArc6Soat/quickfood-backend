@@ -55,7 +55,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: dotnet sonarscanner begin /k:sofarc6soat /d:sonar.login=${{ secrets.SONAR_TOKEN }} && \
             dotnet build src/Api/Api.csproj --configuration Release && \
-            dotnet sonarscanner end
+            dotnet sonarscanner end            
 
   deploy_develop:
     if: github.ref == 'refs/heads/develop'
