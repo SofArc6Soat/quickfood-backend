@@ -30,6 +30,8 @@ public class ValidarPedidoTests
         result.ShouldNotHaveValidationErrorFor(p => p.DataPedido);
     }
 /*
+ * 
+ * teste
     [Fact]
     public void ValidarPedido_DeveTerErro_QuandoCamposNaoEstaoCorretos()
     {
