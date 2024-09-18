@@ -38,9 +38,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
+        
       - name: Set up .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
@@ -49,13 +47,36 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore src/Api/Api.csproj
 
+      - name: Cache SonarCloud packages 
+        uses: actions/cache@v1
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v1
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        run: dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
+
+      - name: Install project dependencies
+        run: dotnet restore
+
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN_GIT }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: dotnet sonarscanner begin /k:sofarc6soat /d:sonar.login=${{ secrets.SONAR_TOKEN }} && \
-            dotnet build src/Api/Api.csproj --configuration Release && \
-            dotnet sonarscanner end            
+        run: |
+          ./.sonar/scanner/dotnet-sonarscanner begin /k:"sofarc6soat" /o:"SofArc6Soat2024" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover -l trx
+          ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"       
 
   deploy_develop:
     if: github.ref == 'refs/heads/develop'
