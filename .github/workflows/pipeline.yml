@@ -37,26 +37,30 @@ jobs:
     needs: unit_test_develop
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Set up .NET Core SDK
+      # Setup .NET Core SDK
+      - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
+      # Restore dependencies
       - name: Restore dependencies
         run: dotnet restore src/Api/Api.csproj
 
+      # Cache SonarCloud packages 
       - name: Cache SonarCloud packages 
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
+      # Cache SonarCloud scanner
       - name: Cache SonarCloud scanner
         id: cache-sonar-scanner
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.sonar/scanner
           key: ${{ runner.os }}-sonar-scanner
@@ -68,15 +72,6 @@ jobs:
           dotnet tool install --global dotnet-sonarscanner
           echo "{DOTNET_ROOT}/tools" >> $GITHUB_PATH
 
-      - name: Verify SonarCloud scanner installation
-        run: dotnet tool list -g
-        
-      - name: Set PATH for SonarScanner
-        run: echo "::add-path::$(dotnet tool list -g | grep dotnet-sonarscanner | awk '{print $3}')/tools"
-
-      - name: Install project dependencies
-        run: dotnet restore
-
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN_GIT }}
@@ -85,7 +80,7 @@ jobs:
           dotnet-sonarscanner begin /k:"SofArc6Soat_quickfood-backend" /o:"sofarc6soat" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover -l trx
           dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-    
+
   deploy_develop:
     if: github.ref == 'refs/heads/develop'
     needs: code_analysis_develop
@@ -136,6 +131,8 @@ jobs:
       - name: Run smoke tests
         run: dotnet test tests/SmokeTests/SmokeTests.csproj
 
+  # Main branch pipeline
+
   unit_test_main:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -163,9 +160,9 @@ jobs:
     needs: unit_test_main
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Set up .NET Core SDK
+      - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
@@ -174,7 +171,7 @@ jobs:
         run: dotnet restore src/Api/Api.csproj
 
       - name: Cache SonarCloud packages 
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
@@ -182,7 +179,7 @@ jobs:
 
       - name: Cache SonarCloud scanner
         id: cache-sonar-scanner
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.sonar/scanner
           key: ${{ runner.os }}-sonar-scanner
@@ -192,9 +189,6 @@ jobs:
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         run: dotnet tool install --global dotnet-sonarscanner --version 5.11.0
 
-      - name: Install project dependencies
-        run: dotnet restore
-
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN_GIT }}
@@ -203,7 +197,7 @@ jobs:
           dotnet-sonarscanner begin /k:"SofArc6Soat_quickfood-backend" /o:"sofarc6soat" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover -l trx
           dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
- 
+
   deploy_main:
     if: github.ref == 'refs/heads/main'
     needs: code_analysis_main
@@ -266,11 +260,6 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Set up Docker BuildKit
-        uses: docker/setup-buildx-action@v2
-        with:
-          use-buildkit: true
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -278,10 +267,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker Image
-        run: docker build -t sofarc6soat/quickfood-backend:latest -f ../src/Api/Dockerfile .
+        run: docker build -f src/Api/Dockerfile -t andersonlpzdesenv/quickfood-backend:latest .
 
-      - name: Tag Docker Image
-        run: docker tag quickfood-backend sofarc6soat/quickfood-backend:latest
-       
       - name: Push Docker Image
-        run: docker push sofarc6soat/quickfood-backend:latest 
+        run: docker push andersonlpzdesenv/quickfood-backend:latest
