@@ -162,14 +162,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # Setup .NET Core SDK
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
+      # Restore dependencies
       - name: Restore dependencies
         run: dotnet restore src/Api/Api.csproj
 
+      # Cache SonarCloud packages 
       - name: Cache SonarCloud packages 
         uses: actions/cache@v3
         with:
@@ -177,6 +180,7 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
+      # Cache SonarCloud scanner
       - name: Cache SonarCloud scanner
         id: cache-sonar-scanner
         uses: actions/cache@v3
@@ -187,7 +191,9 @@ jobs:
 
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        run: dotnet tool install --global dotnet-sonarscanner --version 5.11.0
+        run: |
+          dotnet tool install --global dotnet-sonarscanner
+          echo "{DOTNET_ROOT}/tools" >> $GITHUB_PATH
 
       - name: Build and analyze
         env:
