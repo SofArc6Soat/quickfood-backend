@@ -64,7 +64,7 @@ jobs:
 
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        run: dotnet tool update --global dotnet-sonarscanner
+        run: dotnet tool install --global dotnet-sonarscanner --version 5.11.0
 
       - name: Install project dependencies
         run: dotnet restore
@@ -182,7 +182,7 @@ jobs:
 
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        run: dotnet tool update --global dotnet-sonarscanner
+        run: dotnet tool install --global dotnet-sonarscanner --version 5.11.0
 
       - name: Install project dependencies
         run: dotnet restore
