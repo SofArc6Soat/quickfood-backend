@@ -63,8 +63,10 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar-scanner
 
       - name: Install SonarCloud scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         run: dotnet tool install --global dotnet-sonarscanner --version 5.11.0
+
+      - name: Set PATH for SonarScanner
+        run: echo "::add-path::$(dotnet tool list -g | grep dotnet-sonarscanner | awk '{print $3}')/tools"
 
       - name: Install project dependencies
         run: dotnet restore
