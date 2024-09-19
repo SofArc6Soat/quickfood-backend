@@ -198,7 +198,7 @@ jobs:
  
   deploy_main:
     if: github.ref == 'refs/heads/main'
-    needs: unit_test_main
+    needs: code_analysis_main
     runs-on: ubuntu-latest
 
     steps:
