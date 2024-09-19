@@ -6,7 +6,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0.303-bookworm-slim AS build
 WORKDIR /src
-COPY ["./Api/Api.csproj", "Api/"]
+COPY ["src/Api/Api.csproj", "Api/"]
 RUN dotnet restore "Api/Api.csproj"
 COPY . .
 WORKDIR /src
