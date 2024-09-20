@@ -277,7 +277,7 @@ jobs:
         id: build-docker-image
         run: |
           ls -la 
-          docker build . -t ${{secrets.DOCKERHUB_USERNAME}}/quickfood-backend:latest -f ./src/Api/Dockerfile .
+          docker build . -t ${{secrets.DOCKERHUB_USERNAME}}/quickfood-backend:latest -f ./src/Api/Dockerfile.publish .
 
       - name: Tag Docker Image
         run: docker tag quickfood-backend ${{secrets.DOCKERHUB_USERNAME}}/quickfood-backend:latest
