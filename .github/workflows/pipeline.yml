@@ -275,9 +275,9 @@ jobs:
 
       - name: Build Docker Image
         id: build-docker-image
-        run: docker buildx build --push -t ${{ secrets.DOCKER_USERNAME }}/quickfood-backend:latest -f ./src/Api/Dockerfile.publish .
+        run: docker buildx build --push -t sofarc6soat/quickfood-backend:latest -f ./src/Api/Dockerfile.publish .
 
       - name: Push Docker Image
         id: push-docker-image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/quickfood-backend:latest
+        run: docker push sofarc6soat/quickfood-backend:latest
 
