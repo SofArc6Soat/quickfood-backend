@@ -277,6 +277,9 @@ jobs:
         id: build-docker-image
         run: docker buildx build --push -t sofarc6soat/quickfood-backend:latest -f ./src/Api/Dockerfile.publish .
 
+      - name: Tag Docker Image
+        run: docker tag sofarc6soat/quickfood-backend:latest sofarc6soat/quickfood-backend:latest
+
       - name: Push Docker Image
         id: push-docker-image
         run: docker push sofarc6soat/quickfood-backend:latest
