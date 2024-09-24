@@ -1,4 +1,5 @@
-﻿using Api.Configuration;
+﻿using Amazon.CognitoIdentityProvider;
+using Api.Configuration;
 using Controllers.DependencyInjection;
 using Core.WebApi.DependencyInjection;
 using Gateways.DependencyInjection;
@@ -25,7 +26,7 @@ namespace Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var settings = EnvironmentConfig.ConfigureEnvironment(_configuration);
+            var settings = EnvironmentConfig.ConfigureEnvironment(services, _configuration);
 
             services.AddApiDefautConfig();
 
@@ -33,6 +34,8 @@ namespace Api
 
             services.AddControllerDependencyServices();
             services.AddGatewayDependencyServices(settings.ConnectionStrings.DefaultConnection);
+
+            services.AddAWSService<IAmazonCognitoIdentityProvider>();
         }
 
         public void Configure(IApplicationBuilder app, ApplicationDbContext context)

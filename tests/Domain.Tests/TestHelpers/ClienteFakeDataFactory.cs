@@ -1,31 +1,19 @@
 ﻿using Domain.Entities;
 using Infra.Dto;
 
-namespace Domain.Tests.TestHelpers;
-
-public static class ClienteFakeDataFactory
+namespace Domain.Tests.TestHelpers
 {
-    private static readonly Guid _testGuid = Guid.NewGuid();
-
-    public static Cliente CriarClienteValido()
+    public static class ClienteFakeDataFactory
     {
-        return new Cliente(_testGuid, "João Silva", "joao@teste.com", "63641502098", true);
-    }
+        private static readonly Guid _testGuid = Guid.NewGuid();
 
-    public static Cliente CriarClienteComNomeInvalido()
-    {
-        return new Cliente(_testGuid, null, "joao@teste.com", "63641502098", true);
-    }
+        public static Cliente CriarClienteValido() => new(_testGuid, "João Silva", "joao@teste.com", "63641502098", true);
 
+        public static Cliente CriarClienteComNomeInvalido() => new(_testGuid, null, "joao@teste.com", "63641502098", true);
 
-    public static Cliente CriarClienteComCPFInvalido()
-    {
-        return new Cliente(_testGuid, null, "joao@teste.com", "11111111111", true);
-    }
+        public static Cliente CriarClienteComCPFInvalido() => new(_testGuid, null, "joao@teste.com", "11111111111", true);
 
-    public static ClienteDb CriarClienteDbValido()
-    {
-        return new ClienteDb
+        public static ClienteDb CriarClienteDbValido() => new()
         {
             Id = _testGuid,
             Nome = "João Silva",

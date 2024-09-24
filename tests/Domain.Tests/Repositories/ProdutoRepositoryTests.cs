@@ -6,29 +6,30 @@ using Infra.Dto;
 using Infra.Repositories;
 using Moq;
 
-namespace Domain.Tests.Repositories;
-
-public class ProdutoRepositoryTests
+namespace Domain.Tests.Repositories
 {
-    [Fact]
-    public async Task DeveCadastrarProdutoComSucesso()
+    public class ProdutoRepositoryTests
     {
-        // Arrange
-        var mockRepository = new Mock<IProdutoRepository>();
-        var produto = new Produto(Guid.NewGuid(), "Produto Exemplo", "Descrição do Produto", 100.00m, Categoria.Lanche, true);
+        [Fact]
+        public async Task DeveCadastrarProdutoComSucesso()
+        {
+            // Arrange
+            var mockRepository = new Mock<IProdutoRepository>();
+            var produto = new Produto(Guid.NewGuid(), "Produto Exemplo", "Descrição do Produto", 100.00m, Categoria.Lanche, true);
 
-        mockRepository.Setup(repo => repo.InsertAsync(It.IsAny<ProdutoDb>(), It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask);
+            mockRepository.Setup(repo => repo.InsertAsync(It.IsAny<ProdutoDb>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.CompletedTask);
 
-        mockRepository.Setup(repo => repo.UnitOfWork.CommitAsync(It.IsAny<CancellationToken>()))
-            .Returns(Task.FromResult(true));
+            mockRepository.Setup(repo => repo.UnitOfWork.CommitAsync(It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(true));
 
-        var produtoGateway = new ProdutoGateway(mockRepository.Object);
+            var produtoGateway = new ProdutoGateway(mockRepository.Object);
 
-        // Act
-        var resultado = await produtoGateway.CadastrarProdutoAsync(produto, CancellationToken.None);
+            // Act
+            var resultado = await produtoGateway.CadastrarProdutoAsync(produto, CancellationToken.None);
 
-        // Assert
-        resultado.Should().BeTrue(); // Verifica se o resultado é verdadeiro
+            // Assert
+            resultado.Should().BeTrue();
+        }
     }
 }

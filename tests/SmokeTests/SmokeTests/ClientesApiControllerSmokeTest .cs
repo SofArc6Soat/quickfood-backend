@@ -2,91 +2,87 @@
 using Newtonsoft.Json;
 using System.Text;
 
-namespace SmokeTests.SmokeTests;
-
-public class ClientesApiControllerSmokeTest(SmokeTestStartup factory) : IClassFixture<SmokeTestStartup>
+namespace SmokeTests.SmokeTests
 {
-    private readonly HttpClient _client = factory.CreateClient();
-    private readonly string cpf = "39039023069";
-
-    [Fact]
-    public async Task Get_ClientesEndpoint_ReturnsSuccess()
+    public class ClientesApiControllerSmokeTest(SmokeTestStartup factory) : IClassFixture<SmokeTestStartup>
     {
-        // Act
-        var response = await _client.GetAsync("/clientes");
+        private readonly HttpClient _client = factory.CreateClient();
+        private readonly string cpf = "39039023069";
 
-        // Assert
-        response.EnsureSuccessStatusCode();
-        Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
-    }
+        [Fact]
+        public async Task Get_ClientesEndpoint_ReturnsSuccess()
+        {
+            // Act
+            var response = await _client.GetAsync("/clientes");
 
-    [Fact]
-    public async Task Get_IdentifiqueSeEndpoint_ReturnsSuccess()
-    {
-        // Arrange
-        var cliente = CreateClienteRequestDto();
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        }
 
-        // Act
-        await _client.PostAsync("/clientes", CreateContent(cliente));
-        var response = await _client.GetAsync($"/clientes/identifique-se?cpf={cpf}");
+        [Fact]
+        public async Task Get_IdentifiqueSeEndpoint_ReturnsSuccess()
+        {
+            // Arrange
+            var cliente = CreateClienteRequestDto();
 
-        // Assert
-        response.EnsureSuccessStatusCode();
-        Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
-    }
+            // Act
+            await _client.PostAsync("/clientes", CreateContent(cliente));
+            var response = await _client.GetAsync($"/clientes/identifique-se?cpf={cpf}");
 
-    [Fact]
-    public async Task Post_ClientesEndpoint_CreatesCliente()
-    {
-        // Arrange
-        var cliente = CreateClienteRequestDto();
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        }
 
-        // Act
-        var response = await _client.PostAsync("/clientes", CreateContent(cliente));
+        [Fact]
+        public async Task Post_ClientesEndpoint_CreatesCliente()
+        {
+            // Arrange
+            var cliente = CreateClienteRequestDto();
 
-        // Assert
-        response.EnsureSuccessStatusCode();
-        Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
-    }
+            // Act
+            var response = await _client.PostAsync("/clientes", CreateContent(cliente));
 
-    [Fact]
-    public async Task Put_ClientesEndpoint_UpdatesCliente()
-    {
-        // Arrange
-        var clienteId = Guid.NewGuid();
-        var cliente = CreateClienteRequestDto(clienteId);
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        }
 
-        // Cria o cliente antes de tentar atualizar
-        await _client.PostAsync("/clientes", CreateContent(cliente));
+        [Fact]
+        public async Task Put_ClientesEndpoint_UpdatesCliente()
+        {
+            // Arrange
+            var clienteId = Guid.NewGuid();
+            var cliente = CreateClienteRequestDto(clienteId);
 
-        // Act
-        var response = await _client.PutAsync($"/clientes/{clienteId}", CreateContent(cliente));
+            await _client.PostAsync("/clientes", CreateContent(cliente));
 
-        // Assert
-        response.EnsureSuccessStatusCode();
-        Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
-    }
+            // Act
+            var response = await _client.PutAsync($"/clientes/{clienteId}", CreateContent(cliente));
 
-    [Fact]
-    public async Task Delete_ClientesEndpoint_DeletesCliente()
-    {
-        // Arrange
-        var clienteId = Guid.NewGuid();
-        var cliente = CreateClienteRequestDto(clienteId);
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        }
 
-        // Cria o cliente antes de tentar deletar
-        await _client.PostAsync("/clientes", CreateContent(cliente));
+        [Fact]
+        public async Task Delete_ClientesEndpoint_DeletesCliente()
+        {
+            // Arrange
+            var clienteId = Guid.NewGuid();
+            var cliente = CreateClienteRequestDto(clienteId);
 
-        // Act
-        var response = await _client.DeleteAsync($"/clientes/{clienteId}");
+            await _client.PostAsync("/clientes", CreateContent(cliente));
 
-        // Assert
-        response.EnsureSuccessStatusCode();
-    }
+            // Act
+            var response = await _client.DeleteAsync($"/clientes/{clienteId}");
 
-    private ClienteRequestDto CreateClienteRequestDto(Guid? id = null)
-    {
-        return new ClienteRequestDto
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
+
+        private ClienteRequestDto CreateClienteRequestDto(Guid? id = null) => new()
         {
             Id = id ?? Guid.NewGuid(),
             Nome = "Cliente Teste",
@@ -94,10 +90,7 @@ public class ClientesApiControllerSmokeTest(SmokeTestStartup factory) : IClassFi
             Cpf = cpf,
             Ativo = true
         };
-    }
 
-    private StringContent CreateContent(ClienteRequestDto cliente)
-    {
-        return new StringContent(JsonConvert.SerializeObject(cliente), Encoding.UTF8, "application/json");
+        private StringContent CreateContent(ClienteRequestDto cliente) => new(JsonConvert.SerializeObject(cliente), Encoding.UTF8, "application/json");
     }
 }

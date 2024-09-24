@@ -1,69 +1,67 @@
 ﻿using Domain.Entities;
 using FluentValidation.TestHelper;
 
-namespace Domain.Tests.Validators;
-
-public class ValidarPedidoItemTests
+namespace Domain.Tests.Validators
 {
-    private readonly ValidarPedidoItem _validator;
-
-    public ValidarPedidoItemTests()
+    public class ValidarPedidoItemTests
     {
-        _validator = new ValidarPedidoItem();
-    }
+        private readonly ValidarPedidoItem _validator;
 
-    [Fact]
-    public void ValidarPedidoItem_DeveSerValido_QuandoTodosOsCamposEstaoCorretos()
-    {
-        // Arrange
-        var pedidoItem = new PedidoItem(Guid.NewGuid(), 10, 100.00m);
-        var validator = new ValidarPedidoItem();
+        public ValidarPedidoItemTests() => _validator = new ValidarPedidoItem();
 
-        // Act
-        var result = validator.TestValidate(pedidoItem);
+        [Fact]
+        public void ValidarPedidoItem_DeveSerValido_QuandoTodosOsCamposEstaoCorretos()
+        {
+            // Arrange
+            var pedidoItem = new PedidoItem(Guid.NewGuid(), 10, 100.00m);
+            var validator = new ValidarPedidoItem();
 
-        // Assert
-        result.ShouldNotHaveValidationErrorFor(pi => pi.ProdutoId);
-        result.ShouldNotHaveValidationErrorFor(pi => pi.Quantidade);
-        result.ShouldNotHaveValidationErrorFor(pi => pi.ValorUnitario);
-    }
+            // Act
+            var result = validator.TestValidate(pedidoItem);
 
-    [Fact]
-    public void ValidarPedidoItem_DeveSerInvalido_QuandoProdutoIdNaoForValido()
-    {
-        // Arrange
-        var pedidoItem = new PedidoItem(Guid.Empty, 10, 15.00m);
+            // Assert
+            result.ShouldNotHaveValidationErrorFor(pi => pi.ProdutoId);
+            result.ShouldNotHaveValidationErrorFor(pi => pi.Quantidade);
+            result.ShouldNotHaveValidationErrorFor(pi => pi.ValorUnitario);
+        }
 
-        // Act
-        var result = _validator.TestValidate(pedidoItem);
+        [Fact]
+        public void ValidarPedidoItem_DeveSerInvalido_QuandoProdutoIdNaoForValido()
+        {
+            // Arrange
+            var pedidoItem = new PedidoItem(Guid.Empty, 10, 15.00m);
 
-        // Assert
-        result.ShouldHaveValidationErrorFor(x => x.ProdutoId);
-    }
+            // Act
+            var result = _validator.TestValidate(pedidoItem);
 
-    [Fact]
-    public void ValidarPedidoItem_DeveSerInvalido_QuandoQuantidadeForZeroOuNegativa()
-    {
-        // Arrange
-        var pedidoItem = new PedidoItem(Guid.NewGuid(), 0, 15.00m);
+            // Assert
+            result.ShouldHaveValidationErrorFor(x => x.ProdutoId);
+        }
 
-        // Act
-        var result = _validator.TestValidate(pedidoItem);
+        [Fact]
+        public void ValidarPedidoItem_DeveSerInvalido_QuandoQuantidadeForZeroOuNegativa()
+        {
+            // Arrange
+            var pedidoItem = new PedidoItem(Guid.NewGuid(), 0, 15.00m);
 
-        // Assert
-        result.ShouldHaveValidationErrorFor(x => x.Quantidade);
-    }
+            // Act
+            var result = _validator.TestValidate(pedidoItem);
 
-    [Fact]
-    public void ValidarPedidoItem_DeveSerInvalido_QuandoValorUnitarioForZeroOuNegativo()
-    {
-        // Arrange
-        var pedidoItem = new PedidoItem(Guid.NewGuid(), 10, -5.00m);
+            // Assert
+            result.ShouldHaveValidationErrorFor(x => x.Quantidade);
+        }
 
-        // Act
-        var result = _validator.TestValidate(pedidoItem);
+        [Fact]
+        public void ValidarPedidoItem_DeveSerInvalido_QuandoValorUnitarioForZeroOuNegativo()
+        {
+            // Arrange
+            var pedidoItem = new PedidoItem(Guid.NewGuid(), 10, -5.00m);
 
-        // Assert
-        result.ShouldHaveValidationErrorFor(x => x.ValorUnitario);
+            // Act
+            var result = _validator.TestValidate(pedidoItem);
+
+            // Assert
+            result.ShouldHaveValidationErrorFor(x => x.ValorUnitario);
+        }
     }
 }

@@ -2,94 +2,92 @@
 using Newtonsoft.Json;
 using System.Text;
 
-namespace SmokeTests.SmokeTests;
-
-public class ProdutosApiControllerSmokeTest(SmokeTestStartup factory) : IClassFixture<SmokeTestStartup>
+namespace SmokeTests.SmokeTests
 {
-    private readonly HttpClient _client = factory.CreateClient();
-
-    [Fact]
-    public async Task Get_ProdutosEndpoint_ReturnsSuccess()
+    public class ProdutosApiControllerSmokeTest(SmokeTestStartup factory) : IClassFixture<SmokeTestStartup>
     {
-        // Act
-        var response = await _client.GetAsync("/produtos");
+        private readonly HttpClient _client = factory.CreateClient();
 
-        // Assert
-        response.EnsureSuccessStatusCode();
-        Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
-    }
-
-    [Fact]
-    public async Task Get_ProdutosCategoriaEndpoint_ReturnsSuccess()
-    {
-        // Act
-        var response = await _client.GetAsync("/produtos/categoria?categoria=Lanche");
-
-        // Assert
-        response.EnsureSuccessStatusCode();
-        Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
-    }
-
-    [Fact]
-    public async Task Post_ProdutosEndpoint_CreatesProduto()
-    {
-        // Arrange
-        var produto = CreateProdutoRequestDto();
-        var content = CreateContent(produto);
-
-        // Act
-        var response = await _client.PostAsync("/produtos", content);
-
-        // Assert
-        response.EnsureSuccessStatusCode();
-        Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
-    }
-
-    [Fact]
-    public async Task Put_ProdutosEndpoint_UpdatesProduto()
-    {
-        // Arrange
-        var produtoInicial = CreateProdutoRequestDto();
-        await _client.PostAsync("/produtos", CreateContent(produtoInicial)); // Crie o produto inicial
-
-        var produtoAtualizado = new ProdutoRequestDto
+        [Fact]
+        public async Task Get_ProdutosEndpoint_ReturnsSuccess()
         {
-            Id = produtoInicial.Id, // Use o mesmo ID
-            Nome = "Produto Atualizado",
-            Descricao = "Descrição Atualizada",
-            Preco = 20,
-            Categoria = "Lanche",
-            Ativo = true
-        };
+            // Act
+            var response = await _client.GetAsync("/produtos");
 
-        var updateContent = CreateContent(produtoAtualizado);
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        }
 
-        // Act
-        var response = await _client.PutAsync($"/produtos/{produtoAtualizado.Id}", updateContent);
+        [Fact]
+        public async Task Get_ProdutosCategoriaEndpoint_ReturnsSuccess()
+        {
+            // Act
+            var response = await _client.GetAsync("/produtos/categoria?categoria=Lanche");
 
-        // Assert
-        response.EnsureSuccessStatusCode();
-        Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
-    }
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        }
 
-    [Fact]
-    public async Task Delete_ProdutosEndpoint_DeletesProduto()
-    {
-        // Arrange
-        var produtoId = Guid.NewGuid();
-        var produtoParaCriar = CreateProdutoRequestDto(produtoId);
-        await _client.PostAsync("/produtos", CreateContent(produtoParaCriar)); // Crie o produto antes de deletar
+        [Fact]
+        public async Task Post_ProdutosEndpoint_CreatesProduto()
+        {
+            // Arrange
+            var produto = CreateProdutoRequestDto();
+            var content = CreateContent(produto);
 
-        // Act
-        var response = await _client.DeleteAsync($"/produtos/{produtoId}");
+            // Act
+            var response = await _client.PostAsync("/produtos", content);
 
-        // Assert
-        response.EnsureSuccessStatusCode();
-    }
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        }
 
-    private ProdutoRequestDto CreateProdutoRequestDto(Guid? id = null)
-    {
-        return new ProdutoRequestDto
+        [Fact]
+        public async Task Put_ProdutosEndpoint_UpdatesProduto()
+        {
+            // Arrange
+            var produtoInicial = CreateProdutoRequestDto();
+            await _client.PostAsync("/produtos", CreateContent(produtoInicial));
+
+            var produtoAtualizado = new ProdutoRequestDto
+            {
+                Id = produtoInicial.Id,
+                Nome = "Produto Atualizado",
+                Descricao = "Descrição Atualizada",
+                Preco = 20,
+                Categoria = "Lanche",
+                Ativo = true
+            };
+
+            var updateContent = CreateContent(produtoAtualizado);
+
+            // Act
+            var response = await _client.PutAsync($"/produtos/{produtoAtualizado.Id}", updateContent);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        }
+
+        [Fact]
+        public async Task Delete_ProdutosEndpoint_DeletesProduto()
+        {
+            // Arrange
+            var produtoId = Guid.NewGuid();
+            var produtoParaCriar = CreateProdutoRequestDto(produtoId);
+            await _client.PostAsync("/produtos", CreateContent(produtoParaCriar));
+
+            // Act
+            var response = await _client.DeleteAsync($"/produtos/{produtoId}");
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
+
+        private ProdutoRequestDto CreateProdutoRequestDto(Guid? id = null) => new()
         {
             Id = id ?? Guid.NewGuid(),
             Nome = "Produto Teste",
@@ -98,10 +96,7 @@ public class ProdutosApiControllerSmokeTest(SmokeTestStartup factory) : IClassFi
             Categoria = "Lanche",
             Ativo = true
         };
-    }
 
-    private StringContent CreateContent(ProdutoRequestDto produto)
-    {
-        return new StringContent(JsonConvert.SerializeObject(produto), Encoding.UTF8, "application/json");
+        private StringContent CreateContent(ProdutoRequestDto produto) => new(JsonConvert.SerializeObject(produto), Encoding.UTF8, "application/json");
     }
 }

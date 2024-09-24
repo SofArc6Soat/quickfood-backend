@@ -1,55 +1,56 @@
 ﻿using Domain.Entities;
 using Domain.ValueObjects;
 
-namespace Domain.Tests.Entities;
-
-public class PagamentoTests
+namespace Domain.Tests.Entities
 {
-    [Fact]
-    public void CriarPagamento_DeveCriarComSucesso()
+    public class PagamentoTests
     {
-        // Arrange
-        var pedidoId = Guid.NewGuid();
-        var valor = 100.00m;
+        [Fact]
+        public void CriarPagamento_DeveCriarComSucesso()
+        {
+            // Arrange
+            var pedidoId = Guid.NewGuid();
+            var valor = 100.00m;
 
-        // Act
-        var pagamento = new Pagamento(pedidoId, valor);
+            // Act
+            var pagamento = new Pagamento(pedidoId, valor);
 
-        // Assert
-        Assert.Equal(pedidoId, pagamento.PedidoId);
-        Assert.Equal(valor, pagamento.Valor);
-        Assert.Equal(DateTime.Now.Date, pagamento.DataPagamento.Date);
-    }
+            // Assert
+            Assert.Equal(pedidoId, pagamento.PedidoId);
+            Assert.Equal(valor, pagamento.Valor);
+            Assert.Equal(DateTime.Now.Date, pagamento.DataPagamento.Date);
+        }
 
-    [Fact]
-    public void AtribuirQrCodePix_DeveAtribuirQrCode()
-    {
-        // Arrange
-        var pagamento = new Pagamento(Guid.NewGuid(), 100.00m);
-        var qrCodePix = "1234567890";
+        [Fact]
+        public void AtribuirQrCodePix_DeveAtribuirQrCode()
+        {
+            // Arrange
+            var pagamento = new Pagamento(Guid.NewGuid(), 100.00m);
+            var qrCodePix = "1234567890";
 
-        // Act
-        pagamento.AtribuirQrCodePix(qrCodePix);
+            // Act
+            pagamento.AtribuirQrCodePix(qrCodePix);
 
-        // Assert
-        Assert.Equal(qrCodePix, pagamento.QrCodePix);
-    }
+            // Assert
+            Assert.Equal(qrCodePix, pagamento.QrCodePix);
+        }
 
-    [Fact]
-    public void AlterarStatusPagamento_DeveAlterarStatus()
-    {
-        // Arrange
-        var pagamento = new Pagamento(Guid.NewGuid(), 100.00m);
+        [Fact]
+        public void AlterarStatusPagamento_DeveAlterarStatus()
+        {
+            // Arrange
+            var pagamento = new Pagamento(Guid.NewGuid(), 100.00m);
 
-        // Act
-        pagamento.AlterarStatusPagamentoParaPendente();
+            // Act
+            pagamento.AlterarStatusPagamentoParaPendente();
 
-        // Assert
-        Assert.Equal(StatusPagamento.Pendente, pagamento.Status);
+            // Assert
+            Assert.Equal(StatusPagamento.Pendente, pagamento.Status);
 
-        pagamento.AlterarStatusPagamentoParaPago();
+            pagamento.AlterarStatusPagamentoParaPago();
 
-        // Assert
-        Assert.Equal(StatusPagamento.Pago, pagamento.Status);
+            // Assert
+            Assert.Equal(StatusPagamento.Pago, pagamento.Status);
+        }
     }
 }

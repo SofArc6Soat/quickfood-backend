@@ -3,88 +3,89 @@ using Infra.Dto;
 using Infra.Repositories;
 using Moq;
 
-namespace Domain.Tests.Repositories;
-
-public class ClienteRepositoryTests
+namespace Domain.Tests.Repositories
 {
-    [Fact]
-    public async Task DeveRetornarTodosClientesAsync()
+    public class ClienteRepositoryTests
     {
-        // Arrange
-        var mockRepository = new Mock<IClienteRepository>();
-        var clienteDb = new ClienteDb
+        [Fact]
+        public async Task DeveRetornarTodosClientesAsync()
         {
-            Id = Guid.NewGuid(),
-            Nome = "João Silva",
-            Email = "joao@teste.com",
-            Cpf = "12345678901",
-            Ativo = true
-        };
-        var clientes = new List<ClienteDb> { clienteDb };
+            // Arrange
+            var mockRepository = new Mock<IClienteRepository>();
+            var clienteDb = new ClienteDb
+            {
+                Id = Guid.NewGuid(),
+                Nome = "João Silva",
+                Email = "joao@teste.com",
+                Cpf = "12345678901",
+                Ativo = true
+            };
+            var clientes = new List<ClienteDb> { clienteDb };
 
-        mockRepository.Setup(r => r.ObterTodosClientesAsync(It.IsAny<CancellationToken>()))
-                      .ReturnsAsync(clientes);
+            mockRepository.Setup(r => r.ObterTodosClientesAsync(It.IsAny<CancellationToken>()))
+                          .ReturnsAsync(clientes);
 
-        var clienteGateway = new ClienteGateway(mockRepository.Object);
+            var clienteGateway = new ClienteGateway(mockRepository.Object);
 
-        // Act
-        var result = await clienteGateway.ObterTodosClientesAsync(CancellationToken.None);
+            // Act
+            var result = await clienteGateway.ObterTodosClientesAsync(CancellationToken.None);
 
-        // Assert
-        Assert.Single(result);
-        Assert.Equal(clienteDb.Nome, result.First().Nome);
-    }
+            // Assert
+            Assert.Single(result);
+            Assert.Equal(clienteDb.Nome, result.First().Nome);
+        }
 
-    [Fact]
-    public async Task DeveIdentificarClienteCpfAsync()
-    {
-        // Arrange
-        var mockRepository = new Mock<IClienteRepository>();
-        var clienteDb = new ClienteDb
+        [Fact]
+        public async Task DeveIdentificarClienteCpfAsync()
         {
-            Id = Guid.NewGuid(),
-            Nome = "João Silva",
-            Email = "joao@teste.com",
-            Cpf = "12345678901",
-            Ativo = true
-        };
+            // Arrange
+            var mockRepository = new Mock<IClienteRepository>();
+            var clienteDb = new ClienteDb
+            {
+                Id = Guid.NewGuid(),
+                Nome = "João Silva",
+                Email = "joao@teste.com",
+                Cpf = "12345678901",
+                Ativo = true
+            };
 
-        mockRepository.Setup(r => r.IdentificarClienteCpfAsync("12345678901", It.IsAny<CancellationToken>()))
-                      .ReturnsAsync(clienteDb);
+            mockRepository.Setup(r => r.IdentificarClienteCpfAsync("12345678901", It.IsAny<CancellationToken>()))
+                          .ReturnsAsync(clienteDb);
 
-        var clienteGateway = new ClienteGateway(mockRepository.Object);
+            var clienteGateway = new ClienteGateway(mockRepository.Object);
 
-        // Act
-        var result = await clienteGateway.IdentificarClienteCpfAsync("12345678901", CancellationToken.None);
+            // Act
+            var result = await clienteGateway.IdentificarClienteCpfAsync("12345678901", CancellationToken.None);
 
-        // Assert
-        Assert.NotNull(result);
-        Assert.Equal(clienteDb.Nome, result?.Nome);
-    }
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(clienteDb.Nome, result?.Nome);
+        }
 
-    [Fact]
-    public async Task DeveRetornarClientePorId()
-    {
-        // Arrange
-        var mockRepository = new Mock<IClienteRepository>();
-        var clienteDb = new ClienteDb
+        [Fact]
+        public async Task DeveRetornarClientePorId()
         {
-            Id = Guid.NewGuid(),
-            Nome = "João Silva",
-            Email = "joao@teste.com",
-            Cpf = "12345678901",
-            Ativo = true
-        };
+            // Arrange
+            var mockRepository = new Mock<IClienteRepository>();
+            var clienteDb = new ClienteDb
+            {
+                Id = Guid.NewGuid(),
+                Nome = "João Silva",
+                Email = "joao@teste.com",
+                Cpf = "12345678901",
+                Ativo = true
+            };
 
-        mockRepository.Setup(r => r.FindByIdAsync(clienteDb.Id, It.IsAny<CancellationToken>()))
-                      .ReturnsAsync(clienteDb);
+            mockRepository.Setup(r => r.FindByIdAsync(clienteDb.Id, It.IsAny<CancellationToken>()))
+                          .ReturnsAsync(clienteDb);
 
-        var clienteGateway = new ClienteGateway(mockRepository.Object);
+            var clienteGateway = new ClienteGateway(mockRepository.Object);
 
-        // Act
-        var result = await clienteGateway.VerificarClienteExistenteAsync(clienteDb.Id, CancellationToken.None);
+            // Act
+            var result = await clienteGateway.VerificarClienteExistenteAsync(clienteDb.Id, CancellationToken.None);
 
-        // Assert
-        Assert.True(result);
+            // Assert
+            Assert.True(result);
+        }
     }
 }

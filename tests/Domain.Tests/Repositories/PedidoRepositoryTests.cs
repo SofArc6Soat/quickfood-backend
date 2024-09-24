@@ -2,44 +2,42 @@
 using Infra.Repositories;
 using Moq;
 
-namespace Domain.Tests.Repositories;
-
-public class PedidoRepositoryTests
+namespace Domain.Tests.Repositories
 {
-    private readonly Mock<IPedidoRepository> _pedidoRepositoryMock;
-
-    public PedidoRepositoryTests()
+    public class PedidoRepositoryTests
     {
-        _pedidoRepositoryMock = new Mock<IPedidoRepository>();
-    }
+        private readonly Mock<IPedidoRepository> _pedidoRepositoryMock;
 
-    [Fact]
-    public async Task ObterTodosPedidosOrdenadosAsync_DeveRetornarPedidosOrdenados()
-    {
-        // Arrange
-        var pedidos = "Pedido1, Pedido2";
-        _pedidoRepositoryMock.Setup(repo => repo.ObterTodosPedidosOrdenadosAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(pedidos);
+        public PedidoRepositoryTests() => _pedidoRepositoryMock = new Mock<IPedidoRepository>();
 
-        // Act
-        var resultado = await _pedidoRepositoryMock.Object.ObterTodosPedidosOrdenadosAsync(CancellationToken.None);
+        [Fact]
+        public async Task ObterTodosPedidosOrdenadosAsync_DeveRetornarPedidosOrdenados()
+        {
+            // Arrange
+            var pedidos = "Pedido1, Pedido2";
+            _pedidoRepositoryMock.Setup(repo => repo.ObterTodosPedidosOrdenadosAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(pedidos);
 
-        // Assert
-        resultado.Should().Be(pedidos);
-    }
+            // Act
+            var resultado = await _pedidoRepositoryMock.Object.ObterTodosPedidosOrdenadosAsync(CancellationToken.None);
 
-    [Fact]
-    public async Task ObterTodosPedidosAsync_DeveRetornarTodosPedidos()
-    {
-        // Arrange
-        var pedidos = "Pedido1, Pedido2";
-        _pedidoRepositoryMock.Setup(repo => repo.ObterTodosPedidosAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(pedidos);
+            // Assert
+            resultado.Should().Be(pedidos);
+        }
 
-        // Act
-        var resultado = await _pedidoRepositoryMock.Object.ObterTodosPedidosAsync(CancellationToken.None);
+        [Fact]
+        public async Task ObterTodosPedidosAsync_DeveRetornarTodosPedidos()
+        {
+            // Arrange
+            var pedidos = "Pedido1, Pedido2";
+            _pedidoRepositoryMock.Setup(repo => repo.ObterTodosPedidosAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(pedidos);
 
-        // Assert
-        resultado.Should().Be(pedidos);
+            // Act
+            var resultado = await _pedidoRepositoryMock.Object.ObterTodosPedidosAsync(CancellationToken.None);
+
+            // Assert
+            resultado.Should().Be(pedidos);
+        }
     }
 }

@@ -40,6 +40,8 @@ namespace Core.WebApi.DependencyInjection
 
             app.UseAuthorization();
 
+            app.UseAuthentication();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

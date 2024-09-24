@@ -1,12 +1,10 @@
 ﻿using Domain.Entities;
 using Domain.ValueObjects;
 
-namespace Domain.Tests.TestHelpers;
-
-public static class PagamentoFakeDataFactory
+namespace Domain.Tests.TestHelpers
 {
-    public static Pagamento CriarPagamentoValido()
+    public static class PagamentoFakeDataFactory
     {
-        return new Pagamento(Guid.NewGuid(), Guid.NewGuid(), StatusPagamento.Pago, 100.00m, "QRCode", DateTime.Now);
+        public static Pagamento CriarPagamentoValido() => new(Guid.NewGuid(), Guid.NewGuid(), StatusPagamento.Pago, 100.00m, "QRCode", DateTime.Now);
     }
 }
