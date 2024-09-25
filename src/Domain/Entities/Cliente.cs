@@ -7,11 +7,11 @@ namespace Domain.Entities
     public class Cliente : Entity, IAggregateRoot
     {
         public string Nome { get; private set; }
-        public string? Email { get; private set; }
+        public string Email { get; private set; }
         public string Cpf { get; private set; }
         public bool Ativo { get; private set; }
 
-        public Cliente(Guid id, string nome, string? email, string cpf, bool ativo)
+        public Cliente(Guid id, string nome, string email, string cpf, bool ativo)
         {
             Id = id;
             Nome = nome;
@@ -34,6 +34,7 @@ namespace Domain.Entities
                 .Length(2, 50).WithMessage("O {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres e foi informado {PropertyValue}.");
 
             RuleFor(c => c.Email)
+                .NotNull().WithMessage("O {PropertyName} não pode ser nulo.")
                 .EmailAddress().WithMessage("O {PropertyName} está em um formato inválido.")
                 .Length(2, 100).WithMessage("O {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres e foi informado {PropertyValue}.");
 
@@ -41,7 +42,6 @@ namespace Domain.Entities
                 .NotEmpty().WithMessage("O {PropertyName} não pode ser vazio.")
                 .Length(11).WithMessage("O {PropertyName} precisa ter {ComparisonValue} caracteres e foi fornecido {PropertyValue}.")
                 .Must(cpf => ValidadorCpf.Validar(cpf)).WithMessage("O {PropertyName} fornecido é inválido.");
-
 
             RuleFor(c => c.Ativo)
                 .NotNull().WithMessage("O status não pode ser nulo.");

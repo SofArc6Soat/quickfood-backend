@@ -2,12 +2,13 @@
 using Core.Domain.Notificacoes;
 using Domain.Entities;
 using Gateways;
+using Gateways.Dtos.Response;
 
 namespace UseCases
 {
     public class ClienteUseCase(IClienteGateway clientesGateway, INotificador notificador) : BaseUseCase(notificador), IClienteUseCase
     {
-        public async Task<bool> CadastrarClienteAsync(Cliente cliente, CancellationToken cancellationToken)
+        public async Task<bool> CadastrarClienteAsync(Cliente cliente, string senha, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(cliente);
 
@@ -17,8 +18,14 @@ namespace UseCases
                 return false;
             }
 
-            return ExecutarValidacao(new ValidarCliente(), cliente)
-                   && await clientesGateway.CadastrarClienteAsync(cliente, cancellationToken);
+            if (ExecutarValidacao(new ValidarCliente(), cliente)
+                   && await clientesGateway.CadastrarClienteAsync(cliente, senha, cancellationToken))
+            {
+                return true;
+            }
+
+            Notificar($"Ocorreu um erro ao cadastra o cliente com o e-mail: {cliente.Email}");
+            return false;
         }
 
         public async Task<bool> AtualizarClienteAsync(Cliente cliente, CancellationToken cancellationToken)
@@ -49,18 +56,7 @@ namespace UseCases
         public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken) =>
             await clientesGateway.ObterTodosClientesAsync(cancellationToken);
 
-        public async Task<Cliente?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken)
-        {
-            var cliente = await clientesGateway.IdentificarClienteCpfAsync(cpf, cancellationToken);
-
-            if (cliente is null)
-            {
-                Notificar($"Cliente {cpf} não encontrado.");
-
-                return null;
-            }
-
-            return cliente;
-        }
+        public async Task<TokenUsuario> IdentificarClienteCpfAsync(string cpf, string senha, CancellationToken cancellationToken) =>
+            await clientesGateway.IdentificarClienteCpfAsync(cpf, senha, cancellationToken);
     }
 }

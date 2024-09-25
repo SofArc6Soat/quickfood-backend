@@ -7,7 +7,7 @@
 namespace Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,7 +22,7 @@ namespace Infra.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(50)", nullable: false),
-                    Email = table.Column<string>(type: "varchar(100)", nullable: true),
+                    Email = table.Column<string>(type: "varchar(100)", nullable: false),
                     Cpf = table.Column<string>(type: "varchar(11)", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -64,6 +64,21 @@ namespace Infra.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Produtos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(50)", nullable: false),
+                    Email = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -116,7 +131,7 @@ namespace Infra.Migrations
             migrationBuilder.InsertData(
                 schema: "dbo",
                 table: "Clientes",
-                columns: new[] { "Id", "Ativo", "Cpf", "Email", "Nome" },
+                columns: ["Id", "Ativo", "Cpf", "Email", "Nome"],
                 values: new object[,]
                 {
                     { new Guid("efee2d79-ce89-479a-9667-04f57f9e2e5e"), true, "08062759016", "joao@gmail.com", "João" },
@@ -156,16 +171,14 @@ namespace Infra.Migrations
                 schema: "dbo",
                 table: "Clientes",
                 column: "Email",
-                unique: true,
-                filter: "[Email] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clientes_Email_Cpf",
                 schema: "dbo",
                 table: "Clientes",
                 columns: new[] { "Email", "Cpf" },
-                unique: true,
-                filter: "[Email] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pagamentos_PedidoId",
@@ -178,6 +191,13 @@ namespace Infra.Migrations
                 schema: "dbo",
                 table: "PedidosItens",
                 column: "PedidoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_Email",
+                schema: "dbo",
+                table: "Usuarios",
+                column: "Email",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -197,6 +217,10 @@ namespace Infra.Migrations
 
             migrationBuilder.DropTable(
                 name: "Produtos",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios",
                 schema: "dbo");
 
             migrationBuilder.DropTable(

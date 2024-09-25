@@ -71,11 +71,6 @@ namespace SmokeTests.SmokeTests
             Assert.Equal("application/json; charset=utf-8", produtoResponse.Content.Headers.ContentType.ToString());
         }
 
-        private static PedidoStatusRequestDto CreatePedidoStatusRequestDto() => new()
-        {
-            Status = "EmPreparacao"
-        };
-
-        private StringContent CreateContent(object dto) => new(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json");
+        private static StringContent CreateContent(object dto) => new(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json");
     }
 }

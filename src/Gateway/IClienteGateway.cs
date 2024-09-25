@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Gateways.Dtos.Response;
 
 namespace Gateways
 {
@@ -6,11 +7,11 @@ namespace Gateways
     {
         bool VerificarClienteExistente(Guid id, string? cpf, string? email, CancellationToken cancellationToken);
         Task<bool> VerificarClienteExistenteAsync(Guid id, CancellationToken cancellationToken);
-        Task<bool> CadastrarClienteAsync(Cliente cliente, CancellationToken cancellationToken);
+        Task<bool> CadastrarClienteAsync(Cliente cliente, string senha, CancellationToken cancellationToken);
         Task<bool> AtualizarClienteAsync(Cliente cliente, CancellationToken cancellationToken);
         Task<bool> DeletarClienteAsync(Guid id, CancellationToken cancellationToken);
 
         Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken);
-        Task<Cliente?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken);
+        Task<TokenUsuario> IdentificarClienteCpfAsync(string cpf, string senha, CancellationToken cancellationToken);
     }
 }

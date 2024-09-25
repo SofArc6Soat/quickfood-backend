@@ -69,5 +69,6 @@ namespace Gateways
 
         public async Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken) =>
             await pagamentoRepository.ObterPagamentoPorPedidoAsync(pedidoId, cancellationToken);
+        public Pagamento? ObterPagamentoPorPedido(Guid pedidoId) => throw new NotImplementedException();
     }
 }

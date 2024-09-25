@@ -32,7 +32,6 @@ namespace Domain.Tests.Entities
                 .And.Contain("Parameter 'unidades'");
         }
 
-
         [Fact]
         public void CalcularValor_DeveCalcularValorCorretamente()
         {

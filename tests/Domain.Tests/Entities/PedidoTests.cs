@@ -43,7 +43,6 @@ namespace Domain.Tests.Entities
             pedido.ValorTotal.Should().Be(itemAtualizado.CalcularValor()); // Verifica se o valor total foi calculado corretamente
         }
 
-
         [Fact]
         public void EfetuarCheckout_DeveAtualizarStatusParaPendentePagamento()
         {

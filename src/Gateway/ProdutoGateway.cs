@@ -48,7 +48,6 @@ namespace Gateways
             return await produtoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
-
         public bool VerificarProdutoExistente(Guid id, string nome, string descricao, CancellationToken cancellationToken)
         {
             var produtoExistente = produtoRepository.Find(e => e.Id == id || e.Nome == nome || e.Descricao == descricao, cancellationToken).FirstOrDefault(g => g.Id == id);

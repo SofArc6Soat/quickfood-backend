@@ -131,12 +131,12 @@ namespace Domain.Tests.Gateway
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(produtoId, result?.Id);
-            Assert.Equal("Produto Teste", result?.Nome);
-            Assert.Equal("Descrição Teste", result?.Descricao);
-            Assert.Equal(100.00m, result?.Preco);
-            Assert.Equal(Categoria.Lanche, result?.Categoria);
-            Assert.True(result?.Ativo);
+            Assert.Equal(produtoId, result.Id);
+            Assert.Equal("Produto Teste", result.Nome);
+            Assert.Equal("Descrição Teste", result.Descricao);
+            Assert.Equal(100.00m, result.Preco);
+            Assert.Equal(Categoria.Lanche, result.Categoria);
+            Assert.True(result.Ativo);
         }
 
         [Fact]

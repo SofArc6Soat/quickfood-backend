@@ -17,12 +17,16 @@ namespace Api.Controllers
             return CustomResponseGet(result);
         }
 
-        [HttpGet("identifique-se")]
-        public async Task<IActionResult> IdentificarClienteCpf([FromQuery] IdentifiqueSeRequestDto request, CancellationToken cancellationToken)
+        [HttpPost("identifique-se")]
+        public async Task<IActionResult> IdentificarClienteCpf(IdentifiqueSeRequestDto request, CancellationToken cancellationToken)
         {
-            var result = await clientesController.IdentificarClienteCpfAsync(request.Cpf, cancellationToken);
+            var result = await clientesController.IdentificarClienteCpfAsync(request.Cpf, request.Senha, cancellationToken);
 
-            return CustomResponseGet(result);
+            request.Senha = "*******";
+
+            return result == null
+                ? CustomResponsePost($"clientes/identifique-se", request, false)
+                : CustomResponsePost($"clientes/identifique-se", result, true);
         }
 
         [HttpPost]
@@ -34,6 +38,8 @@ namespace Api.Controllers
             }
 
             var result = await clientesController.CadastrarClienteAsync(clienteRequestDto, cancellationToken);
+
+            clienteRequestDto.Senha = "*******";
 
             return CustomResponsePost($"clientes/{clienteRequestDto.Id}", clienteRequestDto, result);
         }

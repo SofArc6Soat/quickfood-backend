@@ -30,47 +30,6 @@ namespace Api.Controllers
             _userPoolId = _cognitoSettings.UserPoolId;
         }
 
-        [HttpPost("CreateUser")]
-        public async Task<IActionResult> CreateUser([FromBody] UserModel model)
-        {
-            var emailExists = await CheckIfEmailExistsAsync(model.Email);
-            if (emailExists)
-            {
-                return BadRequest(new { message = "Email já está cadastrado." });
-            }
-
-            var request = new SignUpRequest
-            {
-                ClientId = _clientId,
-                SecretHash = CalculateSecretHash(_clientId, _clientSecret, model.Email),
-                Username = model.Email,
-                Password = model.Senha,
-                UserAttributes =
-                [
-                    new() { Name = "email", Value = model.Email }
-                ]
-            };
-
-            try
-            {
-                var signUpResponse = await _cognitoClientIdentityProvider.SignUpAsync(request);
-
-                var addToGroupRequest = new AdminAddUserToGroupRequest
-                {
-                    GroupName = "admin",
-                    Username = model.Email,
-                    UserPoolId = _userPoolId
-                };
-
-                await _cognitoClientIdentityProvider.AdminAddUserToGroupAsync(addToGroupRequest);
-
-                return Ok(signUpResponse);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
-        }
 
         [HttpPost("ConfirmEmailVerification")]
         public async Task<IActionResult> ConfirmEmailVerification([FromBody] ConfirmEmailModel model)
@@ -181,7 +140,6 @@ namespace Api.Controllers
             {
                 return BadRequest(new { message = ex.Message });
             }
-
         }
 
         private async Task<bool> CheckIfEmailExistsAsync(string email)

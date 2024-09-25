@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Gateways.Dtos.Request
 {
-    public record ClienteRequestDto
+    public record UsuarioRequestDto
     {
         [RequiredGuid(ErrorMessage = "O campo {0} é obrigatório.")]
         public required Guid Id { get; set; }
@@ -18,11 +18,6 @@ namespace Gateways.Dtos.Request
         [StringLength(100, ErrorMessage = "O campo {0} deve conter entre {2} e {1} caracteres.", MinimumLength = 5)]
         [Display(Name = "E-mail")]
         public required string Email { get; set; }
-
-        [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-        [StringLength(11, ErrorMessage = "O campo {0} deve conter {1} caracteres.", MinimumLength = 11)]
-        [Display(Name = "CPF")]
-        public required string Cpf { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         [StringLength(50, ErrorMessage = "O campo {0} deve conter entre {2} e {1} caracteres.", MinimumLength = 8)]

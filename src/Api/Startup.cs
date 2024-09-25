@@ -33,7 +33,7 @@ namespace Api
             services.AddHealthCheckConfig(settings.ConnectionStrings.DefaultConnection);
 
             services.AddControllerDependencyServices();
-            services.AddGatewayDependencyServices(settings.ConnectionStrings.DefaultConnection);
+            services.AddGatewayDependencyServices(settings.ConnectionStrings.DefaultConnection, settings.CognitoSettings.ClientId, settings.CognitoSettings.ClientSecret, settings.CognitoSettings.UserPoolId);
 
             services.AddAWSService<IAmazonCognitoIdentityProvider>();
         }

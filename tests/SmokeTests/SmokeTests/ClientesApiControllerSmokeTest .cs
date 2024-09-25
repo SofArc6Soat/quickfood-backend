@@ -20,67 +20,69 @@ namespace SmokeTests.SmokeTests
             Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
         }
 
-        [Fact]
-        public async Task Get_IdentifiqueSeEndpoint_ReturnsSuccess()
-        {
-            // Arrange
-            var cliente = CreateClienteRequestDto();
+        // Nao podemos executar os testes abaixo, pois estão criando um usuário no Cognito
 
-            // Act
-            await _client.PostAsync("/clientes", CreateContent(cliente));
-            var response = await _client.GetAsync($"/clientes/identifique-se?cpf={cpf}");
+        //[Fact]
+        //public async Task Get_IdentifiqueSeEndpoint_ReturnsSuccess()
+        //{
+        //    // Arrange
+        //    var cliente = CreateClienteRequestDto();
 
-            // Assert
-            response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
-        }
+        //    // Act
+        //    await _client.PostAsync("/clientes", CreateContent(cliente));
+        //    var response = await _client.GetAsync($"/clientes/identifique-se?cpf={cpf}");
 
-        [Fact]
-        public async Task Post_ClientesEndpoint_CreatesCliente()
-        {
-            // Arrange
-            var cliente = CreateClienteRequestDto();
+        //    // Assert
+        //    response.EnsureSuccessStatusCode();
+        //    Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        //}
 
-            // Act
-            var response = await _client.PostAsync("/clientes", CreateContent(cliente));
+        //[Fact]
+        //public async Task Post_ClientesEndpoint_CreatesCliente()
+        //{
+        //    // Arrange
+        //    var cliente = CreateClienteRequestDto();
 
-            // Assert
-            response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
-        }
+        //    // Act
+        //    var response = await _client.PostAsync("/clientes", CreateContent(cliente));
 
-        [Fact]
-        public async Task Put_ClientesEndpoint_UpdatesCliente()
-        {
-            // Arrange
-            var clienteId = Guid.NewGuid();
-            var cliente = CreateClienteRequestDto(clienteId);
+        //    // Assert
+        //    response.EnsureSuccessStatusCode();
+        //    Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        //}
 
-            await _client.PostAsync("/clientes", CreateContent(cliente));
+        //[Fact]
+        //public async Task Put_ClientesEndpoint_UpdatesCliente()
+        //{
+        //    // Arrange
+        //    var clienteId = Guid.NewGuid();
+        //    var cliente = CreateClienteRequestDto(clienteId);
 
-            // Act
-            var response = await _client.PutAsync($"/clientes/{clienteId}", CreateContent(cliente));
+        //    await _client.PostAsync("/clientes", CreateContent(cliente));
 
-            // Assert
-            response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
-        }
+        //    // Act
+        //    var response = await _client.PutAsync($"/clientes/{clienteId}", CreateContent(cliente));
 
-        [Fact]
-        public async Task Delete_ClientesEndpoint_DeletesCliente()
-        {
-            // Arrange
-            var clienteId = Guid.NewGuid();
-            var cliente = CreateClienteRequestDto(clienteId);
+        //    // Assert
+        //    response.EnsureSuccessStatusCode();
+        //    Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        //}
 
-            await _client.PostAsync("/clientes", CreateContent(cliente));
+        //[Fact]
+        //public async Task Delete_ClientesEndpoint_DeletesCliente()
+        //{
+        //    // Arrange
+        //    var clienteId = Guid.NewGuid();
+        //    var cliente = CreateClienteRequestDto(clienteId);
 
-            // Act
-            var response = await _client.DeleteAsync($"/clientes/{clienteId}");
+        //    await _client.PostAsync("/clientes", CreateContent(cliente));
 
-            // Assert
-            response.EnsureSuccessStatusCode();
-        }
+        //    // Act
+        //    var response = await _client.DeleteAsync($"/clientes/{clienteId}");
+
+        //    // Assert
+        //    response.EnsureSuccessStatusCode();
+        //}
 
         private ClienteRequestDto CreateClienteRequestDto(Guid? id = null) => new()
         {
@@ -88,9 +90,10 @@ namespace SmokeTests.SmokeTests
             Nome = "Cliente Teste",
             Email = "cliente@test.com",
             Cpf = cpf,
+            Senha = "Teste@123",
             Ativo = true
         };
 
-        private StringContent CreateContent(ClienteRequestDto cliente) => new(JsonConvert.SerializeObject(cliente), Encoding.UTF8, "application/json");
+        private static StringContent CreateContent(ClienteRequestDto cliente) => new(JsonConvert.SerializeObject(cliente), Encoding.UTF8, "application/json");
     }
 }

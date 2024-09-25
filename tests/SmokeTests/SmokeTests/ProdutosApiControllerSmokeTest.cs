@@ -87,7 +87,7 @@ namespace SmokeTests.SmokeTests
             response.EnsureSuccessStatusCode();
         }
 
-        private ProdutoRequestDto CreateProdutoRequestDto(Guid? id = null) => new()
+        private static ProdutoRequestDto CreateProdutoRequestDto(Guid? id = null) => new()
         {
             Id = id ?? Guid.NewGuid(),
             Nome = "Produto Teste",
@@ -97,6 +97,6 @@ namespace SmokeTests.SmokeTests
             Ativo = true
         };
 
-        private StringContent CreateContent(ProdutoRequestDto produto) => new(JsonConvert.SerializeObject(produto), Encoding.UTF8, "application/json");
+        private static StringContent CreateContent(ProdutoRequestDto produto) => new(JsonConvert.SerializeObject(produto), Encoding.UTF8, "application/json");
     }
 }

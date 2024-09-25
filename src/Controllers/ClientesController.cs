@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Gateways.Dtos.Request;
+using Gateways.Dtos.Response;
 using UseCases;
 
 namespace Controllers
@@ -10,7 +11,7 @@ namespace Controllers
         {
             var cliente = new Cliente(clienteRequestDto.Id, clienteRequestDto.Nome, clienteRequestDto.Email, clienteRequestDto.Cpf, clienteRequestDto.Ativo);
 
-            return await clienteUseCase.CadastrarClienteAsync(cliente, cancellationToken);
+            return await clienteUseCase.CadastrarClienteAsync(cliente, clienteRequestDto.Senha, cancellationToken);
         }
 
         public async Task<bool> AtualizarClienteAsync(ClienteRequestDto clienteRequestDto, CancellationToken cancellationToken)
@@ -26,7 +27,7 @@ namespace Controllers
         public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken) =>
             await clienteUseCase.ObterTodosClientesAsync(cancellationToken);
 
-        public async Task<Cliente?> IdentificarClienteCpfAsync(string cfp, CancellationToken cancellationToken) =>
-            await clienteUseCase.IdentificarClienteCpfAsync(cfp, cancellationToken);
+        public async Task<TokenUsuario> IdentificarClienteCpfAsync(string cfp, string senha, CancellationToken cancellationToken) =>
+            await clienteUseCase.IdentificarClienteCpfAsync(cfp, senha, cancellationToken);
     }
 }

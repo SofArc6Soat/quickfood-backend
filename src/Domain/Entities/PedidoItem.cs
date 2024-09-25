@@ -3,18 +3,11 @@ using FluentValidation;
 
 namespace Domain.Entities
 {
-    public class PedidoItem : Entity
+    public class PedidoItem(Guid produtoId, int quantidade, decimal valorUnitario) : Entity
     {
-        public Guid ProdutoId { get; private set; }
-        public int Quantidade { get; private set; }
-        public decimal ValorUnitario { get; private set; }
-
-        public PedidoItem(Guid produtoId, int quantidade, decimal valorUnitario)
-        {
-            ProdutoId = produtoId;
-            Quantidade = quantidade;
-            ValorUnitario = valorUnitario;
-        }
+        public Guid ProdutoId { get; private set; } = produtoId;
+        public int Quantidade { get; private set; } = quantidade;
+        public decimal ValorUnitario { get; private set; } = valorUnitario;
 
         public void AdicionarUnidades(int unidades)
         {

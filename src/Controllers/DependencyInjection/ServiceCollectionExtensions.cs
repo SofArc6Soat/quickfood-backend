@@ -13,6 +13,7 @@ namespace Controllers.DependencyInjection
             services.AddScoped<IProdutosController, ProdutosController>();
             services.AddScoped<IPedidoController, PedidoController>();
             services.AddScoped<IPagamentoController, PagamentoController>();
+            services.AddScoped<IUsuariosController, UsuariosController>();
 
             services.AddUseCasesDependencyServices();
         }

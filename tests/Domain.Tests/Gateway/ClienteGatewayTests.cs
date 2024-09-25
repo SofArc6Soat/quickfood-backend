@@ -10,12 +10,14 @@ namespace Domain.Tests.Gateway
     public class ClienteGatewayTests
     {
         private readonly Mock<IClienteRepository> _mockClienteRepository;
+        private readonly Mock<ICognitoGateway> _mockCognitoGateway;
         private readonly ClienteGateway _clienteGateway;
 
         public ClienteGatewayTests()
         {
             _mockClienteRepository = new Mock<IClienteRepository>();
-            _clienteGateway = new ClienteGateway(_mockClienteRepository.Object);
+            _mockCognitoGateway = new Mock<ICognitoGateway>();
+            _clienteGateway = new ClienteGateway(_mockClienteRepository.Object, _mockCognitoGateway.Object);
         }
 
         [Fact]
@@ -23,18 +25,23 @@ namespace Domain.Tests.Gateway
         {
             // Arrange
             var cliente = ClienteFakeDataFactory.CriarClienteValido();
+            var senha = "Teste@123";
+
             _mockClienteRepository.Setup(repo => repo.InsertAsync(It.IsAny<ClienteDb>(), It.IsAny<CancellationToken>()))
                                   .Returns(Task.CompletedTask);
             _mockClienteRepository.Setup(repo => repo.UnitOfWork.CommitAsync(It.IsAny<CancellationToken>()))
                                   .ReturnsAsync(true);
+            _mockCognitoGateway.Setup(cognito => cognito.CriarUsuarioClienteAsync(cliente, senha, It.IsAny<CancellationToken>()))
+                                  .ReturnsAsync(true);
 
             // Act
-            var result = await _clienteGateway.CadastrarClienteAsync(cliente, CancellationToken.None);
+            var result = await _clienteGateway.CadastrarClienteAsync(cliente, senha, CancellationToken.None);
 
             // Assert
             Assert.True(result);
             _mockClienteRepository.Verify(repo => repo.InsertAsync(It.IsAny<ClienteDb>(), It.IsAny<CancellationToken>()), Times.Once);
             _mockClienteRepository.Verify(repo => repo.UnitOfWork.CommitAsync(It.IsAny<CancellationToken>()), Times.Once);
+            _mockCognitoGateway.Verify(cognito => cognito.CriarUsuarioClienteAsync(cliente, senha, It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
@@ -96,7 +103,6 @@ namespace Domain.Tests.Gateway
             Assert.True(result);
         }
 
-
         [Fact]
         public async Task DeveObterTodosClientesAsync()
         {
@@ -114,22 +120,6 @@ namespace Domain.Tests.Gateway
             // Assert
             Assert.Single(result);
             Assert.Equal(clientesDb.First().Nome, result.First().Nome);
-        }
-
-        [Fact]
-        public async Task DeveIdentificarClienteCpfAsync()
-        {
-            // Arrange
-            var clienteDb = new ClienteDb { Id = Guid.NewGuid(), Nome = "João Silva", Email = "joao@teste.com", Cpf = "12345678901", Ativo = true };
-            _mockClienteRepository.Setup(repo => repo.IdentificarClienteCpfAsync("12345678901", It.IsAny<CancellationToken>()))
-                                  .ReturnsAsync(clienteDb);
-
-            // Act
-            var result = await _clienteGateway.IdentificarClienteCpfAsync("12345678901", CancellationToken.None);
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(clienteDb.Nome, result?.Nome);
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using Domain.Entities;
+using Gateways.Dtos.Response;
 using Infra.Dto;
 using Infra.Repositories;
 
 namespace Gateways
 {
-    public class ClienteGateway(IClienteRepository clienteRepository) : IClienteGateway
+    public class ClienteGateway(IClienteRepository clienteRepository, ICognitoGateway cognitoGateway) : IClienteGateway
     {
-        public async Task<bool> CadastrarClienteAsync(Cliente cliente, CancellationToken cancellationToken)
+        public async Task<bool> CadastrarClienteAsync(Cliente cliente, string senha, CancellationToken cancellationToken)
         {
             var clienteDto = new ClienteDb
             {
@@ -19,7 +20,7 @@ namespace Gateways
 
             await clienteRepository.InsertAsync(clienteDto, cancellationToken);
 
-            return await clienteRepository.UnitOfWork.CommitAsync(cancellationToken);
+            return await clienteRepository.UnitOfWork.CommitAsync(cancellationToken) && await cognitoGateway.CriarUsuarioClienteAsync(cliente, senha, cancellationToken);
         }
 
         public async Task<bool> AtualizarClienteAsync(Cliente cliente, CancellationToken cancellationToken)
@@ -78,11 +79,7 @@ namespace Gateways
             return [];
         }
 
-        public async Task<Cliente?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken)
-        {
-            var clienteDto = await clienteRepository.IdentificarClienteCpfAsync(cpf, cancellationToken);
-
-            return clienteDto is null ? null : new Cliente(clienteDto.Id, clienteDto.Nome, clienteDto.Email, clienteDto.Cpf, clienteDto.Ativo);
-        }
+        public async Task<TokenUsuario> IdentificarClienteCpfAsync(string cpf, string senha, CancellationToken cancellationToken) =>
+            await cognitoGateway.IdentificarClientePorCpfAsync(cpf, senha, cancellationToken);
     }
 }

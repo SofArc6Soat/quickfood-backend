@@ -12,6 +12,8 @@ namespace Domain.Tests.Repositories
         {
             // Arrange
             var mockRepository = new Mock<IClienteRepository>();
+            var mockCognitoGateway = new Mock<ICognitoGateway>();
+
             var clienteDb = new ClienteDb
             {
                 Id = Guid.NewGuid(),
@@ -25,7 +27,7 @@ namespace Domain.Tests.Repositories
             mockRepository.Setup(r => r.ObterTodosClientesAsync(It.IsAny<CancellationToken>()))
                           .ReturnsAsync(clientes);
 
-            var clienteGateway = new ClienteGateway(mockRepository.Object);
+            var clienteGateway = new ClienteGateway(mockRepository.Object, mockCognitoGateway.Object);
 
             // Act
             var result = await clienteGateway.ObterTodosClientesAsync(CancellationToken.None);
@@ -36,37 +38,12 @@ namespace Domain.Tests.Repositories
         }
 
         [Fact]
-        public async Task DeveIdentificarClienteCpfAsync()
-        {
-            // Arrange
-            var mockRepository = new Mock<IClienteRepository>();
-            var clienteDb = new ClienteDb
-            {
-                Id = Guid.NewGuid(),
-                Nome = "João Silva",
-                Email = "joao@teste.com",
-                Cpf = "12345678901",
-                Ativo = true
-            };
-
-            mockRepository.Setup(r => r.IdentificarClienteCpfAsync("12345678901", It.IsAny<CancellationToken>()))
-                          .ReturnsAsync(clienteDb);
-
-            var clienteGateway = new ClienteGateway(mockRepository.Object);
-
-            // Act
-            var result = await clienteGateway.IdentificarClienteCpfAsync("12345678901", CancellationToken.None);
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(clienteDb.Nome, result?.Nome);
-        }
-
-        [Fact]
         public async Task DeveRetornarClientePorId()
         {
             // Arrange
             var mockRepository = new Mock<IClienteRepository>();
+            var mockCognitoGateway = new Mock<ICognitoGateway>();
+
             var clienteDb = new ClienteDb
             {
                 Id = Guid.NewGuid(),
@@ -79,7 +56,7 @@ namespace Domain.Tests.Repositories
             mockRepository.Setup(r => r.FindByIdAsync(clienteDb.Id, It.IsAny<CancellationToken>()))
                           .ReturnsAsync(clienteDb);
 
-            var clienteGateway = new ClienteGateway(mockRepository.Object);
+            var clienteGateway = new ClienteGateway(mockRepository.Object, mockCognitoGateway.Object);
 
             // Act
             var result = await clienteGateway.VerificarClienteExistenteAsync(clienteDb.Id, CancellationToken.None);
