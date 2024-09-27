@@ -59,6 +59,72 @@ namespace Gateways
             return await CriarUsuarioCognito(signUpRequest, addToGroupRequest, cliente.Email, cancellationToken);
         }
 
+        public async Task<bool> ConfirmarEmailVerificacaoAsync(EmailVerificacao emailVerificacao, CancellationToken cancellationToken)
+        {
+            var confirmSignUpRequest = new ConfirmSignUpRequest
+            {
+                ClientId = _clientId,
+                Username = emailVerificacao.Email,
+                ConfirmationCode = emailVerificacao.CodigoVerificacao,
+                SecretHash = CalcularSecretHash(_clientId, _clientSecret, emailVerificacao.Email)
+            };
+
+            try
+            {
+                var response = await _cognitoClientIdentityProvider.ConfirmSignUpAsync(confirmSignUpRequest, cancellationToken);
+
+                return response is not null && response.HttpStatusCode == System.Net.HttpStatusCode.OK;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> SolicitarRecuperacaoSenhaAsync(SolicitarRecuperacaoSenha solicitarRecuperacaoSenha, CancellationToken cancellationToken)
+        {
+            var forgotPasswordRequest = new ForgotPasswordRequest
+            {
+                ClientId = _clientId,
+                Username = solicitarRecuperacaoSenha.Email,
+                SecretHash = CalcularSecretHash(_clientId, _clientSecret, solicitarRecuperacaoSenha.Email)
+            };
+
+            try
+            {
+                var response = await _cognitoClientIdentityProvider.ForgotPasswordAsync(forgotPasswordRequest, cancellationToken);
+
+                return response is not null && response.HttpStatusCode == System.Net.HttpStatusCode.OK;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> EfetuarResetSenhaAsync(ResetarSenha resetarSenha, CancellationToken cancellationToken)
+        {
+            var confirmForgotPasswordRequest = new ConfirmForgotPasswordRequest
+            {
+                ClientId = _clientId,
+                Username = resetarSenha.Email,
+                ConfirmationCode = resetarSenha.CodigoVerificacao,
+                Password = resetarSenha.NovaSenha,
+                SecretHash = CalcularSecretHash(_clientId, _clientSecret, resetarSenha.Email)
+            };
+
+            try
+            {
+                var response = await _cognitoClientIdentityProvider.ConfirmForgotPasswordAsync(confirmForgotPasswordRequest, cancellationToken);
+
+                return response is not null && response.HttpStatusCode == System.Net.HttpStatusCode.OK;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public async Task<bool> CriarUsuarioAsync(Usuario usuario, string senha, CancellationToken cancellationToken)
         {
             if (await VerificarSeEmailExisteAsync(usuario.Email, cancellationToken))
@@ -89,50 +155,71 @@ namespace Gateways
             return await CriarUsuarioCognito(signUpRequest, addToGroupRequest, usuario.Email, cancellationToken);
         }
 
-        public async Task<TokenUsuario> IdentificarClientePorCpfAsync(string cpf, string senha, CancellationToken cancellationToken)
+        public async Task<TokenUsuario?> IdentifiqueSe(string? email, string? cpf, string senha, CancellationToken cancellationToken)
         {
             var userPool = new CognitoUserPool(_userPoolId, _clientId, _cognitoClientIdentityProvider);
 
-            var userId = await ObterUserIdPorCpfAsync(cpf, cancellationToken);
+            var userId = string.Empty;
 
-            var user = new CognitoUser(userId, _clientId, userPool, _cognitoClientIdentityProvider, _clientSecret);
-
-            var authRequest = new InitiateSrpAuthRequest
+            if (email is not null || cpf is not null)
             {
-                Password = senha
-            };
-
-            try
-            {
-                var authResponse = await user.StartWithSrpAuthAsync(authRequest, cancellationToken);
-
-                if (authResponse.ChallengeName == ChallengeNameType.NEW_PASSWORD_REQUIRED)
+                if (email is not null)
                 {
-                    return null;
+                    userId = await ObertUsuarioCognitoPorEmailAsync(email, cancellationToken);
                 }
 
-                var timeSpan = TimeSpan.FromSeconds(authResponse.AuthenticationResult.ExpiresIn);
-                var expiry = DateTimeOffset.UtcNow + timeSpan;
-
-                return new()
+                if (cpf is not null)
                 {
-                    RefreshToken = authResponse.AuthenticationResult.RefreshToken,
-                    AccessToken = authResponse.AuthenticationResult.AccessToken,
-                    Expiry = expiry
-                };
+                    userId = await ObterUserIdPorCpfAsync(cpf, cancellationToken);
+
+                }
+
+                if (!string.IsNullOrEmpty(userId))
+                {
+                    var user = new CognitoUser(userId, _clientId, userPool, _cognitoClientIdentityProvider, _clientSecret);
+
+                    var authRequest = new InitiateSrpAuthRequest
+                    {
+                        Password = senha
+                    };
+
+                    try
+                    {
+                        var respose = await user.StartWithSrpAuthAsync(authRequest, cancellationToken);
+
+                        if (respose is null || respose.ChallengeName == ChallengeNameType.NEW_PASSWORD_REQUIRED)
+                        {
+                            return null;
+                        }
+
+                        var timeSpan = TimeSpan.FromSeconds(respose.AuthenticationResult.ExpiresIn);
+                        var expiry = DateTimeOffset.UtcNow + timeSpan;
+
+                        return new()
+                        {
+                            RefreshToken = respose.AuthenticationResult.RefreshToken,
+                            AccessToken = respose.AuthenticationResult.AccessToken,
+                            Expiry = expiry
+                        };
+                    }
+                    catch (NotAuthorizedException)
+                    {
+                        throw new NotAuthorizedException("Credenciais inválidas.");
+                    }
+                    catch (UserNotConfirmedException)
+                    {
+                        throw new UserNotConfirmedException("Usuário não confirmado. Por favor, verifique seu e-mail.");
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                }
+
+                return null;
             }
-            catch (NotAuthorizedException)
-            {
-                throw new NotAuthorizedException("Credenciais inválidas.");
-            }
-            catch (UserNotConfirmedException)
-            {
-                throw new UserNotConfirmedException("Usuário não confirmado. Por favor, verifique seu e-mail.");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+
+            return null;
         }
 
         private async Task<bool> CriarUsuarioCognito(SignUpRequest signUpRequest, AdminAddUserToGroupRequest addToGroupRequest, string email, CancellationToken cancellationToken)

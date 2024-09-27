@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using Gateways.Dtos.Response;
 using Infra.Dto;
 using Infra.Repositories;
 
@@ -78,8 +77,5 @@ namespace Gateways
 
             return [];
         }
-
-        public async Task<TokenUsuario> IdentificarClienteCpfAsync(string cpf, string senha, CancellationToken cancellationToken) =>
-            await cognitoGateway.IdentificarClientePorCpfAsync(cpf, senha, cancellationToken);
     }
 }

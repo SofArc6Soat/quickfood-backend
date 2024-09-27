@@ -6,7 +6,7 @@ using Gateways.Dtos.Response;
 
 namespace UseCases
 {
-    public class ClienteUseCase(IClienteGateway clientesGateway, INotificador notificador) : BaseUseCase(notificador), IClienteUseCase
+    public class ClienteUseCase(IClienteGateway clientesGateway, ICognitoGateway cognitoGateway, INotificador notificador) : BaseUseCase(notificador), IClienteUseCase
     {
         public async Task<bool> CadastrarClienteAsync(Cliente cliente, string senha, CancellationToken cancellationToken)
         {
@@ -56,7 +56,7 @@ namespace UseCases
         public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken) =>
             await clientesGateway.ObterTodosClientesAsync(cancellationToken);
 
-        public async Task<TokenUsuario> IdentificarClienteCpfAsync(string cpf, string senha, CancellationToken cancellationToken) =>
-            await clientesGateway.IdentificarClienteCpfAsync(cpf, senha, cancellationToken);
+        public async Task<TokenUsuario?> IdentificarClienteCpfAsync(string cpf, string senha, CancellationToken cancellationToken) =>
+            await cognitoGateway.IdentifiqueSe(null, cpf, senha, cancellationToken);
     }
 }

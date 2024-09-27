@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using Gateways.Dtos.Response;
 
 namespace Gateways
 {
@@ -12,6 +11,5 @@ namespace Gateways
         Task<bool> DeletarClienteAsync(Guid id, CancellationToken cancellationToken);
 
         Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken);
-        Task<TokenUsuario> IdentificarClienteCpfAsync(string cpf, string senha, CancellationToken cancellationToken);
     }
 }
