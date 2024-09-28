@@ -1,10 +1,12 @@
 using Controllers;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Authorize(Policy = "AdminRole")]
     [Route("pagamentos")]
     public class PagamentosApiController(IPagamentoController pagamentoController, INotificador notificador) : MainController(notificador)
     {
@@ -16,6 +18,7 @@ namespace Api.Controllers
             return CustomResponseGet(result);
         }
 
+        [AllowAnonymous]
         [HttpPost("checkout/{pedidoId:guid}")]
         public async Task<IActionResult> Checkout([FromRoute] Guid pedidoId, CancellationToken cancellationToken)
         {
@@ -30,7 +33,7 @@ namespace Api.Controllers
         }
 
         // WebHook
-
+        [AllowAnonymous]
         [HttpPost("notificacoes/{pedidoId:guid}")]
         public async Task<IActionResult> Notificacoes([FromRoute] Guid pedidoId, CancellationToken cancellationToken)
         {

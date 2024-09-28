@@ -2,13 +2,16 @@ using Controllers;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
 using Gateways.Dtos.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [Route("clientes")]
     public class ClientesApiController(IClientesController clientesController, INotificador notificador) : MainController(notificador)
     {
+        [Authorize(Policy = "AdminRole")]
         [HttpGet]
         public async Task<IActionResult> ObterTodosClientes(CancellationToken cancellationToken)
         {
@@ -17,6 +20,7 @@ namespace Api.Controllers
             return CustomResponseGet(result);
         }
 
+        [AllowAnonymous]
         [HttpPost("identifique-se")]
         public async Task<IActionResult> IdentificarClienteCpf(IdentifiqueSeRequestDto request, CancellationToken cancellationToken)
         {
@@ -29,6 +33,7 @@ namespace Api.Controllers
                 : CustomResponsePost($"clientes/identifique-se", result, true);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> CadastrarCliente(ClienteRequestDto clienteRequestDto, CancellationToken cancellationToken)
         {
@@ -62,6 +67,7 @@ namespace Api.Controllers
             return CustomResponsePutPatch(clienteRequestDto, result);
         }
 
+        [Authorize(Policy = "AdminRole")]
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeletarCliente([FromRoute] Guid id, CancellationToken cancellationToken)
         {

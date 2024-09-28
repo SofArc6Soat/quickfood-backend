@@ -1,6 +1,7 @@
 ﻿using Amazon.CognitoIdentityProvider;
 using Api.Configuration;
 using Controllers.DependencyInjection;
+using Core.WebApi.Configurations;
 using Core.WebApi.DependencyInjection;
 using Gateways.DependencyInjection;
 using Infra.Context;
@@ -9,7 +10,7 @@ namespace Api
 {
     public class Startup
     {
-        public IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
@@ -28,7 +29,13 @@ namespace Api
         {
             var settings = EnvironmentConfig.ConfigureEnvironment(services, _configuration);
 
-            services.AddApiDefautConfig();
+            var jwtBearerConfigureOptions = new JwtBearerConfigureOptions
+            {
+                Authority = settings.CognitoSettings.Authority,
+                MetadataAddress = settings.CognitoSettings.MetadataAddress
+            };
+
+            services.AddApiDefautConfig(jwtBearerConfigureOptions);
 
             services.AddHealthCheckConfig(settings.ConnectionStrings.DefaultConnection);
 
@@ -36,9 +43,10 @@ namespace Api
             services.AddGatewayDependencyServices(settings.ConnectionStrings.DefaultConnection, settings.CognitoSettings.ClientId, settings.CognitoSettings.ClientSecret, settings.CognitoSettings.UserPoolId);
 
             services.AddAWSService<IAmazonCognitoIdentityProvider>();
+
         }
 
-        public void Configure(IApplicationBuilder app, ApplicationDbContext context)
+        public static void Configure(IApplicationBuilder app, ApplicationDbContext context)
         {
             DatabaseMigratorBase.MigrateDatabase(context);
 

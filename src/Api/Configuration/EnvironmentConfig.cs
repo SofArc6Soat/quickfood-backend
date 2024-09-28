@@ -30,6 +30,8 @@
         public string ClientId { get; set; } = string.Empty;
         public string ClientSecret { get; set; } = string.Empty;
         public string UserPoolId { get; set; } = string.Empty;
+        public string Authority { get; set; } = string.Empty;
+        public string MetadataAddress { get; set; } = string.Empty;
     }
 
     public interface ICognitoSettings
@@ -37,5 +39,7 @@
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
         public string UserPoolId { get; set; }
+        public string Authority { get; set; }
+        public string MetadataAddress { get; set; }
     }
 }

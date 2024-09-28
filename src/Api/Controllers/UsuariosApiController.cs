@@ -2,10 +2,12 @@ using Controllers;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
 using Gateways.Dtos.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [AllowAnonymous]
     [Route("usuarios")]
     public class UsuariosApiController(IUsuariosController usuarioController, INotificador notificador) : MainController(notificador)
     {
