@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Gateways.Cognito;
 using Infra.Dto;
 using Infra.Repositories;
 

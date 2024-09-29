@@ -1,8 +1,8 @@
 ﻿using Core.Domain.Base;
 using Core.Domain.Notificacoes;
 using Domain.ValueObjects;
-using Gateways;
-using Gateways.Dtos.Response;
+using Gateways.Cognito;
+using Gateways.Cognito.Dtos.Response;
 
 namespace UseCases
 {

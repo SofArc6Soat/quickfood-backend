@@ -1,16 +1,16 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Gateways.Configurations
+namespace Gateways.Cognito.Configurations
 {
     [ExcludeFromCodeCoverage]
-    public class Cognito(string clientId, string clientSecret, string userPoolId) : ICognito
+    public class CognitoConfig(string clientId, string clientSecret, string userPoolId) : ICognitoConfig
     {
         public string ClientId { get; set; } = clientId;
         public string ClientSecret { get; set; } = clientSecret;
         public string UserPoolId { get; set; } = userPoolId;
     }
 
-    public interface ICognito
+    public interface ICognitoConfig
     {
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }

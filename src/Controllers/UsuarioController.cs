@@ -1,6 +1,7 @@
 ﻿using Domain.ValueObjects;
+using Gateways.Cognito.Dtos.Request;
+using Gateways.Cognito.Dtos.Response;
 using Gateways.Dtos.Request;
-using Gateways.Dtos.Response;
 using UseCases;
 
 namespace Controllers

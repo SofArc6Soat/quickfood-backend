@@ -1,5 +1,5 @@
 ﻿using Domain.ValueObjects;
-using Gateways.Dtos.Response;
+using Gateways.Cognito.Dtos.Response;
 
 namespace UseCases
 {

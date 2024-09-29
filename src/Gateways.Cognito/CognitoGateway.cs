@@ -3,24 +3,24 @@ using Amazon.CognitoIdentityProvider.Model;
 using Amazon.Extensions.CognitoAuthentication;
 using Domain.Entities;
 using Domain.ValueObjects;
-using Gateways.Configurations;
-using Gateways.Dtos.Response;
-using System.Security.Cryptography;
-using System.Text;
+using Gateways.Cognito.Configurations;
+using Gateways.Cognito.Dtos.Response;
 
-namespace Gateways
+namespace Gateways.Cognito
 {
     public class CognitoGateway : ICognitoGateway
     {
         private readonly IAmazonCognitoIdentityProvider _cognitoClientIdentityProvider;
+        private readonly ICognitoFactory _cognitoFactory;
 
         private readonly string _clientId;
         private readonly string _clientSecret;
         private readonly string _userPoolId;
 
-        public CognitoGateway(IAmazonCognitoIdentityProvider cognitoClientIdentityProvider, ICognito cognitoSettings)
+        public CognitoGateway(IAmazonCognitoIdentityProvider cognitoClientIdentityProvider, ICognitoFactory cognitoFactory, ICognitoConfig cognitoSettings)
         {
             _cognitoClientIdentityProvider = cognitoClientIdentityProvider;
+            _cognitoFactory = cognitoFactory;
 
             var _cognitoSettings = cognitoSettings;
 
@@ -31,44 +31,33 @@ namespace Gateways
 
         public async Task<bool> CriarUsuarioClienteAsync(Cliente cliente, string senha, CancellationToken cancellationToken)
         {
-            if (await VerificarSeCpfExisteAsync(cliente.Cpf, cancellationToken) && await VerificarSeEmailExisteAsync(cliente.Email, cancellationToken))
+            if (await VerificarSeCpfExisteAsync(cliente.Cpf, cancellationToken) || await VerificarSeEmailExisteAsync(cliente.Email, cancellationToken))
             {
                 return false;
             }
 
-            var signUpRequest = new SignUpRequest
-            {
-                ClientId = _clientId,
-                SecretHash = CalcularSecretHash(_clientId, _clientSecret, cliente.Email),
-                Username = cliente.Email,
-                Password = senha,
-                UserAttributes =
-                [
-                    new() { Name = "email", Value = cliente.Email },
-                    new() { Name = "name", Value = cliente.Nome },
-                    new() { Name = "custom:cpf", Value = cliente.Cpf }
-                ]
-            };
-
-            var adminAddUserToGroupRequest = new AdminAddUserToGroupRequest
-            {
-                GroupName = "cliente",
-                Username = cliente.Email,
-                UserPoolId = _userPoolId
-            };
+            var signUpRequest = _cognitoFactory.CreateSignUpRequest(cliente.Email, senha, cliente.Nome, cliente.Cpf);
+            var adminAddUserToGroupRequest = _cognitoFactory.CreateAddUserToGroupRequest(cliente.Email, "cliente");
 
             return await CriarUsuarioCognitoAsync(signUpRequest, adminAddUserToGroupRequest, cliente.Email, cancellationToken);
         }
 
+        public async Task<bool> CriarUsuarioFuncionarioAsync(Funcionario funcionario, string senha, CancellationToken cancellationToken)
+        {
+            if (await VerificarSeEmailExisteAsync(funcionario.Email, cancellationToken))
+            {
+                return false;
+            }
+
+            var signUpRequest = _cognitoFactory.CreateSignUpRequest(funcionario.Email, senha, funcionario.Nome);
+            var adminAddUserToGroupRequest = _cognitoFactory.CreateAddUserToGroupRequest(funcionario.Email, "admin");
+
+            return await CriarUsuarioCognitoAsync(signUpRequest, adminAddUserToGroupRequest, funcionario.Email, cancellationToken);
+        }
+
         public async Task<bool> ConfirmarEmailVerificacaoAsync(EmailVerificacao emailVerificacao, CancellationToken cancellationToken)
         {
-            var confirmSignUpRequest = new ConfirmSignUpRequest
-            {
-                ClientId = _clientId,
-                Username = emailVerificacao.Email,
-                ConfirmationCode = emailVerificacao.CodigoVerificacao,
-                SecretHash = CalcularSecretHash(_clientId, _clientSecret, emailVerificacao.Email)
-            };
+            var confirmSignUpRequest = _cognitoFactory.CreateConfirmSignUpRequest(emailVerificacao.Email, emailVerificacao.CodigoVerificacao);
 
             try
             {
@@ -84,12 +73,7 @@ namespace Gateways
 
         public async Task<bool> SolicitarRecuperacaoSenhaAsync(RecuperacaoSenha recuperacaoSenha, CancellationToken cancellationToken)
         {
-            var forgotPasswordRequest = new ForgotPasswordRequest
-            {
-                ClientId = _clientId,
-                Username = recuperacaoSenha.Email,
-                SecretHash = CalcularSecretHash(_clientId, _clientSecret, recuperacaoSenha.Email)
-            };
+            var forgotPasswordRequest = _cognitoFactory.CreateForgotPasswordRequest(recuperacaoSenha.Email);
 
             try
             {
@@ -105,14 +89,7 @@ namespace Gateways
 
         public async Task<bool> EfetuarResetSenhaAsync(ResetSenha resetSenha, CancellationToken cancellationToken)
         {
-            var confirmForgotPasswordRequest = new ConfirmForgotPasswordRequest
-            {
-                ClientId = _clientId,
-                Username = resetSenha.Email,
-                ConfirmationCode = resetSenha.CodigoVerificacao,
-                Password = resetSenha.NovaSenha,
-                SecretHash = CalcularSecretHash(_clientId, _clientSecret, resetSenha.Email)
-            };
+            var confirmForgotPasswordRequest = _cognitoFactory.CreateConfirmForgotPasswordRequest(resetSenha.Email, resetSenha.CodigoVerificacao, resetSenha.NovaSenha);
 
             try
             {
@@ -124,36 +101,6 @@ namespace Gateways
             {
                 return false;
             }
-        }
-
-        public async Task<bool> CriarUsuarioFuncionarioAsync(Funcionario funcionario, string senha, CancellationToken cancellationToken)
-        {
-            if (await VerificarSeEmailExisteAsync(funcionario.Email, cancellationToken))
-            {
-                return false;
-            }
-
-            var signUpRequest = new SignUpRequest
-            {
-                ClientId = _clientId,
-                SecretHash = CalcularSecretHash(_clientId, _clientSecret, funcionario.Email),
-                Username = funcionario.Email,
-                Password = senha,
-                UserAttributes =
-                [
-                    new() { Name = "email", Value = funcionario.Email },
-                    new() { Name = "name", Value = funcionario.Nome }
-                ]
-            };
-
-            var adminAddUserToGroupRequest = new AdminAddUserToGroupRequest
-            {
-                GroupName = "admin",
-                Username = funcionario.Email,
-                UserPoolId = _userPoolId
-            };
-
-            return await CriarUsuarioCognitoAsync(signUpRequest, adminAddUserToGroupRequest, funcionario.Email, cancellationToken);
         }
 
         public async Task<TokenUsuario?> IdentifiqueSeAsync(string? email, string? cpf, string senha, CancellationToken cancellationToken)
@@ -179,10 +126,7 @@ namespace Gateways
                 {
                     var cognitoUser = new CognitoUser(userId, _clientId, userPool, _cognitoClientIdentityProvider, _clientSecret);
 
-                    var authRequest = new InitiateSrpAuthRequest
-                    {
-                        Password = senha
-                    };
+                    var authRequest = _cognitoFactory.CreateInitiateSrpAuthRequest(senha);
 
                     try
                     {
@@ -225,6 +169,33 @@ namespace Gateways
             return null;
         }
 
+        public async Task<bool> DeletarUsuarioCognitoAsync(string email, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var username = await ObertUsuarioCognitoPorEmailAsync(email, cancellationToken);
+
+                if (username == null)
+                {
+                    return false;
+                }
+
+                var adminDeleteUserRequest = _cognitoFactory.CreateAdminDeleteUserRequest(_userPoolId, username);
+
+                await _cognitoClientIdentityProvider.AdminDeleteUserAsync(adminDeleteUserRequest, cancellationToken);
+
+                return true;
+            }
+            catch (UserNotFoundException)
+            {
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private async Task<bool> CriarUsuarioCognitoAsync(SignUpRequest signUpRequest, AdminAddUserToGroupRequest addToGroupRequest, string email, CancellationToken cancellationToken)
         {
             try
@@ -251,48 +222,14 @@ namespace Gateways
             }
         }
 
-        public async Task<bool> DeletarUsuarioCognitoAsync(string email, CancellationToken cancellationToken)
-        {
-            try
-            {
-                var username = await ObertUsuarioCognitoPorEmailAsync(email, cancellationToken);
-
-                if (username == null)
-                {
-                    return false;
-                }
-
-                var adminDeleteUserRequest = new AdminDeleteUserRequest
-                {
-                    UserPoolId = _userPoolId,
-                    Username = username
-                };
-
-                await _cognitoClientIdentityProvider.AdminDeleteUserAsync(adminDeleteUserRequest, cancellationToken);
-
-                return true;
-            }
-            catch (UserNotFoundException)
-            {
-                return false;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         private async Task<bool> VerificarSeEmailExisteAsync(string email, CancellationToken cancellationToken)
         {
             try
             {
-                var request = new ListUsersRequest
-                {
-                    UserPoolId = _userPoolId,
-                    Filter = $"email = \"{email}\""
-                };
+                var request = _cognitoFactory.CreateListUsersRequestByEmail(_userPoolId, email);
 
                 var response = await _cognitoClientIdentityProvider.ListUsersAsync(request, cancellationToken);
+
                 return response.Users.Count != 0;
             }
             catch (Exception ex)
@@ -329,16 +266,6 @@ namespace Gateways
             return emailAttribute?.Value;
         }
 
-        private static string CalcularSecretHash(string clientId, string clientSecret, string nomeUsuario)
-        {
-            var keyBytes = Encoding.UTF8.GetBytes(clientSecret);
-            var messageBytes = Encoding.UTF8.GetBytes(nomeUsuario + clientId);
-
-            using var hmac = new HMACSHA256(keyBytes);
-            var hash = hmac.ComputeHash(messageBytes);
-            return Convert.ToBase64String(hash);
-        }
-
         private async Task<List<UserType>> ObterTodosUsuariosCognitoAsync(CancellationToken cancellationToken)
         {
             try
@@ -348,14 +275,12 @@ namespace Gateways
 
                 do
                 {
-                    var request = new ListUsersRequest
-                    {
-                        UserPoolId = _userPoolId,
-                        PaginationToken = paginationToken
-                    };
+                    var request = _cognitoFactory.CreateListUsersRequestByAll(_userPoolId, paginationToken);
 
                     var response = await _cognitoClientIdentityProvider.ListUsersAsync(request, cancellationToken);
+
                     usuarios.AddRange(response.Users);
+
                     paginationToken = response.PaginationToken;
                 }
                 while (!string.IsNullOrEmpty(paginationToken));
@@ -370,11 +295,7 @@ namespace Gateways
 
         private async Task<string?> ObertUsuarioCognitoPorEmailAsync(string email, CancellationToken cancellationToken)
         {
-            var request = new ListUsersRequest
-            {
-                UserPoolId = _userPoolId,
-                Filter = $"email = \"{email}\""
-            };
+            var request = _cognitoFactory.CreateListUsersRequestByEmail(_userPoolId, email);
 
             var response = await _cognitoClientIdentityProvider.ListUsersAsync(request, cancellationToken);
 

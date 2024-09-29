@@ -1,4 +1,4 @@
-﻿namespace Gateways.Dtos.Response
+﻿namespace Gateways.Cognito.Dtos.Response
 {
     public record TokenUsuario
     {

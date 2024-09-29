@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Gateways.Dtos.Request
+namespace Gateways.Cognito.Dtos.Request
 {
     public record ResetarSenhaDto
     {

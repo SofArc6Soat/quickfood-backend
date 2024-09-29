@@ -1,4 +1,5 @@
 ﻿using Gateways;
+using Gateways.Cognito;
 using Infra.Dto;
 using Infra.Repositories;
 using Moq;

@@ -2,6 +2,7 @@
 using Controllers.DependencyInjection;
 using Core.WebApi.Configurations;
 using Core.WebApi.DependencyInjection;
+using Gateways.Cognito.DependencyInjection;
 using Gateways.DependencyInjection;
 using Infra.Context;
 using System.Diagnostics.CodeAnalysis;
@@ -41,7 +42,8 @@ namespace Api
             services.AddHealthCheckConfig(settings.ConnectionStrings.DefaultConnection);
 
             services.AddControllerDependencyServices();
-            services.AddGatewayDependencyServices(settings.ConnectionStrings.DefaultConnection, settings.CognitoSettings.ClientId, settings.CognitoSettings.ClientSecret, settings.CognitoSettings.UserPoolId);
+            services.AddGatewayDependencyServices(settings.ConnectionStrings.DefaultConnection);
+            services.AddGatewayCognitoDependencyServices(settings.CognitoSettings.ClientId, settings.CognitoSettings.ClientSecret, settings.CognitoSettings.UserPoolId);
         }
 
         public static void Configure(IApplicationBuilder app, ApplicationDbContext context)

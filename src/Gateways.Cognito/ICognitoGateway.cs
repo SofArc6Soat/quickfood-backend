@@ -1,8 +1,8 @@
 ﻿using Domain.Entities;
 using Domain.ValueObjects;
-using Gateways.Dtos.Response;
+using Gateways.Cognito.Dtos.Response;
 
-namespace Gateways
+namespace Gateways.Cognito
 {
     public interface ICognitoGateway
     {

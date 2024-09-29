@@ -1,6 +1,7 @@
 using Controllers;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
+using Gateways.Cognito.Dtos.Request;
 using Gateways.Dtos.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
