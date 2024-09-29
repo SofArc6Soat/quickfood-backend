@@ -1,32 +1,18 @@
 ﻿using Core.Domain.Base;
 using Core.Domain.Notificacoes;
-using Domain.Entities;
+using Domain.ValueObjects;
 using Gateways;
 using Gateways.Dtos.Response;
 
 namespace UseCases
 {
-    public class UsuarioUseCase(IUsuarioGateway usuarioGateway, ICognitoGateway cognitoGateway, INotificador notificador) : BaseUseCase(notificador), IUsuarioUseCase
+    public class UsuarioUseCase(ICognitoGateway cognitoGateway, INotificador notificador) : BaseUseCase(notificador), IUsuarioUseCase
     {
-        public async Task<bool> CadastrarUsuarioAsync(Usuario usuario, string senha, CancellationToken cancellationToken)
-        {
-            ArgumentNullException.ThrowIfNull(usuario);
+        public async Task<TokenUsuario?> IdentificarFuncionarioAsync(string email, string senha, CancellationToken cancellationToken) =>
+            await cognitoGateway.IdentifiqueSeAsync(email, null, senha, cancellationToken);
 
-            if (usuarioGateway.VerificarUsuarioExistente(usuario.Id, usuario.Email, cancellationToken))
-            {
-                Notificar("Usuário já existente");
-                return false;
-            }
-
-            if (ExecutarValidacao(new ValidarUsuario(), usuario)
-                   && await usuarioGateway.CadastrarUsuarioAsync(usuario, senha, cancellationToken))
-            {
-                return true;
-            }
-
-            Notificar($"Ocorreu um erro ao cadastrar o usuario com o e-mail: {usuario.Email}");
-            return false;
-        }
+        public async Task<TokenUsuario?> IdentificarClienteCpfAsync(string cpf, string senha, CancellationToken cancellationToken) =>
+            await cognitoGateway.IdentifiqueSeAsync(null, cpf, senha, cancellationToken);
 
         public async Task<bool> ConfirmarEmailVerificacaoAsync(EmailVerificacao emailVerificacao, CancellationToken cancellationToken)
         {
@@ -42,35 +28,32 @@ namespace UseCases
             return false;
         }
 
-        public async Task<bool> SolicitarRecuperacaoSenhaAsync(SolicitarRecuperacaoSenha solicitarRecuperacaoSenha, CancellationToken cancellationToken)
+        public async Task<bool> SolicitarRecuperacaoSenhaAsync(RecuperacaoSenha recuperacaoSenha, CancellationToken cancellationToken)
         {
-            ArgumentNullException.ThrowIfNull(solicitarRecuperacaoSenha);
+            ArgumentNullException.ThrowIfNull(recuperacaoSenha);
 
-            if (ExecutarValidacao(new ValidarSolicitacaoRecuperacaoSenha(), solicitarRecuperacaoSenha)
-                   && await cognitoGateway.SolicitarRecuperacaoSenhaAsync(solicitarRecuperacaoSenha, cancellationToken))
+            if (ExecutarValidacao(new ValidarSolicitacaoRecuperacaoSenha(), recuperacaoSenha)
+                   && await cognitoGateway.SolicitarRecuperacaoSenhaAsync(recuperacaoSenha, cancellationToken))
             {
                 return true;
             }
 
-            Notificar($"Ocorreu um erro solicitar a recuperacao de senha do e-mail: {solicitarRecuperacaoSenha.Email}");
+            Notificar($"Ocorreu um erro solicitar a recuperacao de senha do e-mail: {recuperacaoSenha.Email}");
             return false;
         }
 
-        public async Task<bool> EfetuarResetSenhaAsync(ResetarSenha resetarSenha, CancellationToken cancellationToken)
+        public async Task<bool> EfetuarResetSenhaAsync(ResetSenha resetSenha, CancellationToken cancellationToken)
         {
-            ArgumentNullException.ThrowIfNull(resetarSenha);
+            ArgumentNullException.ThrowIfNull(resetSenha);
 
-            if (ExecutarValidacao(new ValidarResetSenha(), resetarSenha)
-                   && await cognitoGateway.EfetuarResetSenhaAsync(resetarSenha, cancellationToken))
+            if (ExecutarValidacao(new ValidarResetSenha(), resetSenha)
+                   && await cognitoGateway.EfetuarResetSenhaAsync(resetSenha, cancellationToken))
             {
                 return true;
             }
 
-            Notificar($"Ocorreu um erro efetuar o reset de senha do e-mail: {resetarSenha.Email}");
+            Notificar($"Ocorreu um erro efetuar o reset de senha do e-mail: {resetSenha.Email}");
             return false;
         }
-
-        public async Task<TokenUsuario?> IdentificarAdminAsync(string email, string senha, CancellationToken cancellationToken) =>
-            await cognitoGateway.IdentifiqueSe(email, null, senha, cancellationToken);
     }
 }

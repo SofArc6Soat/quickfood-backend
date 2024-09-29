@@ -27,8 +27,8 @@ namespace SmokeTests
                     // Adiciona o banco de dados in-memory para testes
                     services.AddInfraDependencyServices("TestConnectionString", useInMemoryDatabase: true);
 
-                    services.AddScoped<IClientesController, ClientesController>();
-                    services.AddScoped<IProdutosController, ProdutosController>();
+                    services.AddScoped<IClienteController, ClienteController>();
+                    services.AddScoped<IProdutoController, ProdutoController>();
                     services.AddScoped<IPedidoController, PedidoController>();
                     services.AddScoped<IPagamentoController, PagamentoController>();
                     services.AddScoped<IClienteGateway, ClienteGateway>();

@@ -12,7 +12,7 @@ namespace UseCases.DependencyInjection
             services.AddScoped<IClienteUseCase, ClienteUseCase>();
             services.AddScoped<IPedidoUseCase, PedidoUseCase>();
             services.AddScoped<IPagamentoUseCase, PagamentoUseCase>();
-            services.AddScoped<IUsuarioUseCase, UsuarioUseCase>();
+            services.AddScoped<IFuncionarioUseCase, FuncionarioUseCase>();
         }
     }
 }

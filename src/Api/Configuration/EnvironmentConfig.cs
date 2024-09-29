@@ -1,5 +1,8 @@
-﻿namespace Api.Configuration
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Api.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public static class EnvironmentConfig
     {
         public static Settings ConfigureEnvironment(this IServiceCollection services, IConfiguration configuration)
@@ -13,6 +16,7 @@
         }
     }
 
+    [ExcludeFromCodeCoverage]
     public record Settings
     {
         public ConnectionStrings ConnectionStrings { get; set; } = new ConnectionStrings();
@@ -20,11 +24,13 @@
         public CognitoSettings CognitoSettings { get; set; } = new CognitoSettings();
     }
 
+    [ExcludeFromCodeCoverage]
     public record ConnectionStrings
     {
         public string DefaultConnection { get; set; } = string.Empty;
     }
 
+    [ExcludeFromCodeCoverage]
     public class CognitoSettings : ICognitoSettings
     {
         public string ClientId { get; set; } = string.Empty;

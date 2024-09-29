@@ -1,4 +1,5 @@
-﻿using Core.Domain.Notificacoes;
+﻿using Amazon.CognitoIdentityProvider;
+using Core.Domain.Notificacoes;
 using Core.WebApi.Configurations;
 using Core.WebApi.GlobalErrorMiddleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -50,6 +51,8 @@ namespace Core.WebApi.DependencyInjection
                 .AddPolicy("ClienteRole", policy => policy.RequireRole("cliente"))
                 // Política para usuários que pertencem a "admin" ou "cliente"
                 .AddPolicy("AdminOrClienteRole", policy => policy.RequireRole("admin", "cliente"));
+
+            services.AddAWSService<IAmazonCognitoIdentityProvider>();
         }
 
         public static void UseApiDefautConfig(this IApplicationBuilder app)

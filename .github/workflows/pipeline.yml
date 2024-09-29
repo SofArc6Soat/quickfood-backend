@@ -151,9 +151,17 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore src/Api/Api.csproj
 
-      # Run unit tests
-      - name: Run unit tests
+      # Run unit tests Domain
+      - name: Run unit tests Domain
         run: dotnet test tests/Domain.Tests/Domain.Tests.csproj
+        
+    # Run unit tests Gateways
+      - name: Run unit tests Gateways
+        run: dotnet test tests/Gateways.Tests/Gateways.Tests.csproj
+        
+    # Run unit tests Infra
+      - name: Run unit tests Infra
+        run: dotnet test tests/Infra.Tests/Infra.Tests.csproj
 
   code_analysis_main:
     runs-on: ubuntu-latest

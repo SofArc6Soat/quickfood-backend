@@ -14,7 +14,7 @@ namespace Gateways.DependencyInjection
             services.AddScoped<IProdutoGateway, ProdutoGateway>();
             services.AddScoped<IPedidoGateway, PedidoGateway>();
             services.AddScoped<IPagamentoGateway, PagamentoGateway>();
-            services.AddScoped<IUsuarioGateway, UsuarioGateway>();
+            services.AddScoped<IFuncionarioGateway, FuncionarioGateway>();
 
             services.AddSingleton<ICognito>(new Cognito(clientId, clientSecret, userPoolId));
             services.AddScoped<ICognitoGateway, CognitoGateway>();

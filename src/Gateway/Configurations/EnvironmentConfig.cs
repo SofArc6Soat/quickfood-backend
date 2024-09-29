@@ -1,17 +1,13 @@
-﻿namespace Gateways.Configurations
-{
-    public class Cognito : ICognito
-    {
-        public Cognito(string clientId, string clientSecret, string userPoolId)
-        {
-            ClientId = clientId;
-            ClientSecret = clientSecret;
-            UserPoolId = userPoolId;
-        }
+﻿using System.Diagnostics.CodeAnalysis;
 
-        public string ClientId { get; set; }
-        public string ClientSecret { get; set; }
-        public string UserPoolId { get; set; }
+namespace Gateways.Configurations
+{
+    [ExcludeFromCodeCoverage]
+    public class Cognito(string clientId, string clientSecret, string userPoolId) : ICognito
+    {
+        public string ClientId { get; set; } = clientId;
+        public string ClientSecret { get; set; } = clientSecret;
+        public string UserPoolId { get; set; } = userPoolId;
     }
 
     public interface ICognito

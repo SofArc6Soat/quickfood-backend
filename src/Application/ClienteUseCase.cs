@@ -2,11 +2,10 @@
 using Core.Domain.Notificacoes;
 using Domain.Entities;
 using Gateways;
-using Gateways.Dtos.Response;
 
 namespace UseCases
 {
-    public class ClienteUseCase(IClienteGateway clientesGateway, ICognitoGateway cognitoGateway, INotificador notificador) : BaseUseCase(notificador), IClienteUseCase
+    public class ClienteUseCase(IClienteGateway clientesGateway, INotificador notificador) : BaseUseCase(notificador), IClienteUseCase
     {
         public async Task<bool> CadastrarClienteAsync(Cliente cliente, string senha, CancellationToken cancellationToken)
         {
@@ -24,7 +23,7 @@ namespace UseCases
                 return true;
             }
 
-            Notificar($"Ocorreu um erro ao cadastra o cliente com o e-mail: {cliente.Email}");
+            Notificar($"Ocorreu um erro ao cadastrar o cliente com o e-mail: {cliente.Email}");
             return false;
         }
 
@@ -32,19 +31,23 @@ namespace UseCases
         {
             ArgumentNullException.ThrowIfNull(cliente);
 
-            if (!await clientesGateway.VerificarClienteExistenteAsync(cliente.Id, cancellationToken))
+            var clienteExistente = await clientesGateway.VerificarClienteExistenteAsync(cliente.Id, cancellationToken);
+
+            if (clienteExistente is null)
             {
                 Notificar("Cliente inexistente");
                 return false;
             }
 
-            return ExecutarValidacao(new ValidarCliente(), cliente)
-                   && await clientesGateway.AtualizarClienteAsync(cliente, cancellationToken);
+            var clienteAualizar = new Cliente(clienteExistente.Id, cliente.Nome, clienteExistente.Email, clienteExistente.Cpf, cliente.Ativo);
+
+            return ExecutarValidacao(new ValidarCliente(), clienteAualizar)
+                   && await clientesGateway.AtualizarClienteAsync(clienteAualizar, cancellationToken);
         }
 
         public async Task<bool> DeletarClienteAsync(Guid id, CancellationToken cancellationToken)
         {
-            if (!await clientesGateway.VerificarClienteExistenteAsync(id, cancellationToken))
+            if (await clientesGateway.VerificarClienteExistenteAsync(id, cancellationToken) is null)
             {
                 Notificar("Cliente inexistente");
                 return false;
@@ -55,8 +58,5 @@ namespace UseCases
 
         public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken) =>
             await clientesGateway.ObterTodosClientesAsync(cancellationToken);
-
-        public async Task<TokenUsuario?> IdentificarClienteCpfAsync(string cpf, string senha, CancellationToken cancellationToken) =>
-            await cognitoGateway.IdentifiqueSe(null, cpf, senha, cancellationToken);
     }
 }

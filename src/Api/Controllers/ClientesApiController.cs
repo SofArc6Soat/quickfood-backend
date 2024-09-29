@@ -7,30 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "AdminRole")]
     [Route("clientes")]
-    public class ClientesApiController(IClientesController clientesController, INotificador notificador) : MainController(notificador)
+    public class ClientesApiController(IClienteController clienteController, INotificador notificador) : MainController(notificador)
     {
-        [Authorize(Policy = "AdminRole")]
         [HttpGet]
         public async Task<IActionResult> ObterTodosClientes(CancellationToken cancellationToken)
         {
-            var result = await clientesController.ObterTodosClientesAsync(cancellationToken);
+            var result = await clienteController.ObterTodosClientesAsync(cancellationToken);
 
             return CustomResponseGet(result);
-        }
-
-        [AllowAnonymous]
-        [HttpPost("identifique-se")]
-        public async Task<IActionResult> IdentificarClienteCpf(IdentifiqueSeRequestDto request, CancellationToken cancellationToken)
-        {
-            var result = await clientesController.IdentificarClienteCpfAsync(request.Cpf, request.Senha, cancellationToken);
-
-            request.Senha = "*******";
-
-            return result == null
-                ? CustomResponsePost($"clientes/identifique-se", request, false)
-                : CustomResponsePost($"clientes/identifique-se", result, true);
         }
 
         [AllowAnonymous]
@@ -42,7 +28,7 @@ namespace Api.Controllers
                 return ErrorBadRequestModelState(ModelState);
             }
 
-            var result = await clientesController.CadastrarClienteAsync(clienteRequestDto, cancellationToken);
+            var result = await clienteController.CadastrarClienteAsync(clienteRequestDto, cancellationToken);
 
             clienteRequestDto.Senha = "*******";
 
@@ -50,28 +36,27 @@ namespace Api.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> AtualizarCliente([FromRoute] Guid id, ClienteRequestDto clienteRequestDto, CancellationToken cancellationToken)
+        public async Task<IActionResult> AtualizarCliente([FromRoute] Guid id, ClienteAtualizarRequestDto clienteAtualizarRequestDto, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 return ErrorBadRequestModelState(ModelState);
             }
 
-            if (id != clienteRequestDto.Id)
+            if (id != clienteAtualizarRequestDto.Id)
             {
                 return ErrorBadRequestPutId();
             }
 
-            var result = await clientesController.AtualizarClienteAsync(clienteRequestDto, cancellationToken);
+            var result = await clienteController.AtualizarClienteAsync(clienteAtualizarRequestDto, cancellationToken);
 
-            return CustomResponsePutPatch(clienteRequestDto, result);
+            return CustomResponsePutPatch(clienteAtualizarRequestDto, result);
         }
 
-        [Authorize(Policy = "AdminRole")]
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeletarCliente([FromRoute] Guid id, CancellationToken cancellationToken)
         {
-            var result = await clientesController.DeletarClienteAsync(id, cancellationToken);
+            var result = await clienteController.DeletarClienteAsync(id, cancellationToken);
 
             return CustomResponseDelete(id, result);
         }

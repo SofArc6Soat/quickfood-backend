@@ -9,9 +9,9 @@ namespace Domain.Tests.TestHelpers
 
         public static Cliente CriarClienteValido() => new(_testGuid, "João Silva", "joao@teste.com", "63641502098", true);
 
-        public static Cliente CriarClienteComNomeInvalido() => new(_testGuid, null, "joao@teste.com", "63641502098", true);
+        public static Cliente CriarClienteComNomeInvalido() => new(_testGuid, "J", "joao@teste.com", "63641502098", true);
 
-        public static Cliente CriarClienteComCPFInvalido() => new(_testGuid, null, "joao@teste.com", "11111111111", true);
+        public static Cliente CriarClienteComCPFInvalido() => new(_testGuid, "J", "joao@teste.com", "11111111111", true);
 
         public static ClienteDb CriarClienteDbValido() => new()
         {

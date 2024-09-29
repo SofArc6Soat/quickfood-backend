@@ -1,13 +1,14 @@
-﻿using Amazon.CognitoIdentityProvider;
-using Api.Configuration;
+﻿using Api.Configuration;
 using Controllers.DependencyInjection;
 using Core.WebApi.Configurations;
 using Core.WebApi.DependencyInjection;
 using Gateways.DependencyInjection;
 using Infra.Context;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Api
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         private readonly IConfiguration _configuration;
@@ -41,9 +42,6 @@ namespace Api
 
             services.AddControllerDependencyServices();
             services.AddGatewayDependencyServices(settings.ConnectionStrings.DefaultConnection, settings.CognitoSettings.ClientId, settings.CognitoSettings.ClientSecret, settings.CognitoSettings.UserPoolId);
-
-            services.AddAWSService<IAmazonCognitoIdentityProvider>();
-
         }
 
         public static void Configure(IApplicationBuilder app, ApplicationDbContext context)

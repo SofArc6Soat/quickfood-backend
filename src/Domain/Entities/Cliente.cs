@@ -7,8 +7,8 @@ namespace Domain.Entities
     public class Cliente : Entity, IAggregateRoot
     {
         public string Nome { get; private set; }
-        public string Email { get; private set; }
-        public string Cpf { get; private set; }
+        public string Email { get; private set; } = string.Empty;
+        public string Cpf { get; private set; } = string.Empty;
         public bool Ativo { get; private set; }
 
         public Cliente(Guid id, string nome, string email, string cpf, bool ativo)
@@ -17,6 +17,13 @@ namespace Domain.Entities
             Nome = nome;
             Email = email;
             Cpf = cpf;
+            Ativo = ativo;
+        }
+
+        public Cliente(Guid id, string nome, bool ativo)
+        {
+            Id = id;
+            Nome = nome;
             Ativo = ativo;
         }
     }

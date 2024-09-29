@@ -4,7 +4,7 @@ using Infra.Repositories;
 
 namespace Gateways
 {
-    public class ClienteGateway(IClienteRepository clienteRepository, ICognitoGateway cognitoGateway) : IClienteGateway
+    public class ClienteGateway(IClienteRepository clienteRepository, IFuncionarioRepository funcionarioRepository, ICognitoGateway cognitoGateway) : IClienteGateway
     {
         public async Task<bool> CadastrarClienteAsync(Cliente cliente, string senha, CancellationToken cancellationToken)
         {
@@ -50,14 +50,27 @@ namespace Gateways
             var clienteExistente = clienteRepository.Find(e => e.Id == id || e.Cpf == cpf || e.Email == email, cancellationToken)
                                                      .FirstOrDefault(g => g.Id == id);
 
-            return clienteExistente is not null;
+            var funcionarioExistente = funcionarioRepository.Find(e => e.Email == email, cancellationToken)
+                                                     .FirstOrDefault(g => g.Id == id);
+
+            return clienteExistente is not null && funcionarioExistente is null;
         }
 
-        public async Task<bool> VerificarClienteExistenteAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<Cliente?> VerificarClienteExistenteAsync(Guid id, CancellationToken cancellationToken)
         {
             var clienteExistente = await clienteRepository.FindByIdAsync(id, cancellationToken);
 
-            return clienteExistente is not null;
+            if (clienteExistente is not null)
+            {
+                var funcionarioExistente = funcionarioRepository.Find(e => e.Email == clienteExistente.Email, cancellationToken)
+                                                     .FirstOrDefault(g => g.Id == id);
+
+                return clienteExistente is not null && funcionarioExistente is null
+                ? new(clienteExistente.Id, clienteExistente.Nome, clienteExistente.Email, clienteExistente.Cpf, clienteExistente.Ativo)
+                : null;
+            }
+
+            return null;
         }
 
         public async Task<IEnumerable<Cliente>> ObterTodosClientesAsync(CancellationToken cancellationToken)

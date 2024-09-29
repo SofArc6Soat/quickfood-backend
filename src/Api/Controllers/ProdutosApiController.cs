@@ -9,7 +9,7 @@ namespace Api.Controllers
 {
     [Authorize(Policy = "AdminRole")]
     [Route("produtos")]
-    public class ProdutosApiController(IProdutosController produtosController, INotificador notificador) : MainController(notificador)
+    public class ProdutosApiController(IProdutoController produtosController, INotificador notificador) : MainController(notificador)
     {
         [AllowAnonymous]
         [HttpGet]
