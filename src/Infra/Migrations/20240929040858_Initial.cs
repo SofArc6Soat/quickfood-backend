@@ -32,6 +32,21 @@ namespace Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Funcionarios",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(50)", nullable: false),
+                    Email = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Funcionarios", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Pedidos",
                 schema: "dbo",
                 columns: table => new
@@ -64,21 +79,6 @@ namespace Infra.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Produtos", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Usuarios",
-                schema: "dbo",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(50)", nullable: false),
-                    Email = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Usuarios", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -141,7 +141,7 @@ namespace Infra.Migrations
             migrationBuilder.InsertData(
                 schema: "dbo",
                 table: "Produtos",
-                columns: new[] { "Id", "Ativo", "Categoria", "Descricao", "Nome", "Preco" },
+                columns: ["Id", "Ativo", "Categoria", "Descricao", "Nome", "Preco"],
                 values: new object[,]
                 {
                     { new Guid("111cb598-2df6-41bf-b51b-d4e0f292bda3"), true, "Bebida", "350ml", "PEPSI LATA", 7m },
@@ -177,7 +177,14 @@ namespace Infra.Migrations
                 name: "IX_Clientes_Email_Cpf",
                 schema: "dbo",
                 table: "Clientes",
-                columns: new[] { "Email", "Cpf" },
+                columns: ["Email", "Cpf"],
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Funcionarios_Email",
+                schema: "dbo",
+                table: "Funcionarios",
+                column: "Email",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -191,13 +198,6 @@ namespace Infra.Migrations
                 schema: "dbo",
                 table: "PedidosItens",
                 column: "PedidoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_Email",
-                schema: "dbo",
-                table: "Usuarios",
-                column: "Email",
-                unique: true);
         }
 
         /// <inheritdoc />
@@ -205,6 +205,10 @@ namespace Infra.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Clientes",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Funcionarios",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -217,10 +221,6 @@ namespace Infra.Migrations
 
             migrationBuilder.DropTable(
                 name: "Produtos",
-                schema: "dbo");
-
-            migrationBuilder.DropTable(
-                name: "Usuarios",
                 schema: "dbo");
 
             migrationBuilder.DropTable(

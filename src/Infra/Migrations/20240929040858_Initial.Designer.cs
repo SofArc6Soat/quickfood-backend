@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240925040617_Initial")]
+    [Migration("20240929040858_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -76,6 +76,31 @@ namespace Infra.Migrations
                             Email = "maria@gmail.com",
                             Nome = "Maria"
                         });
+                });
+
+            modelBuilder.Entity("Infra.Dto.FuncionarioDb", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Funcionarios", "dbo");
                 });
 
             modelBuilder.Entity("Infra.Dto.PagamentoDb", b =>
@@ -313,31 +338,6 @@ namespace Infra.Migrations
                             Nome = "SORVETE DE CREME",
                             Preco = 12m
                         });
-                });
-
-            modelBuilder.Entity("Infra.Dto.UsuarioDb", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.ToTable("Usuarios", "dbo");
                 });
 
             modelBuilder.Entity("Infra.Dto.PagamentoDb", b =>
