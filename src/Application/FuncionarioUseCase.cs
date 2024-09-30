@@ -23,7 +23,7 @@ namespace UseCases
                 return true;
             }
 
-            Notificar($"Ocorreu um erro ao cadastrar o funcionario com o e-mail: {funcionario.Email}");
+            Notificar($"Ocorreu um erro ao cadastrar o funcionario com o e-mail: {funcionario.Email}, este e-mail já está sendo utilizado.");
             return false;
         }
     }

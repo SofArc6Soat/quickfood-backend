@@ -33,9 +33,6 @@ namespace Infra.Mappings
             builder.HasIndex(u => u.Cpf)
                    .IsUnique();
 
-            builder.HasIndex(u => new { u.Email, u.Cpf })
-                  .IsUnique();
-
             // Data
             builder.HasData(ClienteSeedData.GetSeedData());
         }

@@ -51,9 +51,6 @@ namespace Infra.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("Email", "Cpf")
-                        .IsUnique();
-
                     b.ToTable("Clientes", "dbo");
 
                     b.HasData(
@@ -62,7 +59,7 @@ namespace Infra.Migrations
                             Id = new Guid("efee2d79-ce89-479a-9667-04f57f9e2e5e"),
                             Ativo = true,
                             Cpf = "08062759016",
-                            Email = "joao@gmail.com",
+                            Email = "joao-teste@gmail.com",
                             Nome = "João"
                         },
                         new
@@ -70,7 +67,7 @@ namespace Infra.Migrations
                             Id = new Guid("fdff63d2-127f-49c5-854a-e47cae8cedb9"),
                             Ativo = true,
                             Cpf = "05827307084",
-                            Email = "maria@gmail.com",
+                            Email = "maria-teste@gmail.com",
                             Nome = "Maria"
                         });
                 });
@@ -98,6 +95,15 @@ namespace Infra.Migrations
                         .IsUnique();
 
                     b.ToTable("Funcionarios", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("34a86719-0082-4ef5-a620-35d55f076c31"),
+                            Ativo = true,
+                            Email = "sof.arc.6soat@gmail.com",
+                            Nome = "Mario"
+                        });
                 });
 
             modelBuilder.Entity("Infra.Dto.PagamentoDb", b =>

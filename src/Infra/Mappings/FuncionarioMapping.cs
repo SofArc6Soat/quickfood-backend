@@ -1,4 +1,5 @@
 ﻿using Infra.Dto;
+using Infra.Mappings.SeedData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Diagnostics.CodeAnalysis;
@@ -25,6 +26,9 @@ namespace Infra.Mappings
             // UK
             builder.HasIndex(u => u.Email)
                    .IsUnique();
+
+            // Data
+            builder.HasData(FuncionarioSeedData.GetSeedData());
         }
     }
 }

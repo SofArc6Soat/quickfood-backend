@@ -23,7 +23,7 @@ namespace UseCases
                 return true;
             }
 
-            Notificar($"Ocorreu um erro ao cadastrar o cliente com o e-mail: {cliente.Email}");
+            Notificar($"Ocorreu um erro ao cadastrar o cliente com o e-mail: {cliente.Email}, este e-mail já está sendo utilizado.");
             return false;
         }
 

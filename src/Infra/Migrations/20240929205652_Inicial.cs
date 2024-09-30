@@ -7,7 +7,7 @@
 namespace Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -134,14 +134,20 @@ namespace Infra.Migrations
                 columns: ["Id", "Ativo", "Cpf", "Email", "Nome"],
                 values: new object[,]
                 {
-                    { new Guid("efee2d79-ce89-479a-9667-04f57f9e2e5e"), true, "08062759016", "joao@gmail.com", "João" },
-                    { new Guid("fdff63d2-127f-49c5-854a-e47cae8cedb9"), true, "05827307084", "maria@gmail.com", "Maria" }
+                    { new Guid("efee2d79-ce89-479a-9667-04f57f9e2e5e"), true, "08062759016", "joao-teste@gmail.com", "João" },
+                    { new Guid("fdff63d2-127f-49c5-854a-e47cae8cedb9"), true, "05827307084", "maria-teste@gmail.com", "Maria" }
                 });
 
             migrationBuilder.InsertData(
                 schema: "dbo",
+                table: "Funcionarios",
+                columns: ["Id", "Ativo", "Email", "Nome"],
+                values: [new Guid("34a86719-0082-4ef5-a620-35d55f076c31"), true, "sof.arc.6soat@gmail.com", "Mario"]);
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
                 table: "Produtos",
-                columns: ["Id", "Ativo", "Categoria", "Descricao", "Nome", "Preco"],
+                columns: new[] { "Id", "Ativo", "Categoria", "Descricao", "Nome", "Preco" },
                 values: new object[,]
                 {
                     { new Guid("111cb598-2df6-41bf-b51b-d4e0f292bda3"), true, "Bebida", "350ml", "PEPSI LATA", 7m },
@@ -171,13 +177,6 @@ namespace Infra.Migrations
                 schema: "dbo",
                 table: "Clientes",
                 column: "Email",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Clientes_Email_Cpf",
-                schema: "dbo",
-                table: "Clientes",
-                columns: ["Email", "Cpf"],
                 unique: true);
 
             migrationBuilder.CreateIndex(

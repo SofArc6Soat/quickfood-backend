@@ -10,7 +10,7 @@ namespace Gateways.Cognito.DependencyInjection
         public static void AddGatewayCognitoDependencyServices(this IServiceCollection services, string clientId, string clientSecret, string userPoolId)
         {
             services.AddSingleton<ICognitoConfig>(new CognitoConfig(clientId, clientSecret, userPoolId));
-            services.AddScoped<ICognitoFactory, CognitoFactory>();
+            services.AddSingleton<ICognitoFactory>(new CognitoFactory(clientId, clientSecret, userPoolId));
             services.AddScoped<ICognitoGateway, CognitoGateway>();
         }
     }
