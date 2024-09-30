@@ -6,7 +6,5 @@ namespace Infra.Repositories
     public interface IClienteRepository : IRepositoryGeneric<ClienteDb>
     {
         Task<IEnumerable<ClienteDb>> ObterTodosClientesAsync(CancellationToken cancellationToken);
-
-        Task<ClienteDb?> IdentificarClienteCpfAsync(string cpf, CancellationToken cancellationToken);
     }
 }

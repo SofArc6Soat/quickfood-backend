@@ -2,10 +2,12 @@ using Controllers;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
 using Gateways.Dtos.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Authorize(Policy = "AdminRole")]
     [Route("pedidos")]
     public class PedidosApiController(IPedidoController pedidoController, INotificador notificador) : MainController(notificador)
     {
@@ -25,6 +27,7 @@ namespace Api.Controllers
             return CustomResponseGet(result);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> CadastrarPedido(PedidoRequestDto request, CancellationToken cancellationToken)
         {

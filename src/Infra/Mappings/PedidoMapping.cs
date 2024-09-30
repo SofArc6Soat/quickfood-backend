@@ -1,9 +1,11 @@
 ﻿using Infra.Dto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infra.Mappings
 {
+    [ExcludeFromCodeCoverage]
     public class PedidoMapping : IEntityTypeConfiguration<PedidoDb>
     {
         public void Configure(EntityTypeBuilder<PedidoDb> builder)

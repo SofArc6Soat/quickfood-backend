@@ -8,34 +8,33 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace SmokeTests;
-
-public class SmokeTestStartup : WebApplicationFactory<Startup>
+namespace SmokeTests
 {
-    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    public class SmokeTestStartup : WebApplicationFactory<Startup>
     {
-        builder.ConfigureServices(services =>
-        {
-            // Remove o contexto de banco de dados real
-            var descriptor = services.SingleOrDefault(
-                d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+        protected override void ConfigureWebHost(IWebHostBuilder builder) => builder.ConfigureServices(
+            services =>
+                {
+                    // Remove o contexto de banco de dados real
+                    var descriptor = services.SingleOrDefault(
+                        d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
 
-            if (descriptor != null)
-            {
-                services.Remove(descriptor);
-            }
+                    if (descriptor != null)
+                    {
+                        services.Remove(descriptor);
+                    }
 
-            // Adiciona o banco de dados in-memory para testes
-            services.AddInfraDependencyServices("TestConnectionString", useInMemoryDatabase: true);
+                    // Adiciona o banco de dados in-memory para testes
+                    services.AddInfraDependencyServices("TestConnectionString", useInMemoryDatabase: true);
 
-            services.AddScoped<IClientesController, ClientesController>();
-            services.AddScoped<IProdutosController, ProdutosController>();
-            services.AddScoped<IPedidoController, PedidoController>();
-            services.AddScoped<IPagamentoController, PagamentoController>();
-            services.AddScoped<IClienteGateway, ClienteGateway>();
-            services.AddScoped<IProdutoGateway, ProdutoGateway>();
-            services.AddScoped<IPedidoGateway, PedidoGateway>();
-            services.AddScoped<IPagamentoGateway, PagamentoGateway>();
-        });
+                    services.AddScoped<IClienteController, ClienteController>();
+                    services.AddScoped<IProdutoController, ProdutoController>();
+                    services.AddScoped<IPedidoController, PedidoController>();
+                    services.AddScoped<IPagamentoController, PagamentoController>();
+                    services.AddScoped<IClienteGateway, ClienteGateway>();
+                    services.AddScoped<IProdutoGateway, ProdutoGateway>();
+                    services.AddScoped<IPedidoGateway, PedidoGateway>();
+                    services.AddScoped<IPagamentoGateway, PagamentoGateway>();
+                });
     }
 }

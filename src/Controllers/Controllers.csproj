@@ -8,9 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\UseCases.csproj" />
-    <ProjectReference Include="..\Gateway\Gateways.csproj">
-      <TreatAsUsed>true</TreatAsUsed>
-    </ProjectReference>
+    <ProjectReference Include="..\Gateways\Gateways.csproj" />
   </ItemGroup>
 
 </Project>

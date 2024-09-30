@@ -16,7 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BuildingBlocks\Core.WebApi\Core.WebApi.csproj" />
     <ProjectReference Include="..\Controllers\Controllers.csproj" />
-    <ProjectReference Include="..\Gateway\Gateways.csproj" />
   </ItemGroup>
 
   <ItemGroup>

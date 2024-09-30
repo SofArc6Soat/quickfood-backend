@@ -28,7 +28,7 @@ namespace Domain.Entities
             DataPagamento = dataCriacao;
         }
 
-        public void AtribuirQrCodePix(string qrCodePix) => 
+        public void AtribuirQrCodePix(string qrCodePix) =>
             QrCodePix = qrCodePix;
 
         public void AlterarStatusPagamentoParaPendente() =>

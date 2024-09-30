@@ -17,12 +17,12 @@ namespace Infra.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Infra.Dto.ClienteDto", b =>
+            modelBuilder.Entity("Infra.Dto.ClienteDb", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,6 +36,7 @@ namespace Infra.Migrations
                         .HasColumnType("varchar(11)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("Nome")
@@ -48,12 +49,7 @@ namespace Infra.Migrations
                         .IsUnique();
 
                     b.HasIndex("Email")
-                        .IsUnique()
-                        .HasFilter("[Email] IS NOT NULL");
-
-                    b.HasIndex("Email", "Cpf")
-                        .IsUnique()
-                        .HasFilter("[Email] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Clientes", "dbo");
 
@@ -63,7 +59,7 @@ namespace Infra.Migrations
                             Id = new Guid("efee2d79-ce89-479a-9667-04f57f9e2e5e"),
                             Ativo = true,
                             Cpf = "08062759016",
-                            Email = "joao@gmail.com",
+                            Email = "joao-teste@gmail.com",
                             Nome = "João"
                         },
                         new
@@ -71,12 +67,46 @@ namespace Infra.Migrations
                             Id = new Guid("fdff63d2-127f-49c5-854a-e47cae8cedb9"),
                             Ativo = true,
                             Cpf = "05827307084",
-                            Email = "maria@gmail.com",
+                            Email = "maria-teste@gmail.com",
                             Nome = "Maria"
                         });
                 });
 
-            modelBuilder.Entity("Infra.Dto.PagamentoDto", b =>
+            modelBuilder.Entity("Infra.Dto.FuncionarioDb", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Funcionarios", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("34a86719-0082-4ef5-a620-35d55f076c31"),
+                            Ativo = true,
+                            Email = "sof.arc.6soat@gmail.com",
+                            Nome = "Mario"
+                        });
+                });
+
+            modelBuilder.Entity("Infra.Dto.PagamentoDb", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +137,7 @@ namespace Infra.Migrations
                     b.ToTable("Pagamentos", "dbo");
                 });
 
-            modelBuilder.Entity("Infra.Dto.PedidoDto", b =>
+            modelBuilder.Entity("Infra.Dto.PedidoDb", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -138,7 +168,7 @@ namespace Infra.Migrations
                     b.ToTable("Pedidos", "dbo");
                 });
 
-            modelBuilder.Entity("Infra.Dto.PedidoItemDto", b =>
+            modelBuilder.Entity("Infra.Dto.PedidoItemDb", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,7 +194,7 @@ namespace Infra.Migrations
                     b.ToTable("PedidosItens", "dbo");
                 });
 
-            modelBuilder.Entity("Infra.Dto.ProdutoDto", b =>
+            modelBuilder.Entity("Infra.Dto.ProdutoDb", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -313,9 +343,9 @@ namespace Infra.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Infra.Dto.PagamentoDto", b =>
+            modelBuilder.Entity("Infra.Dto.PagamentoDb", b =>
                 {
-                    b.HasOne("Infra.Dto.PedidoDto", "Pedido")
+                    b.HasOne("Infra.Dto.PedidoDb", "Pedido")
                         .WithMany()
                         .HasForeignKey("PedidoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -324,9 +354,9 @@ namespace Infra.Migrations
                     b.Navigation("Pedido");
                 });
 
-            modelBuilder.Entity("Infra.Dto.PedidoItemDto", b =>
+            modelBuilder.Entity("Infra.Dto.PedidoItemDb", b =>
                 {
-                    b.HasOne("Infra.Dto.PedidoDto", "Pedido")
+                    b.HasOne("Infra.Dto.PedidoDb", "Pedido")
                         .WithMany("Itens")
                         .HasForeignKey("PedidoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -335,7 +365,7 @@ namespace Infra.Migrations
                     b.Navigation("Pedido");
                 });
 
-            modelBuilder.Entity("Infra.Dto.PedidoDto", b =>
+            modelBuilder.Entity("Infra.Dto.PedidoDb", b =>
                 {
                     b.Navigation("Itens");
                 });

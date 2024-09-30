@@ -2,66 +2,64 @@
 using Domain.Tests.TestHelpers;
 using FluentValidation.TestHelper;
 
-namespace Domain.Tests.Validators;
-
-public class ValidarClienteTests
+namespace Domain.Tests.Validators
 {
-    private readonly ValidarCliente _validarCliente;
-
-    public ValidarClienteTests()
+    public class ValidarClienteTests
     {
-        _validarCliente = new ValidarCliente();
-    }
+        private readonly ValidarCliente _validarCliente;
 
-    [Fact]
-    public void DeveSerValido_QuandoInformacoesCorretas()
-    {
-        // Arrange
-        var cliente = ClienteFakeDataFactory.CriarClienteValido();
+        public ValidarClienteTests() => _validarCliente = new ValidarCliente();
 
-        // Act
-        var result = _validarCliente.TestValidate(cliente);
+        [Fact]
+        public void DeveSerValido_QuandoInformacoesCorretas()
+        {
+            // Arrange
+            var cliente = ClienteFakeDataFactory.CriarClienteValido();
 
-        // Assert
-        result.ShouldNotHaveAnyValidationErrors();
-    }
+            // Act
+            var result = _validarCliente.TestValidate(cliente);
 
-    [Fact]
-    public void DeveSerInvalido_QuandoNomeInvalido()
-    {
-        // Arrange
-        var cliente = ClienteFakeDataFactory.CriarClienteComNomeInvalido();
+            // Assert
+            result.ShouldNotHaveAnyValidationErrors();
+        }
 
-        // Act
-        var result = _validarCliente.TestValidate(cliente);
+        [Fact]
+        public void DeveSerInvalido_QuandoNomeInvalido()
+        {
+            // Arrange
+            var cliente = ClienteFakeDataFactory.CriarClienteComNomeInvalido();
 
-        // Assert
-        result.ShouldHaveValidationErrorFor(c => c.Nome);
-    }
+            // Act
+            var result = _validarCliente.TestValidate(cliente);
 
-    [Fact]
-    public void DeveSerInvalido_QuandoCpfInvalido()
-    {
-        // Arrange
-        var cliente = new Cliente(Guid.NewGuid(), "João Silva", "joao@teste.com", "12345678900", true);
+            // Assert
+            result.ShouldHaveValidationErrorFor(c => c.Nome);
+        }
 
-        // Act
-        var result = _validarCliente.TestValidate(cliente);
+        [Fact]
+        public void DeveSerInvalido_QuandoCpfInvalido()
+        {
+            // Arrange
+            var cliente = new Cliente(Guid.NewGuid(), "João Silva", "joao@teste.com", "12345678900", true);
 
-        // Assert
-        result.ShouldHaveValidationErrorFor(c => c.Cpf);
-    }
+            // Act
+            var result = _validarCliente.TestValidate(cliente);
 
-    [Fact]
-    public void DeveSerInvalido_QuandoCpfTemDigitosRepetidos()
-    {
-        // Arrange
-        var cliente = new Cliente(Guid.NewGuid(), "João Silva", "joao@teste.com", "11111111111", true);
+            // Assert
+            result.ShouldHaveValidationErrorFor(c => c.Cpf);
+        }
 
-        // Act
-        var result = _validarCliente.TestValidate(cliente);
+        [Fact]
+        public void DeveSerInvalido_QuandoCpfTemDigitosRepetidos()
+        {
+            // Arrange
+            var cliente = new Cliente(Guid.NewGuid(), "João Silva", "joao@teste.com", "11111111111", true);
 
-        // Assert
-        result.ShouldHaveValidationErrorFor(c => c.Cpf);
+            // Act
+            var result = _validarCliente.TestValidate(cliente);
+
+            // Assert
+            result.ShouldHaveValidationErrorFor(c => c.Cpf);
+        }
     }
 }

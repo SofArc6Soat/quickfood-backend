@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d6992d1a-1bec-41e1-b83f-d4e7d941716c",
+		"_postman_id": "2d4fa941-e147-4912-8458-c8ed53402072",
 		"name": "API QuickFood",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "28727875"
@@ -9,307 +9,6 @@
 		{
 			"name": "clientes",
 			"item": [
-				{
-					"name": "identifique-se",
-					"item": [
-						{
-							"name": "/clientes/identifique-se",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/clientes/identifique-se?Cpf=27406935323",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"clientes",
-										"identifique-se"
-									],
-									"query": [
-										{
-											"key": "Cpf",
-											"value": "27406935323",
-											"description": "(Required) "
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "OK",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/clientes/identifique-se?Cpf=<string>",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"clientes",
-												"identifique-se"
-											],
-											"query": [
-												{
-													"key": "Cpf",
-													"value": "<string>",
-													"description": "(Required) "
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Created",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/clientes/identifique-se?Cpf=<string>",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"clientes",
-												"identifique-se"
-											],
-											"query": [
-												{
-													"key": "Cpf",
-													"value": "<string>",
-													"description": "(Required) "
-												}
-											]
-										}
-									},
-									"status": "Created",
-									"code": 201,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "No Content",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/clientes/identifique-se?Cpf=<string>",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"clientes",
-												"identifique-se"
-											],
-											"query": [
-												{
-													"key": "Cpf",
-													"value": "<string>",
-													"description": "(Required) "
-												}
-											]
-										}
-									},
-									"status": "No Content",
-									"code": 204,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Bad Request",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/clientes/identifique-se?Cpf=<string>",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"clientes",
-												"identifique-se"
-											],
-											"query": [
-												{
-													"key": "Cpf",
-													"value": "<string>",
-													"description": "(Required) "
-												}
-											]
-										}
-									},
-									"status": "Bad Request",
-									"code": 400,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Unauthorized",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/clientes/identifique-se?Cpf=<string>",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"clientes",
-												"identifique-se"
-											],
-											"query": [
-												{
-													"key": "Cpf",
-													"value": "<string>",
-													"description": "(Required) "
-												}
-											]
-										}
-									},
-									"status": "Unauthorized",
-									"code": 401,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Forbidden",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/clientes/identifique-se?Cpf=<string>",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"clientes",
-												"identifique-se"
-											],
-											"query": [
-												{
-													"key": "Cpf",
-													"value": "<string>",
-													"description": "(Required) "
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Not Found",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/clientes/identifique-se?Cpf=<string>",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"clientes",
-												"identifique-se"
-											],
-											"query": [
-												{
-													"key": "Cpf",
-													"value": "<string>",
-													"description": "(Required) "
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Internal Server Error",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/clientes/identifique-se?Cpf=<string>",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"clientes",
-												"identifique-se"
-											],
-											"query": [
-												{
-													"key": "Cpf",
-													"value": "<string>",
-													"description": "(Required) "
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Service Unavailable",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{baseUrl}}/clientes/identifique-se?Cpf=<string>",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"clientes",
-												"identifique-se"
-											],
-											"query": [
-												{
-													"key": "Cpf",
-													"value": "<string>",
-													"description": "(Required) "
-												}
-											]
-										}
-									},
-									"status": "Service Unavailable",
-									"code": 503,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						}
-					]
-				},
 				{
 					"name": "{id}",
 					"item": [
@@ -325,7 +24,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": true,\n  \"cpf\": \"27406935323\",\n  \"id\": \"988ed58d-ce28-4c14-bf61-6a719fb50b96\",\n  \"nome\": \"Ana Beatriz\",\n  \"email\": \"ana.b@gmail.com\"\n}",
+									"raw": "{\n  \"id\": \"9b8a5a38-93b7-41de-960a-638fea3c8d63\",\n  \"nome\": \"Ricardo1\",\n  \"email\": \"ricardo@example.com\",\n  \"cpf\": \"45605579509\",\n  \"senha\": \"Q123@tyu\",\n  \"ativo\": true\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -345,7 +44,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "988ed58d-ce28-4c14-bf61-6a719fb50b96",
+											"value": "9b8a5a38-93b7-41de-960a-638fea3c8d63",
 											"description": "(Required) "
 										}
 									]
@@ -360,11 +59,16 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -403,11 +107,16 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -446,11 +155,16 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -489,11 +203,16 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -532,11 +251,16 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -575,11 +299,16 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -618,11 +347,16 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -661,11 +395,16 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -704,11 +443,16 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -758,7 +502,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "988ed58d-ce28-4c14-bf61-6a719fb50b96",
+											"value": "9b8a5a38-93b7-41de-960a-638fea3c8d63",
 											"description": "(Required) "
 										}
 									]
@@ -769,7 +513,13 @@
 									"name": "OK",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/clientes/:id",
 											"host": [
@@ -797,7 +547,13 @@
 									"name": "Created",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/clientes/:id",
 											"host": [
@@ -825,7 +581,13 @@
 									"name": "No Content",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/clientes/:id",
 											"host": [
@@ -853,7 +615,13 @@
 									"name": "Bad Request",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/clientes/:id",
 											"host": [
@@ -881,7 +649,13 @@
 									"name": "Unauthorized",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/clientes/:id",
 											"host": [
@@ -909,7 +683,13 @@
 									"name": "Forbidden",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/clientes/:id",
 											"host": [
@@ -937,7 +717,13 @@
 									"name": "Not Found",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/clientes/:id",
 											"host": [
@@ -965,7 +751,13 @@
 									"name": "Internal Server Error",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/clientes/:id",
 											"host": [
@@ -993,7 +785,13 @@
 									"name": "Service Unavailable",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/clientes/:id",
 											"host": [
@@ -1041,7 +839,13 @@
 							"name": "OK",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/clientes",
 									"host": [
@@ -1063,7 +867,13 @@
 							"name": "Created",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/clientes",
 									"host": [
@@ -1085,7 +895,13 @@
 							"name": "No Content",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/clientes",
 									"host": [
@@ -1107,7 +923,13 @@
 							"name": "Bad Request",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/clientes",
 									"host": [
@@ -1129,7 +951,13 @@
 							"name": "Unauthorized",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/clientes",
 									"host": [
@@ -1151,7 +979,13 @@
 							"name": "Forbidden",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/clientes",
 									"host": [
@@ -1173,7 +1007,13 @@
 							"name": "Not Found",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/clientes",
 									"host": [
@@ -1195,7 +1035,13 @@
 							"name": "Internal Server Error",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/clientes",
 									"host": [
@@ -1217,7 +1063,13 @@
 							"name": "Service Unavailable",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/clientes",
 									"host": [
@@ -1249,7 +1101,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"ativo\": true,\n  \"cpf\": \"27406935323\",\n  \"id\": \"988ed58d-ce28-4c14-bf61-6a719fb50b96\",\n  \"nome\": \"Ana B\",\n  \"email\": \"ana.b@gmail.com\"\n}",
+							"raw": "{\n  \"id\": \"9b8a5a38-93b7-41de-960a-638fea3c8d63\",\n  \"nome\": \"Ricardo\",\n  \"email\": \"ricardo@example.com\",\n  \"cpf\": \"45605579509\",\n  \"senha\": \"Q123@tyu\",\n  \"ativo\": true\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -1276,11 +1128,16 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -1313,11 +1170,16 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -1350,11 +1212,16 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -1387,11 +1254,16 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -1424,11 +1296,16 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -1461,11 +1338,16 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -1498,11 +1380,16 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -1535,11 +1422,16 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -1572,11 +1464,16 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"cpf\": \"<string>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -1591,6 +1488,444 @@
 									],
 									"path": [
 										"clientes"
+									]
+								}
+							},
+							"status": "Service Unavailable",
+							"code": 503,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "funcionarios",
+			"item": [
+				{
+					"name": "/funcionarios",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"8a2ce816-0aee-4aa9-9f90-2ee1c48d6127\",\n  \"nome\": \"Rafael\",\n  \"email\": \"rafael@example.com\",\n  \"senha\": \"Z@qaz369\",\n  \"ativo\": true\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/funcionarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/funcionarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"funcionarios"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/funcionarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"funcionarios"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "No Content",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/funcionarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"funcionarios"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/funcionarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"funcionarios"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/funcionarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"funcionarios"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/funcionarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"funcionarios"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/funcionarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"funcionarios"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/funcionarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"funcionarios"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Service Unavailable",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ativo\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"id\": \"<uuid>\",\n  \"nome\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/funcionarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"funcionarios"
 									]
 								}
 							},
@@ -1628,7 +1963,7 @@
 									"variable": [
 										{
 											"key": "pedidoId",
-											"value": "be5f2ed1-40dc-4fa0-8ee1-5bb0bf15e966",
+											"value": "BFC76499-FE3D-4AEF-82E5-C367CC92F33A",
 											"description": "(Required) "
 										}
 									]
@@ -1639,7 +1974,13 @@
 									"name": "OK",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
 											"host": [
@@ -1667,7 +2008,13 @@
 									"name": "Created",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
 											"host": [
@@ -1695,7 +2042,13 @@
 									"name": "No Content",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
 											"host": [
@@ -1723,7 +2076,13 @@
 									"name": "Bad Request",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
 											"host": [
@@ -1751,7 +2110,13 @@
 									"name": "Unauthorized",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
 											"host": [
@@ -1779,7 +2144,13 @@
 									"name": "Forbidden",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
 											"host": [
@@ -1807,7 +2178,13 @@
 									"name": "Not Found",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
 											"host": [
@@ -1835,7 +2212,13 @@
 									"name": "Internal Server Error",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
 											"host": [
@@ -1863,7 +2246,13 @@
 									"name": "Service Unavailable",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pagamentos/:pedidoId",
 											"host": [
@@ -1915,7 +2304,7 @@
 											"variable": [
 												{
 													"key": "pedidoId",
-													"value": "be5f2ed1-40dc-4fa0-8ee1-5bb0bf15e966",
+													"value": "bfc76499-fe3d-4aef-82e5-c367cc92f33a",
 													"description": "(Required) "
 												}
 											]
@@ -1926,7 +2315,13 @@
 											"name": "OK",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
@@ -1955,7 +2350,13 @@
 											"name": "Created",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
@@ -1984,7 +2385,13 @@
 											"name": "No Content",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
@@ -2013,7 +2420,13 @@
 											"name": "Bad Request",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
@@ -2042,7 +2455,13 @@
 											"name": "Unauthorized",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
@@ -2071,7 +2490,13 @@
 											"name": "Forbidden",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
@@ -2100,7 +2525,13 @@
 											"name": "Not Found",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
@@ -2129,7 +2560,13 @@
 											"name": "Internal Server Error",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
@@ -2158,7 +2595,13 @@
 											"name": "Service Unavailable",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/checkout/:pedidoId",
 													"host": [
@@ -2213,7 +2656,7 @@
 											"variable": [
 												{
 													"key": "pedidoId",
-													"value": "be5f2ed1-40dc-4fa0-8ee1-5bb0bf15e966",
+													"value": "BFC76499-FE3D-4AEF-82E5-C367CC92F33A",
 													"description": "(Required) "
 												}
 											]
@@ -2224,7 +2667,13 @@
 											"name": "OK",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
 													"host": [
@@ -2253,7 +2702,13 @@
 											"name": "Created",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
 													"host": [
@@ -2282,7 +2737,13 @@
 											"name": "No Content",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
 													"host": [
@@ -2311,7 +2772,13 @@
 											"name": "Bad Request",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
 													"host": [
@@ -2340,7 +2807,13 @@
 											"name": "Unauthorized",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
 													"host": [
@@ -2369,7 +2842,13 @@
 											"name": "Forbidden",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
 													"host": [
@@ -2398,7 +2877,13 @@
 											"name": "Not Found",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
 													"host": [
@@ -2427,7 +2912,13 @@
 											"name": "Internal Server Error",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
 													"host": [
@@ -2456,7 +2947,13 @@
 											"name": "Service Unavailable",
 											"originalRequest": {
 												"method": "POST",
-												"header": [],
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
 												"url": {
 													"raw": "{{baseUrl}}/pagamentos/notificacoes/:pedidoId",
 													"host": [
@@ -2516,7 +3013,13 @@
 									"name": "OK",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pedidos/ordenados",
 											"host": [
@@ -2539,7 +3042,13 @@
 									"name": "Created",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pedidos/ordenados",
 											"host": [
@@ -2562,7 +3071,13 @@
 									"name": "No Content",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pedidos/ordenados",
 											"host": [
@@ -2585,7 +3100,13 @@
 									"name": "Bad Request",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pedidos/ordenados",
 											"host": [
@@ -2608,7 +3129,13 @@
 									"name": "Unauthorized",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pedidos/ordenados",
 											"host": [
@@ -2631,7 +3158,13 @@
 									"name": "Forbidden",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pedidos/ordenados",
 											"host": [
@@ -2654,7 +3187,13 @@
 									"name": "Not Found",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pedidos/ordenados",
 											"host": [
@@ -2677,7 +3216,13 @@
 									"name": "Internal Server Error",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pedidos/ordenados",
 											"host": [
@@ -2700,7 +3245,13 @@
 									"name": "Service Unavailable",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/pedidos/ordenados",
 											"host": [
@@ -2762,7 +3313,7 @@
 											"variable": [
 												{
 													"key": "pedidoId",
-													"value": "be5f2ed1-40dc-4fa0-8ee1-5bb0bf15e966",
+													"value": "BFC76499-FE3D-4AEF-82E5-C367CC92F33A",
 													"description": "(Required) "
 												}
 											]
@@ -2777,6 +3328,11 @@
 													{
 														"key": "Content-Type",
 														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
 													}
 												],
 												"body": {
@@ -2821,6 +3377,11 @@
 													{
 														"key": "Content-Type",
 														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
 													}
 												],
 												"body": {
@@ -2865,6 +3426,11 @@
 													{
 														"key": "Content-Type",
 														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
 													}
 												],
 												"body": {
@@ -2909,6 +3475,11 @@
 													{
 														"key": "Content-Type",
 														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
 													}
 												],
 												"body": {
@@ -2953,6 +3524,11 @@
 													{
 														"key": "Content-Type",
 														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
 													}
 												],
 												"body": {
@@ -2997,6 +3573,11 @@
 													{
 														"key": "Content-Type",
 														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
 													}
 												],
 												"body": {
@@ -3041,6 +3622,11 @@
 													{
 														"key": "Content-Type",
 														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
 													}
 												],
 												"body": {
@@ -3085,6 +3671,11 @@
 													{
 														"key": "Content-Type",
 														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
 													}
 												],
 												"body": {
@@ -3129,6 +3720,11 @@
 													{
 														"key": "Content-Type",
 														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
 													}
 												],
 												"body": {
@@ -3191,7 +3787,13 @@
 							"name": "OK",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/pedidos",
 									"host": [
@@ -3213,7 +3815,13 @@
 							"name": "Created",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/pedidos",
 									"host": [
@@ -3235,7 +3843,13 @@
 							"name": "No Content",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/pedidos",
 									"host": [
@@ -3257,7 +3871,13 @@
 							"name": "Bad Request",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/pedidos",
 									"host": [
@@ -3279,7 +3899,13 @@
 							"name": "Unauthorized",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/pedidos",
 									"host": [
@@ -3301,7 +3927,13 @@
 							"name": "Forbidden",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/pedidos",
 									"host": [
@@ -3323,7 +3955,13 @@
 							"name": "Not Found",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/pedidos",
 									"host": [
@@ -3345,7 +3983,13 @@
 							"name": "Internal Server Error",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/pedidos",
 									"host": [
@@ -3367,7 +4011,13 @@
 							"name": "Service Unavailable",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/pedidos",
 									"host": [
@@ -3399,7 +4049,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"items\": [\n    {\n      \"produtoId\": \"3de0c5e7-787b-4885-8ec8-020866971d3b\",\n      \"quantidade\": 1\n    },\n    {\n      \"produtoId\": \"efee2d79-ce89-479a-9667-04f57f9e2e5e\",\n      \"quantidade\": 1\n    }\n  ],\n  \"pedidoId\": \"be5f2ed1-40dc-4fa0-8ee1-5bb0bf15e966\",\n  \"clienteId\": \"efee2d79-ce89-479a-9667-04f57f9e2e5e\"\n}",
+							"raw": "{\n  \"items\": [\n    {\n      \"produtoId\": \"EFEE2D79-CE89-479A-9667-04F57F9E2E5E\",\n      \"quantidade\": 1\n    },\n    {\n      \"produtoId\": \"C0EAB3DC-2DDF-4DDE-A64F-392F2412201F\",\n      \"quantidade\": 1\n    }\n  ],\n  \"pedidoId\": \"bfc76499-fe3d-4aef-82e5-c367cc92f33a\",\n  \"clienteId\": \"EFEE2D79-CE89-479A-9667-04F57F9E2E5E\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -3426,6 +4076,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -3463,6 +4118,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -3500,6 +4160,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -3537,6 +4202,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -3574,6 +4244,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -3611,6 +4286,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -3648,6 +4328,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -3685,6 +4370,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -3722,6 +4412,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -3767,7 +4462,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/produtos/categoria?categoria=Sobremesa",
+									"raw": "{{baseUrl}}/produtos/categoria?categoria=Lanche",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -3778,7 +4473,7 @@
 									"query": [
 										{
 											"key": "categoria",
-											"value": "Sobremesa"
+											"value": "Lanche"
 										}
 									]
 								}
@@ -3788,7 +4483,13 @@
 									"name": "OK",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
@@ -3817,7 +4518,13 @@
 									"name": "Created",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
@@ -3846,7 +4553,13 @@
 									"name": "No Content",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
@@ -3875,7 +4588,13 @@
 									"name": "Bad Request",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
@@ -3904,7 +4623,13 @@
 									"name": "Unauthorized",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
@@ -3933,7 +4658,13 @@
 									"name": "Forbidden",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
@@ -3962,7 +4693,13 @@
 									"name": "Not Found",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
@@ -3991,7 +4728,13 @@
 									"name": "Internal Server Error",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
@@ -4020,7 +4763,13 @@
 									"name": "Service Unavailable",
 									"originalRequest": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/categoria?categoria=<string>",
 											"host": [
@@ -4064,7 +4813,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ativo\": true,\n  \"categoria\": \"Sobremesa\",\n  \"descricao\": \"Chocolate - M&M\",\n  \"id\": \"bec19be4-43ca-4d9c-8d4e-4dac18066a02\",\n  \"nome\": \"M&M\",\n  \"preco\": \"4.00\"\n}",
+									"raw": "{\n  \"id\": \"a1742aa6-fb35-45f6-9934-2fd3e8176e1d\",\n  \"nome\": \"Suco de Laranja\",\n  \"descricao\": \"Suco Natural\",\n  \"preco\": 10,\n  \"ativo\": true,\n  \"categoria\": \"Bebida\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -4084,7 +4833,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "bec19be4-43ca-4d9c-8d4e-4dac18066a02",
+											"value": "a1742aa6-fb35-45f6-9934-2fd3e8176e1d",
 											"description": "(Required) "
 										}
 									]
@@ -4099,6 +4848,11 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
@@ -4142,6 +4896,11 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
@@ -4185,6 +4944,11 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
@@ -4228,6 +4992,11 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
@@ -4271,6 +5040,11 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
@@ -4314,6 +5088,11 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
@@ -4357,6 +5136,11 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
@@ -4400,6 +5184,11 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
@@ -4443,6 +5232,11 @@
 											{
 												"key": "Content-Type",
 												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
 											}
 										],
 										"body": {
@@ -4497,7 +5291,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "bec19be4-43ca-4d9c-8d4e-4dac18066a02",
+											"value": "a1742aa6-fb35-45f6-9934-2fd3e8176e1d",
 											"description": "(Required) "
 										}
 									]
@@ -4508,7 +5302,13 @@
 									"name": "OK",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/:id",
 											"host": [
@@ -4536,7 +5336,13 @@
 									"name": "Created",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/:id",
 											"host": [
@@ -4564,7 +5370,13 @@
 									"name": "No Content",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/:id",
 											"host": [
@@ -4592,7 +5404,13 @@
 									"name": "Bad Request",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/:id",
 											"host": [
@@ -4620,7 +5438,13 @@
 									"name": "Unauthorized",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/:id",
 											"host": [
@@ -4648,7 +5472,13 @@
 									"name": "Forbidden",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/:id",
 											"host": [
@@ -4676,7 +5506,13 @@
 									"name": "Not Found",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/:id",
 											"host": [
@@ -4704,7 +5540,13 @@
 									"name": "Internal Server Error",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/:id",
 											"host": [
@@ -4732,7 +5574,13 @@
 									"name": "Service Unavailable",
 									"originalRequest": {
 										"method": "DELETE",
-										"header": [],
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
 										"url": {
 											"raw": "{{baseUrl}}/produtos/:id",
 											"host": [
@@ -4780,7 +5628,13 @@
 							"name": "OK",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/produtos",
 									"host": [
@@ -4802,7 +5656,13 @@
 							"name": "Created",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/produtos",
 									"host": [
@@ -4824,7 +5684,13 @@
 							"name": "No Content",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/produtos",
 									"host": [
@@ -4846,7 +5712,13 @@
 							"name": "Bad Request",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/produtos",
 									"host": [
@@ -4868,7 +5740,13 @@
 							"name": "Unauthorized",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/produtos",
 									"host": [
@@ -4890,7 +5768,13 @@
 							"name": "Forbidden",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/produtos",
 									"host": [
@@ -4912,7 +5796,13 @@
 							"name": "Not Found",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/produtos",
 									"host": [
@@ -4934,7 +5824,13 @@
 							"name": "Internal Server Error",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/produtos",
 									"host": [
@@ -4956,7 +5852,13 @@
 							"name": "Service Unavailable",
 							"originalRequest": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
 								"url": {
 									"raw": "{{baseUrl}}/produtos",
 									"host": [
@@ -4988,7 +5890,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"ativo\": true,\n  \"categoria\": \"Sobremesa\",\n  \"descricao\": \"Chocolate - M&M\",\n  \"id\": \"bec19be4-43ca-4d9c-8d4e-4dac18066a02\",\n  \"nome\": \"M&M\",\n  \"preco\": \"2.00\"\n}",
+							"raw": "{\n  \"id\": \"a1742aa6-fb35-45f6-9934-2fd3e8176e1d\",\n  \"nome\": \"Suco de Laranja\",\n  \"descricao\": \"Suco Natural\",\n  \"preco\": 12,\n  \"ativo\": true,\n  \"categoria\": \"Bebida\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -5015,6 +5917,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -5052,6 +5959,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -5089,6 +6001,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -5126,6 +6043,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -5163,6 +6085,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -5200,6 +6127,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -5237,6 +6169,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -5274,6 +6211,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -5311,6 +6253,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
 									}
 								],
 								"body": {
@@ -5343,8 +6290,2198 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "usuarios",
+			"item": [
+				{
+					"name": "cliente",
+					"item": [
+						{
+							"name": "identifique-se",
+							"item": [
+								{
+									"name": "/usuarios/cliente/identifique-se",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/cliente/identifique-se",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"cliente",
+												"identifique-se"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"cpf\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/cliente/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"cliente",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Created",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"cpf\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/cliente/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"cliente",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"cpf\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/cliente/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"cliente",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"cpf\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/cliente/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"cliente",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"cpf\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/cliente/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"cliente",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Forbidden",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"cpf\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/cliente/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"cliente",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"cpf\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/cliente/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"cliente",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"cpf\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/cliente/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"cliente",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Service Unavailable",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"cpf\": \"<string>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/cliente/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"cliente",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Service Unavailable",
+											"code": 503,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "funcionario",
+					"item": [
+						{
+							"name": "identifique-se",
+							"item": [
+								{
+									"name": "/usuarios/funcionario/identifique-se",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\",\n  \"senha\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/funcionario/identifique-se",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"funcionario",
+												"identifique-se"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<email>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/funcionario/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"funcionario",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Created",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<email>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/funcionario/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"funcionario",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<email>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/funcionario/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"funcionario",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<email>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/funcionario/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"funcionario",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<email>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/funcionario/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"funcionario",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Forbidden",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<email>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/funcionario/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"funcionario",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<email>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/funcionario/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"funcionario",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<email>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/funcionario/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"funcionario",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Service Unavailable",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<email>\",\n  \"senha\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/usuarios/funcionario/identifique-se",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"usuarios",
+														"funcionario",
+														"identifique-se"
+													]
+												}
+											},
+											"status": "Service Unavailable",
+											"code": 503,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "email-verificacao:confirmar",
+					"item": [
+						{
+							"name": "/usuarios/email-verificacao:confirmar",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/usuarios/email-verificacao:confirmar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios",
+										"email-verificacao:confirmar"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/email-verificacao:confirmar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"email-verificacao:confirmar"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/email-verificacao:confirmar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"email-verificacao:confirmar"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "No Content",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/email-verificacao:confirmar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"email-verificacao:confirmar"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/email-verificacao:confirmar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"email-verificacao:confirmar"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/email-verificacao:confirmar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"email-verificacao:confirmar"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/email-verificacao:confirmar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"email-verificacao:confirmar"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/email-verificacao:confirmar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"email-verificacao:confirmar"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/email-verificacao:confirmar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"email-verificacao:confirmar"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Service Unavailable",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/email-verificacao:confirmar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"email-verificacao:confirmar"
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "esquecia-senha:solicitar",
+					"item": [
+						{
+							"name": "/usuarios/esquecia-senha:solicitar",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"<email>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/usuarios/esquecia-senha:solicitar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios",
+										"esquecia-senha:solicitar"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:solicitar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:solicitar"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:solicitar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:solicitar"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "No Content",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:solicitar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:solicitar"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:solicitar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:solicitar"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:solicitar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:solicitar"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:solicitar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:solicitar"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:solicitar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:solicitar"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:solicitar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:solicitar"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Service Unavailable",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:solicitar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:solicitar"
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "esquecia-senha:resetar",
+					"item": [
+						{
+							"name": "/usuarios/esquecia-senha:resetar",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\",\n  \"novaSenha\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/usuarios/esquecia-senha:resetar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios",
+										"esquecia-senha:resetar"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\",\n  \"novaSenha\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:resetar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:resetar"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\",\n  \"novaSenha\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:resetar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:resetar"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "No Content",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\",\n  \"novaSenha\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:resetar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:resetar"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\",\n  \"novaSenha\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:resetar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:resetar"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\",\n  \"novaSenha\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:resetar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:resetar"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\",\n  \"novaSenha\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:resetar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:resetar"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\",\n  \"novaSenha\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:resetar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:resetar"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\",\n  \"novaSenha\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:resetar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:resetar"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Service Unavailable",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"codigoVerificacao\": \"<string>\",\n  \"email\": \"<email>\",\n  \"novaSenha\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/usuarios/esquecia-senha:resetar",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"usuarios",
+												"esquecia-senha:resetar"
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJraWQiOiJ3QlpDZmhsTUo5YUhDaVdkWENHYUpkRURnbHBhYmF5S0pqZkJJVjVIZWZnPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhNDM4ZjRjOC1mMDkxLTcwNDgtM2Y4NC0xMjI0YTdlODY1YjciLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80Q0VUaDVBQTUiLCJjbGllbnRfaWQiOiI3Z202ZHRiNGVsODQ0NTlvYzQwNzdqMG50dCIsIm9yaWdpbl9qdGkiOiJkN2I0MGI2Yy0xYTM4LTRjMTYtOWNjMi1lYTk4NDdmNzBkYjkiLCJldmVudF9pZCI6IjA4ZWM1YmEyLTU2MDEtNGIxYS04NWQwLWZmMTI0MTU0MTYyYiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE3Mjc2NTI4MDAsImV4cCI6MTcyNzY1NjQwMCwiaWF0IjoxNzI3NjUyODAwLCJqdGkiOiJiODA1OWZiOS05MWI5LTQyMjUtYTdiZC1lZjUxZGEyMDBlNDgiLCJ1c2VybmFtZSI6ImE0MzhmNGM4LWYwOTEtNzA0OC0zZjg0LTEyMjRhN2U4NjViNyJ9.LZsFUgf1xrImRQMtZ1D3RMBtU7WY_HVMjZA1yIgfZAIh93uxnsWLOvbMAkY5diZHNjslYrnhDNFvYXVRlU7QuZ1xjgDr_sf081zsrNFPanNj_FQHuoydtfmzFxjyErzvVgcae23RVzFaIC_DQCePma5h_KX8rP3uA5aNo266BQXAzPzY_0Gi6gNHZah3KdPPfXPdFJaF2O_TAaV6QPJxnXIDT1feiznqZLML08h0CuLpX-A_4RfF7WmY18ziR_8lzQYnJLJKmp5XFfBYEOnpIgCxQMKCMjI3_UG9rEkBN-ax8571FZvE1xo4zrlB2_y60Q0CnCWfjHbE0ecpcx0xeg",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",

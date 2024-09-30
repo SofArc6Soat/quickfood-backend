@@ -2,16 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Api.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public static class DatabaseMigratorBase
     {
         public static void MigrateDatabase(ApplicationDbContext context)
         {
             if (context.Database.IsInMemory())
             {
-                // Skip migrations or handle in-memory database scenario
                 return;
             }
 
