@@ -77,8 +77,7 @@
         public void AddDigito(string digito) =>
             numero = string.Concat(numero, digito);
 
-        public string CalculaDigito() =>
-            !(numero.Length > 0) ? "" : GetDigitSum();
+        public string CalculaDigito() => (numero.Length <= 0) ? "" : GetDigitSum();
 
         private string GetDigitSum()
         {

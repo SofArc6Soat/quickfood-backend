@@ -2,57 +2,55 @@
 using Domain.ValueObjects;
 using FluentValidation.TestHelper;
 
-namespace Domain.Tests.Validators;
-
-public class ValidarProdutoTests
+namespace Domain.Tests.Validators
 {
-    private readonly ValidarProduto _validarProduto;
-
-    public ValidarProdutoTests()
+    public class ValidarProdutoTests
     {
-        _validarProduto = new ValidarProduto();
-    }
+        private readonly ValidarProduto _validarProduto;
 
-    [Fact]
-    public void DeveSerValido_QuandoInformacoesCorretas()
-    {
-        // Arrange
-        var produto = new Produto(Guid.NewGuid(), "Produto Exemplo", "Descrição do Produto", 100.00m, Categoria.Lanche, true);
+        public ValidarProdutoTests() => _validarProduto = new ValidarProduto();
 
-        // Act
-        var result = _validarProduto.TestValidate(produto);
+        [Fact]
+        public void DeveSerValido_QuandoInformacoesCorretas()
+        {
+            // Arrange
+            var produto = new Produto(Guid.NewGuid(), "Produto Exemplo", "Descrição do Produto", 100.00m, Categoria.Lanche, true);
 
-        // Assert
-        result.ShouldNotHaveValidationErrorFor(p => p.Nome);
-        result.ShouldNotHaveValidationErrorFor(p => p.Descricao);
-        result.ShouldNotHaveValidationErrorFor(p => p.Preco);
-        result.ShouldNotHaveValidationErrorFor(p => p.Categoria);
-        result.ShouldNotHaveValidationErrorFor(p => p.Ativo);
-    }
+            // Act
+            var result = _validarProduto.TestValidate(produto);
 
-    [Fact]
-    public void DeveSerInvalido_QuandoNomeInvalido()
-    {
-        // Arrange
-        var produto = new Produto(Guid.NewGuid(), "", "Descrição do Produto", 100.00m, Categoria.Lanche, true);
+            // Assert
+            result.ShouldNotHaveValidationErrorFor(p => p.Nome);
+            result.ShouldNotHaveValidationErrorFor(p => p.Descricao);
+            result.ShouldNotHaveValidationErrorFor(p => p.Preco);
+            result.ShouldNotHaveValidationErrorFor(p => p.Categoria);
+            result.ShouldNotHaveValidationErrorFor(p => p.Ativo);
+        }
 
-        // Act
-        var result = _validarProduto.TestValidate(produto);
+        [Fact]
+        public void DeveSerInvalido_QuandoNomeInvalido()
+        {
+            // Arrange
+            var produto = new Produto(Guid.NewGuid(), "", "Descrição do Produto", 100.00m, Categoria.Lanche, true);
 
-        // Assert
-        result.ShouldHaveValidationErrorFor(p => p.Nome);
-    }
+            // Act
+            var result = _validarProduto.TestValidate(produto);
 
-    [Fact]
-    public void DeveSerInvalido_QuandoPrecoInvalido()
-    {
-        // Arrange
-        var produto = new Produto(Guid.NewGuid(), "Produto Exemplo", "Descrição do Produto", 0.00m, Categoria.Lanche, true);
+            // Assert
+            result.ShouldHaveValidationErrorFor(p => p.Nome);
+        }
 
-        // Act
-        var result = _validarProduto.TestValidate(produto);
+        [Fact]
+        public void DeveSerInvalido_QuandoPrecoInvalido()
+        {
+            // Arrange
+            var produto = new Produto(Guid.NewGuid(), "Produto Exemplo", "Descrição do Produto", 0.00m, Categoria.Lanche, true);
 
-        // Assert
-        result.ShouldHaveValidationErrorFor(p => p.Preco);
+            // Act
+            var result = _validarProduto.TestValidate(produto);
+
+            // Assert
+            result.ShouldHaveValidationErrorFor(p => p.Preco);
+        }
     }
 }

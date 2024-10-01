@@ -1,14 +1,8 @@
 ﻿namespace Domain.Entities
 {
-    public class PedidoListaItens
+    public class PedidoListaItens(Guid produtoId, int quantidade)
     {
-        public Guid ProdutoId { get; set; }
-        public int Quantidade { get; set; }
-
-        public PedidoListaItens(Guid produtoId, int quantidade)
-        {
-            ProdutoId = produtoId;
-            Quantidade = quantidade;
-        }
+        public Guid ProdutoId { get; set; } = produtoId;
+        public int Quantidade { get; set; } = quantidade;
     }
 }

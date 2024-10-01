@@ -1,14 +1,18 @@
 ﻿using Api.Configuration;
 using Controllers.DependencyInjection;
+using Core.WebApi.Configurations;
 using Core.WebApi.DependencyInjection;
+using Gateways.Cognito.DependencyInjection;
 using Gateways.DependencyInjection;
 using Infra.Context;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Api
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
-        public IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
@@ -25,17 +29,24 @@ namespace Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var settings = EnvironmentConfig.ConfigureEnvironment(_configuration);
+            var settings = EnvironmentConfig.ConfigureEnvironment(services, _configuration);
 
-            services.AddApiDefautConfig();
+            var jwtBearerConfigureOptions = new JwtBearerConfigureOptions
+            {
+                Authority = settings.CognitoSettings.Authority,
+                MetadataAddress = settings.CognitoSettings.MetadataAddress
+            };
+
+            services.AddApiDefautConfig(jwtBearerConfigureOptions);
 
             services.AddHealthCheckConfig(settings.ConnectionStrings.DefaultConnection);
 
             services.AddControllerDependencyServices();
             services.AddGatewayDependencyServices(settings.ConnectionStrings.DefaultConnection);
+            services.AddGatewayCognitoDependencyServices(settings.CognitoSettings.ClientId, settings.CognitoSettings.ClientSecret, settings.CognitoSettings.UserPoolId);
         }
 
-        public void Configure(IApplicationBuilder app, ApplicationDbContext context)
+        public static void Configure(IApplicationBuilder app, ApplicationDbContext context)
         {
             DatabaseMigratorBase.MigrateDatabase(context);
 

@@ -2,8 +2,8 @@
 
 ## quickfood-backend
 
-Este projeto visa o desenvolvimento do backend para um software que simula um totem de autoatendimento de uma lanchonete.<br>
-Utilizando a arquitetura limpa, .NET 8, Docker e Kubernetes, o objetivo é criar uma base sólida e escalável para suportar as funcionalidades necessárias para um sistema de autoatendimento. <br>
+Este projeto visa o desenvolvimento do backend para um software que simula um totem de auto-atendimento de uma lanchonete.<br>
+Utilizando a arquitetura limpa, .NET 8, Cognito, Docker e Kubernetes, o objetivo é criar uma base sólida e escalável para suportar as funcionalidades necessárias para um sistema de autoatendimento. <br>
 O foco principal é a criação de uma aplicação robusta, modular e de fácil manutenção.<br>
 
 ## Funcionalidades Principais
@@ -13,6 +13,7 @@ O foco principal é a criação de uma aplicação robusta, modular e de fácil 
 - **Gerenciamento de Cliente**: Manutenção dos cliente, incluindo adição, remoção e atualização de clientes. <br>
 - **Pagamento dos Pedidos**: Integração (fake) com gateway de pagamentos. <br>
 - **Armazenamento de Dados**: Persistência de dados utilizando um banco de dados adequado SQL Server. <br>
+- **Gerenciamento de usuários**: Gestão de usuários (admin ou clientes) integrados com o Cognito. <br>
 
 ## Tecnologias Utilizadas
 
@@ -20,11 +21,12 @@ O foco principal é a criação de uma aplicação robusta, modular e de fácil 
 - **Arquitetura Limpa**: Estruturação do projeto para promover a separação de preocupações e facilitar a manutenção e escalabilidade. <br>
 - **Docker**: Containerização da aplicação para garantir portabilidade e facilitar o deploy. <br>
 - **Kubernetes**: Orquestração dos container visando resiliência da aplicação <br>
-- **Banco de Dados**: Utilização do SQL Serverpara armazenamento de informações. <br>
+- **Banco de Dados**: Utilização do SQL Server para armazenamento de informações. <br>
+- **Cognito**: Gestão e autenticação de usuários. <br>
 
 ## Estrutura do Projeto
 
-A arquitetura limpa será utilizada para garantir que a aplicação seja modular e de fácil manutenção, o projeto foi estruturado da seguinte forma: API, Controllers, Gateways, Presenters, Domain, Infra (implementação das interfaces de repositório, configurações de banco de dados) e Building Blocks (componentes e serviços reutilizáveis)<br>
+A arquitetura limpa será utilizada para garantir que a aplicação seja modular e de fácil manutenção, o projeto foi estruturado da seguinte forma: API, Controllers, Gateways, Gateways.Cognito, Presenters, Domain, Infra (implementação das interfaces de repositório, configurações de banco de dados) e Building Blocks (componentes e serviços reutilizáveis)<br>
 
 ## Como Executar o Projeto
 
@@ -81,10 +83,48 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 2. Também é possível utilizar o Swagger disponibilizado pela aplicação (URL do Swagger: http://localhost:8080/swagger).
 
 Para testar localmente com o Postman, a ordem de excução deverá ser a seguinte:
-1. POST - {{baseUrl}}/pedidos (criar um pedido)
-2. POST - {{baseUrl}}/pagamentos/checkout/:pedidoId (efetar checkout do pedido com integração fake para gerar o QRCODE do PIX)
-3. POST - {{baseUrl}}/pagamentos/notificacoes/:pedidoId (simulação do WebHook que recebe que o PIX foi pago)
-4. PATCH - {{baseUrl}}/pedidos/status/:pedidoId (altera status do pedido para "EmPreparacao" -> "Pronto" -> "Finalizado")
+
+1. Usuários para testes:
+- Funcionário Mario (usuário com perfil admin):
+E-mail: sof.arc.6soat@gmail.com
+Senha: A@cdE1460
+<br>
+- Cliente João (usuário com perfil cliente):
+E-mail: joao-teste@gmail.com
+CPF: 08062759016
+Senha: B@cdE0943
+<br>
+- Cliente Maria (usuário com perfil cliente):
+E-mail: maria-teste@gmail.com
+CPF: 05827307084
+Senha: C@cdE0943
+
+2. POST - {{baseUrl}}/pedidos (criar um pedido)
+3. POST - {{baseUrl}}/pagamentos/checkout/:pedidoId (efetar checkout do pedido com integração fake para gerar o QRCODE do PIX)
+4. POST - {{baseUrl}}/pagamentos/notificacoes/:pedidoId (simulação do WebHook que recebe que o PIX foi pago)
+5. PATCH - {{baseUrl}}/pedidos/status/:pedidoId (altera status do pedido para "EmPreparacao" -> "Pronto" -> "Finalizado")
+
+Obs.:
+- Cadastrar um novo funcionário (usuário com perfil admin):
+POST - {{baseUrl}}/funcionarios
+
+- Efetuar login de funcionarios (será gerado um token JWT, utilizar a função lambda):
+POST - {{baseUrl}}/usuarios/funcionario/identifique-se
+
+- Cadastrar um novo cliente (usuário com perfil cliente):
+POST - {{baseUrl}}/clientes
+
+- Efetuar login de cliente (será gerado um token JWT, utilizar a função lambda):
+POST - {{baseUrl}}/usuarios/cliente/identifique-se
+
+- Sempre após o cadastro de um usuário, será enviado um email com o código de verificação. Para efetar a confirmação, acesse:
+POST - {{baseUrl}}/usuarios/email-verificacao:confirmar
+
+- Caso tenha esquecido a senha, acesse para poder prosseguir com a troca da senha:
+POST - {{baseUrl}}/usuarios/esquecia-senha:solicitar
+
+- Para redefinir sua senha, acesse:
+POST - {{baseUrl}}/usuarios/esquecia-senha:resetar
 
 ## Desenho da arquitetura
 Para visualizar o desenho da arquitetura abra o arquivo "Arquitetura.drawio.png" no diretório "arquitetura" ou importe o arquivo "Arquitetura.drawio" no Draw.io (https://app.diagrams.net/).

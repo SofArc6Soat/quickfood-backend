@@ -2,13 +2,16 @@ using Controllers;
 using Core.Domain.Notificacoes;
 using Core.WebApi.Controller;
 using Gateways.Dtos.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Authorize(Policy = "AdminRole")]
     [Route("produtos")]
-    public class ProdutosApiController(IProdutosController produtosController, INotificador notificador) : MainController(notificador)
+    public class ProdutosApiController(IProdutoController produtosController, INotificador notificador) : MainController(notificador)
     {
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> ObterTodosProdutos(CancellationToken cancellationToken)
         {
@@ -17,6 +20,7 @@ namespace Api.Controllers
             return CustomResponseGet(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("categoria")]
         public async Task<IActionResult> ObterProdutosCategoria(string categoria, CancellationToken cancellationToken)
         {

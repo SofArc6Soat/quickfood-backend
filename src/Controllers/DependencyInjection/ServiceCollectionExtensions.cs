@@ -9,10 +9,12 @@ namespace Controllers.DependencyInjection
     {
         public static void AddControllerDependencyServices(this IServiceCollection services)
         {
-            services.AddScoped<IClientesController, ClientesController>();
-            services.AddScoped<IProdutosController, ProdutosController>();
+            services.AddScoped<IClienteController, ClienteController>();
+            services.AddScoped<IProdutoController, ProdutoController>();
             services.AddScoped<IPedidoController, PedidoController>();
             services.AddScoped<IPagamentoController, PagamentoController>();
+            services.AddScoped<IFuncionarioController, FuncionarioController>();
+            services.AddScoped<IUsuarioController, UsuarioController>();
 
             services.AddUseCasesDependencyServices();
         }

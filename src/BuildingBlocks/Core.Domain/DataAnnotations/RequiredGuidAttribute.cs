@@ -9,6 +9,6 @@ namespace Core.Domain.DataAnnotations
 #pragma warning disable CS8765
         public override bool IsValid(object value)
 #pragma warning restore CS8765
-            => value != null && value is Guid && !Guid.Empty.Equals(value);
+            => value is Guid && !Guid.Empty.Equals(value);
     }
 }

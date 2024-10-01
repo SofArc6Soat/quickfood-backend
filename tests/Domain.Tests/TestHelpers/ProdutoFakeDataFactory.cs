@@ -2,18 +2,13 @@
 using Domain.ValueObjects;
 using Infra.Dto;
 
-namespace Domain.Tests.TestHelpers;
-
-public static class ProdutoFakeDataFactory
+namespace Domain.Tests.TestHelpers
 {
-    public static Produto CriarProdutoValido()
+    public static class ProdutoFakeDataFactory
     {
-        return new Produto(Guid.NewGuid(), "Produto Exemplo", "Descrição do Produto", 100.00m, Categoria.Lanche, true);
-    }
+        public static Produto CriarProdutoValido() => new(Guid.NewGuid(), "Produto Exemplo", "Descrição do Produto", 100.00m, Categoria.Lanche, true);
 
-    public static ProdutoDb CriarProdutoDbValido()
-    {
-        return new ProdutoDb
+        public static ProdutoDb CriarProdutoDbValido() => new()
         {
             Id = Guid.NewGuid(),
             Nome = "Produto Exemplo",

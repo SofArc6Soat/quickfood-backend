@@ -20,6 +20,7 @@ namespace Infra.Mappings
                    .HasColumnType("varchar(50)");
 
             builder.Property(c => c.Email)
+                    .IsRequired()
                    .HasColumnType("varchar(100)");
 
             builder.Property(c => c.Cpf)
@@ -31,9 +32,6 @@ namespace Infra.Mappings
 
             builder.HasIndex(u => u.Cpf)
                    .IsUnique();
-
-            builder.HasIndex(u => new { u.Email, u.Cpf })
-                  .IsUnique();
 
             // Data
             builder.HasData(ClienteSeedData.GetSeedData());

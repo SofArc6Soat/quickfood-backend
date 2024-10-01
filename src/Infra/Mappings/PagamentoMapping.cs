@@ -1,9 +1,11 @@
 ﻿using Infra.Dto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infra.Mappings
 {
+    [ExcludeFromCodeCoverage]
     public class PagamentoMapping : IEntityTypeConfiguration<PagamentoDb>
     {
         public void Configure(EntityTypeBuilder<PagamentoDb> builder)
