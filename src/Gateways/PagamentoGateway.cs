@@ -2,6 +2,7 @@
 using Domain.ValueObjects;
 using Infra.Dto;
 using Infra.Repositories;
+using System.Security.Cryptography;
 
 namespace Gateways
 {
@@ -41,6 +42,33 @@ namespace Gateways
             return await pagamentoRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
 
+        public string GerarQrCodePixGatewayPagamento(Pagamento pagamento)
+        {
+            // Integração com gateway de pagamento e geração QR Code do PIX
+
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var stringLength = 100;
+
+            var result = new char[stringLength];
+            var charsLength = chars.Length;
+
+            var randomBytes = new byte[stringLength];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomBytes);
+            }
+
+            for (var i = 0; i < stringLength; i++)
+            {
+                result[i] = chars[randomBytes[i] % charsLength];
+            }
+
+            return new string(result);
+        }
+
+        public async Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken) =>
+            await pagamentoRepository.ObterPagamentoPorPedidoAsync(pedidoId, cancellationToken);
+
         public Pagamento? ObterPagamentoPorPedido(Guid pedidoId, CancellationToken cancellationToken)
         {
             var pagamentoDto = pagamentoRepository.Find(e => e.PedidoId == pedidoId, cancellationToken).FirstOrDefault();
@@ -54,21 +82,5 @@ namespace Gateways
 
             return new Pagamento(pagamentoDto.Id, pagamentoDto.PedidoId, statusPagamento, pagamentoDto.Valor, pagamentoDto.QrCodePix, pagamentoDto.DataPagamento);
         }
-
-        public string GerarQrCodePixGatewayPagamento(Pagamento pagamento)
-        {
-            // Integração com gateway de pagamento e geração QR Code do PIX
-
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var random = new Random();
-            return new string(
-                Enumerable.Repeat(chars, 100)
-                          .Select(s => s[random.Next(s.Length)])
-                          .ToArray());
-        }
-
-        public async Task<string> ObterPagamentoPorPedidoAsync(Guid pedidoId, CancellationToken cancellationToken) =>
-            await pagamentoRepository.ObterPagamentoPorPedidoAsync(pedidoId, cancellationToken);
-        public Pagamento? ObterPagamentoPorPedido(Guid pedidoId) => throw new NotImplementedException();
     }
 }

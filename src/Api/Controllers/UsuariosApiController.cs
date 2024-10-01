@@ -15,6 +15,11 @@ namespace Api.Controllers
         [HttpPost("cliente/identifique-se")]
         public async Task<IActionResult> IdentificarClienteCpf(ClienteIdentifiqueSeRequestDto request, CancellationToken cancellationToken)
         {
+            if (!ModelState.IsValid)
+            {
+                return ErrorBadRequestModelState(ModelState);
+            }
+
             var result = await usuarioController.IdentificarClienteCpfAsync(request, cancellationToken);
 
             request.Senha = "*******";
@@ -27,6 +32,11 @@ namespace Api.Controllers
         [HttpPost("funcionario/identifique-se")]
         public async Task<IActionResult> IdentificarFuncionario(FuncinarioIdentifiqueSeRequestDto request, CancellationToken cancellationToken)
         {
+            if (!ModelState.IsValid)
+            {
+                return ErrorBadRequestModelState(ModelState);
+            }
+
             var result = await usuarioController.IdentificarFuncionarioAsync(request, cancellationToken);
 
             request.Senha = "*******";
