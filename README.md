@@ -2,6 +2,7 @@
   - [Funcionalidades Principais](#funcionalidades-principais)
   - [Estrutura do Projeto](#estrutura-do-projeto)
   - [Tecnologias Utilizadas](#tecnologias-utilizadas)
+  - [Serviços Utilizados](#serviços-utilizados)
   - [Motivações para Utilizar o SQL Server como Banco de Dados da Aplicação](#motivações-para-utilizar-o-sql-server-como-banco-de-dados-da-aplicação)
   - [Como Executar o Projeto](#como-executar-o-projeto)
     - [Clonar o repositório](#clonar-o-repositório)
@@ -41,7 +42,11 @@ A arquitetura limpa será utilizada para garantir que a aplicação seja modular
 - **Docker**: Containerização da aplicação para garantir portabilidade e facilitar o deploy. <br>
 - **Kubernetes**: Orquestração dos container visando resiliência da aplicação <br>
 - **Banco de Dados**: Utilização do SQL Server para armazenamento de informações. <br>
+
+## Serviços Utilizados
 - **Cognito**: Gestão e autenticação de usuários. <br>
+- **Github Actions**: Todo o CI/CD é automatizado através de pipelines. <br>
+- **SonarQube**: Análise estática do código para promover qualidade. <br>
 
 ## Motivações para Utilizar o SQL Server como Banco de Dados da Aplicação
 Para um sistema de gerenciamento de pedidos em uma lanchonete, a escolha do SQL Server como banco de dados relacional se destaca como a mais adequada por diversas razões. Primeiramente, ele oferece uma estrutura de dados bem definida, assegurando a consistência das informações e garantindo que todas as operações sigam as propriedades ACID (Atomicidade, Consistência, Isolamento e Durabilidade), essenciais para a integridade das transações.
