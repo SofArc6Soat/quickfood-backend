@@ -1,7 +1,7 @@
 # Usando a imagem base do ASP.NET
 FROM mcr.microsoft.com/dotnet/aspnet:8.0.3-bookworm-slim AS base
 
-# Criar o diretório e usuário não-root
+# Criar o diretório e usuário não-root 2
 RUN mkdir -p /app && adduser --disabled-password --gecos "" userapp && chown -R userapp /app
 
 # Usando a imagem base do SDK do .NET
@@ -17,7 +17,7 @@ COPY ["src/BuildingBlocks/Core.Domain/Core.Domain.csproj", "./src/Core.Domain/"]
 COPY ["src/BuildingBlocks/Core.WebApi/Core.WebApi.csproj", "./src/Core.WebApi/"]
 COPY ["src/Controllers/Controllers.csproj", "./src/Controllers/"]
 COPY ["src/Domain/Domain.csproj", "./src/Domain/"]
-COPY ["src/Gateway/Gateways.csproj", "./src/Gateways/"]
+COPY ["src/Gateways/Gateways.csproj", "./src/Gateways/"]
 COPY ["src/Infra/Infra.csproj", "./src/Infra/"]
 COPY ["src/Presenters/Presenters.csproj", "./src/Presenters/"]
 
